@@ -17,22 +17,22 @@ import (
 type OperatingSystemSpec struct {
 
 	// centos
-	Centos *CentOSSpec `json:"centos,omitempty"`
+	Centos *CentOSSpec `json:"centos"`
 
 	// container linux
-	ContainerLinux *ContainerLinuxSpec `json:"containerLinux,omitempty"`
+	ContainerLinux *ContainerLinuxSpec `json:"containerLinux"`
 
 	// flatcar
-	Flatcar *FlatcarSpec `json:"flatcar,omitempty"`
+	Flatcar *FlatcarSpec `json:"flatcar"`
 
 	// rhel
-	Rhel *RHELSpec `json:"rhel,omitempty"`
+	Rhel *RHELSpec `json:"rhel"`
 
 	// sles
-	Sles *SLESSpec `json:"sles,omitempty"`
+	Sles *SLESSpec `json:"sles"`
 
 	// ubuntu
-	Ubuntu *UbuntuSpec `json:"ubuntu,omitempty"`
+	Ubuntu *UbuntuSpec `json:"ubuntu"`
 }
 
 // Validate validates this operating system spec
