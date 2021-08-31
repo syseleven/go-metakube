@@ -10,22 +10,22 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// Openshift openshift
+// AnexiaVlan AnexiaVlan represents a object of Anexia Vlan.
 //
-// swagger:model Openshift
-type Openshift struct {
+// swagger:model AnexiaVlan
+type AnexiaVlan struct {
 
-	// image pull secret
-	ImagePullSecret string `json:"imagePullSecret,omitempty"`
+	// ID
+	ID string `json:"id,omitempty"`
 }
 
-// Validate validates this openshift
-func (m *Openshift) Validate(formats strfmt.Registry) error {
+// Validate validates this anexia vlan
+func (m *AnexiaVlan) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *Openshift) MarshalBinary() ([]byte, error) {
+func (m *AnexiaVlan) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -33,8 +33,8 @@ func (m *Openshift) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *Openshift) UnmarshalBinary(b []byte) error {
-	var res Openshift
+func (m *AnexiaVlan) UnmarshalBinary(b []byte) error {
+	var res AnexiaVlan
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

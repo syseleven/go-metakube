@@ -10,22 +10,22 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ContainerLinuxSpec ContainerLinuxSpec ubuntu linux specific settings
+// AlibabaVSwitch AlibabaVSwitch represents a object of Alibaba vSwitch.
 //
-// swagger:model ContainerLinuxSpec
-type ContainerLinuxSpec struct {
+// swagger:model AlibabaVSwitch
+type AlibabaVSwitch struct {
 
-	// disable container linux auto-update feature
-	DisableAutoUpdate bool `json:"disableAutoUpdate,omitempty"`
+	// ID
+	ID string `json:"id,omitempty"`
 }
 
-// Validate validates this container linux spec
-func (m *ContainerLinuxSpec) Validate(formats strfmt.Registry) error {
+// Validate validates this alibaba v switch
+func (m *AlibabaVSwitch) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
 // MarshalBinary interface implementation
-func (m *ContainerLinuxSpec) MarshalBinary() ([]byte, error) {
+func (m *AlibabaVSwitch) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -33,8 +33,8 @@ func (m *ContainerLinuxSpec) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *ContainerLinuxSpec) UnmarshalBinary(b []byte) error {
-	var res ContainerLinuxSpec
+func (m *AlibabaVSwitch) UnmarshalBinary(b []byte) error {
+	var res AlibabaVSwitch
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}
