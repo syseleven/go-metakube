@@ -22,7 +22,7 @@ type AWSNodeSpec struct {
 
 	// This flag controls a property of the AWS instance. When set the AWS instance will get a public IP address
 	// assigned during launch overriding a possible setting in the used AWS subnet.
-	AssignPublicIP bool `json:"assignPublicIP,omitempty"`
+	AssignPublicIP bool `json:"assignPublicIP"`
 
 	// Availability zone in which to place the node. It is coupled with the subnet to which the node will belong.
 	AvailabilityZone string `json:"availabilityZone,omitempty"`
@@ -32,7 +32,7 @@ type AWSNodeSpec struct {
 	InstanceType *string `json:"instanceType"`
 
 	// IsSpotInstance indicates whether the created machine is an aws ec2 spot instance or on-demand ec2 instance.
-	IsSpotInstance bool `json:"isSpotInstance,omitempty"`
+	IsSpotInstance bool `json:"isSpotInstance"`
 
 	// The VPC subnet to which the node shall be connected.
 	SubnetID string `json:"subnetID,omitempty"`

@@ -18,16 +18,16 @@ import (
 type AzureNodeSpec struct {
 
 	// should the machine have a publicly accessible IP address
-	AssignPublicIP bool `json:"assignPublicIP,omitempty"`
+	AssignPublicIP bool `json:"assignPublicIP"`
 
 	// Data disk size in GB
-	DataDiskSize int32 `json:"dataDiskSize,omitempty"`
+	DataDiskSize int32 `json:"dataDiskSize"`
 
 	// ImageID represents the ID of the image that should be used to run the node
 	ImageID string `json:"imageID,omitempty"`
 
 	// OS disk size in GB
-	OSDiskSize int32 `json:"osDiskSize,omitempty"`
+	OSDiskSize int32 `json:"osDiskSize"`
 
 	// VM size
 	// Required: true

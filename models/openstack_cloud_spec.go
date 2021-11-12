@@ -76,10 +76,10 @@ type OpenstackCloudSpec struct {
 	// Takes precedence over the 'use_octavia' flag provided at datacenter
 	// level if both are specified.
 	// +optional
-	UseOctavia bool `json:"useOctavia,omitempty"`
+	UseOctavia bool `json:"useOctavia"`
 
 	// use token
-	UseToken bool `json:"useToken,omitempty"`
+	UseToken bool `json:"useToken"`
 
 	// username
 	Username string `json:"username,omitempty"`

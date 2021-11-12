@@ -35,13 +35,13 @@ type OpenstackNodeSpec struct {
 	InstanceReadyCheckTimeout string `json:"instanceReadyCheckTimeout,omitempty"`
 
 	// if set, the rootDisk will be a volume. If not, the rootDisk will be on ephemeral storage and its size will be derived from the flavor
-	RootDiskSizeGB int64 `json:"diskSize,omitempty"`
+	RootDiskSizeGB int64 `json:"diskSize"`
 
 	// Additional metadata to set
 	Tags map[string]string `json:"tags,omitempty"`
 
 	// Defines whether floating ip should be used
-	UseFloatingIP bool `json:"useFloatingIP,omitempty"`
+	UseFloatingIP bool `json:"useFloatingIP"`
 }
 
 // Validate validates this openstack node spec
