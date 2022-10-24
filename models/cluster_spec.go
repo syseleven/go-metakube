@@ -74,6 +74,9 @@ type ClusterSpec struct {
 	// update window
 	UpdateWindow *UpdateWindow `json:"updateWindow,omitempty"`
 
+	// billing tenant
+	BillingTenant string `json:"billingTenant,omitempty"`
+
 	// version
 	Version Semver `json:"version,omitempty"`
 }
