@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -17,30 +19,30 @@ import (
 type DatacenterSpecOpenstack struct {
 
 	// auth URL
-	AuthURL string `json:"auth_url,omitempty"`
+	AuthURL string `json:"authURL,omitempty"`
 
 	// availability zone
-	AvailabilityZone string `json:"availability_zone,omitempty"`
+	AvailabilityZone string `json:"availabilityZone,omitempty"`
 
 	// Used for automatic network creation
-	DNSServers []string `json:"dns_servers"`
+	DNSServers []string `json:"dnsServers"`
 
 	// Optional: List of enabled flavors for the given datacenter
-	EnabledFlavors []string `json:"enabled_flavors"`
+	EnabledFlavors []string `json:"enabledFlavors"`
 
 	// Optional
-	EnforceFloatingIP bool `json:"enforce_floating_ip,omitempty"`
+	EnforceFloatingIP bool `json:"enforceFloatingIP,omitempty"`
 
 	// Optional
-	IgnoreVolumeAZ bool `json:"ignore_volume_az,omitempty"`
+	IgnoreVolumeAZ bool `json:"ignoreVolumeAZ,omitempty"`
 
 	// Optional: Gets mapped to the "manage-security-groups" setting in the cloud config.
 	// See https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/#load-balancer
 	// This setting defaults to true.
-	ManageSecurityGroups bool `json:"manage_security_groups,omitempty"`
+	ManageSecurityGroups bool `json:"manageSecurityGroups,omitempty"`
 
 	// node volume attach limit
-	NodeVolumeAttachLimit uint64 `json:"node_volume_attach_limit,omitempty"`
+	NodeVolumeAttachLimit uint64 `json:"nodeVolumeAttachLimit,omitempty"`
 
 	// region
 	Region string `json:"region,omitempty"`
@@ -48,18 +50,18 @@ type DatacenterSpecOpenstack struct {
 	// Optional: Gets mapped to the "trust-device-path" setting in the cloud config.
 	// See https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/#block-storage
 	// This setting defaults to false.
-	TrustDevicePath bool `json:"trust_device_path,omitempty"`
+	TrustDevicePath bool `json:"trustDevicePath,omitempty"`
 
 	// Optional: Gets mapped to the "use-octavia" setting in the cloud config.
 	// use-octavia is enabled by default in CCM since v1.17.0, and disabled by
 	// default with the in-tree cloud provider.
-	UseOctavia bool `json:"use_octavia,omitempty"`
+	UseOctavia bool `json:"useOctavia,omitempty"`
 
 	// images
 	Images ImageList `json:"images,omitempty"`
 
 	// node size requirements
-	NodeSizeRequirements *OpenstackNodeSizeRequirements `json:"node_size_requirements,omitempty"`
+	NodeSizeRequirements *OpenstackNodeSizeRequirements `json:"nodeSizeRequirements,omitempty"`
 }
 
 // Validate validates this datacenter spec openstack
@@ -81,23 +83,25 @@ func (m *DatacenterSpecOpenstack) Validate(formats strfmt.Registry) error {
 }
 
 func (m *DatacenterSpecOpenstack) validateImages(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Images) { // not required
 		return nil
 	}
 
-	if err := m.Images.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("images")
+	if m.Images != nil {
+		if err := m.Images.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("images")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("images")
+			}
+			return err
 		}
-		return err
 	}
 
 	return nil
 }
 
 func (m *DatacenterSpecOpenstack) validateNodeSizeRequirements(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.NodeSizeRequirements) { // not required
 		return nil
 	}
@@ -105,7 +109,57 @@ func (m *DatacenterSpecOpenstack) validateNodeSizeRequirements(formats strfmt.Re
 	if m.NodeSizeRequirements != nil {
 		if err := m.NodeSizeRequirements.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("node_size_requirements")
+				return ve.ValidateName("nodeSizeRequirements")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("nodeSizeRequirements")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this datacenter spec openstack based on the context it is used
+func (m *DatacenterSpecOpenstack) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateImages(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateNodeSizeRequirements(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DatacenterSpecOpenstack) contextValidateImages(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.Images.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("images")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("images")
+		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *DatacenterSpecOpenstack) contextValidateNodeSizeRequirements(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.NodeSizeRequirements != nil {
+		if err := m.NodeSizeRequirements.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("nodeSizeRequirements")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("nodeSizeRequirements")
 			}
 			return err
 		}

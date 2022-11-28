@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -36,11 +38,11 @@ type DatacenterSpec struct {
 	// It is used for informational purposes.
 	Provider string `json:"provider,omitempty"`
 
-	// Deprecated. Automatically migrated to the RequiredEmailDomains field.
+	// Deprecated. Automatically migrated to the RequiredEmails field.
 	RequiredEmailDomain string `json:"requiredEmailDomain,omitempty"`
 
-	// required email domains
-	RequiredEmailDomains []string `json:"requiredEmailDomains"`
+	// required emails
+	RequiredEmails []string `json:"requiredEmails"`
 
 	// Name of the seed this datacenter belongs to.
 	Seed string `json:"seed,omitempty"`
@@ -151,7 +153,6 @@ func (m *DatacenterSpec) Validate(formats strfmt.Registry) error {
 }
 
 func (m *DatacenterSpec) validateAlibaba(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Alibaba) { // not required
 		return nil
 	}
@@ -160,6 +161,8 @@ func (m *DatacenterSpec) validateAlibaba(formats strfmt.Registry) error {
 		if err := m.Alibaba.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("alibaba")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("alibaba")
 			}
 			return err
 		}
@@ -169,7 +172,6 @@ func (m *DatacenterSpec) validateAlibaba(formats strfmt.Registry) error {
 }
 
 func (m *DatacenterSpec) validateAnexia(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Anexia) { // not required
 		return nil
 	}
@@ -178,6 +180,8 @@ func (m *DatacenterSpec) validateAnexia(formats strfmt.Registry) error {
 		if err := m.Anexia.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("anexia")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("anexia")
 			}
 			return err
 		}
@@ -187,7 +191,6 @@ func (m *DatacenterSpec) validateAnexia(formats strfmt.Registry) error {
 }
 
 func (m *DatacenterSpec) validateAws(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Aws) { // not required
 		return nil
 	}
@@ -196,6 +199,8 @@ func (m *DatacenterSpec) validateAws(formats strfmt.Registry) error {
 		if err := m.Aws.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("aws")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("aws")
 			}
 			return err
 		}
@@ -205,7 +210,6 @@ func (m *DatacenterSpec) validateAws(formats strfmt.Registry) error {
 }
 
 func (m *DatacenterSpec) validateAzure(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Azure) { // not required
 		return nil
 	}
@@ -214,6 +218,8 @@ func (m *DatacenterSpec) validateAzure(formats strfmt.Registry) error {
 		if err := m.Azure.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("azure")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("azure")
 			}
 			return err
 		}
@@ -223,7 +229,6 @@ func (m *DatacenterSpec) validateAzure(formats strfmt.Registry) error {
 }
 
 func (m *DatacenterSpec) validateDigitalocean(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Digitalocean) { // not required
 		return nil
 	}
@@ -232,6 +237,8 @@ func (m *DatacenterSpec) validateDigitalocean(formats strfmt.Registry) error {
 		if err := m.Digitalocean.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("digitalocean")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("digitalocean")
 			}
 			return err
 		}
@@ -241,7 +248,6 @@ func (m *DatacenterSpec) validateDigitalocean(formats strfmt.Registry) error {
 }
 
 func (m *DatacenterSpec) validateFake(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Fake) { // not required
 		return nil
 	}
@@ -250,6 +256,8 @@ func (m *DatacenterSpec) validateFake(formats strfmt.Registry) error {
 		if err := m.Fake.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("fake")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("fake")
 			}
 			return err
 		}
@@ -259,7 +267,6 @@ func (m *DatacenterSpec) validateFake(formats strfmt.Registry) error {
 }
 
 func (m *DatacenterSpec) validateGcp(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Gcp) { // not required
 		return nil
 	}
@@ -268,6 +275,8 @@ func (m *DatacenterSpec) validateGcp(formats strfmt.Registry) error {
 		if err := m.Gcp.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("gcp")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("gcp")
 			}
 			return err
 		}
@@ -277,7 +286,6 @@ func (m *DatacenterSpec) validateGcp(formats strfmt.Registry) error {
 }
 
 func (m *DatacenterSpec) validateHetzner(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Hetzner) { // not required
 		return nil
 	}
@@ -286,6 +294,8 @@ func (m *DatacenterSpec) validateHetzner(formats strfmt.Registry) error {
 		if err := m.Hetzner.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("hetzner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("hetzner")
 			}
 			return err
 		}
@@ -295,7 +305,6 @@ func (m *DatacenterSpec) validateHetzner(formats strfmt.Registry) error {
 }
 
 func (m *DatacenterSpec) validateKubevirt(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Kubevirt) { // not required
 		return nil
 	}
@@ -304,6 +313,8 @@ func (m *DatacenterSpec) validateKubevirt(formats strfmt.Registry) error {
 		if err := m.Kubevirt.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("kubevirt")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("kubevirt")
 			}
 			return err
 		}
@@ -313,7 +324,6 @@ func (m *DatacenterSpec) validateKubevirt(formats strfmt.Registry) error {
 }
 
 func (m *DatacenterSpec) validateNode(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Node) { // not required
 		return nil
 	}
@@ -322,6 +332,8 @@ func (m *DatacenterSpec) validateNode(formats strfmt.Registry) error {
 		if err := m.Node.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("node")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("node")
 			}
 			return err
 		}
@@ -331,7 +343,6 @@ func (m *DatacenterSpec) validateNode(formats strfmt.Registry) error {
 }
 
 func (m *DatacenterSpec) validateOpenstack(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Openstack) { // not required
 		return nil
 	}
@@ -340,6 +351,8 @@ func (m *DatacenterSpec) validateOpenstack(formats strfmt.Registry) error {
 		if err := m.Openstack.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("openstack")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("openstack")
 			}
 			return err
 		}
@@ -349,7 +362,6 @@ func (m *DatacenterSpec) validateOpenstack(formats strfmt.Registry) error {
 }
 
 func (m *DatacenterSpec) validatePacket(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Packet) { // not required
 		return nil
 	}
@@ -358,6 +370,8 @@ func (m *DatacenterSpec) validatePacket(formats strfmt.Registry) error {
 		if err := m.Packet.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("packet")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("packet")
 			}
 			return err
 		}
@@ -367,7 +381,6 @@ func (m *DatacenterSpec) validatePacket(formats strfmt.Registry) error {
 }
 
 func (m *DatacenterSpec) validateVsphere(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Vsphere) { // not required
 		return nil
 	}
@@ -376,6 +389,278 @@ func (m *DatacenterSpec) validateVsphere(formats strfmt.Registry) error {
 		if err := m.Vsphere.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("vsphere")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("vsphere")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this datacenter spec based on the context it is used
+func (m *DatacenterSpec) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateAlibaba(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateAnexia(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateAws(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateAzure(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateDigitalocean(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateFake(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateGcp(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateHetzner(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateKubevirt(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateNode(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateOpenstack(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidatePacket(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateVsphere(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DatacenterSpec) contextValidateAlibaba(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Alibaba != nil {
+		if err := m.Alibaba.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("alibaba")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("alibaba")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *DatacenterSpec) contextValidateAnexia(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Anexia != nil {
+		if err := m.Anexia.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("anexia")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("anexia")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *DatacenterSpec) contextValidateAws(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Aws != nil {
+		if err := m.Aws.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("aws")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("aws")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *DatacenterSpec) contextValidateAzure(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Azure != nil {
+		if err := m.Azure.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("azure")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("azure")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *DatacenterSpec) contextValidateDigitalocean(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Digitalocean != nil {
+		if err := m.Digitalocean.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("digitalocean")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("digitalocean")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *DatacenterSpec) contextValidateFake(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Fake != nil {
+		if err := m.Fake.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("fake")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("fake")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *DatacenterSpec) contextValidateGcp(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Gcp != nil {
+		if err := m.Gcp.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("gcp")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("gcp")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *DatacenterSpec) contextValidateHetzner(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Hetzner != nil {
+		if err := m.Hetzner.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("hetzner")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("hetzner")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *DatacenterSpec) contextValidateKubevirt(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Kubevirt != nil {
+		if err := m.Kubevirt.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("kubevirt")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("kubevirt")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *DatacenterSpec) contextValidateNode(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Node != nil {
+		if err := m.Node.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("node")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("node")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *DatacenterSpec) contextValidateOpenstack(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Openstack != nil {
+		if err := m.Openstack.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("openstack")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("openstack")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *DatacenterSpec) contextValidatePacket(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Packet != nil {
+		if err := m.Packet.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("packet")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("packet")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *DatacenterSpec) contextValidateVsphere(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Vsphere != nil {
+		if err := m.Vsphere.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("vsphere")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("vsphere")
 			}
 			return err
 		}

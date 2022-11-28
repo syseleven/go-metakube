@@ -46,7 +46,8 @@ func NewListOpenstackImagesOK() *ListOpenstackImagesOK {
 	return &ListOpenstackImagesOK{}
 }
 
-/*ListOpenstackImagesOK handles this case with default header values.
+/*
+ListOpenstackImagesOK describes a response with status code 200, with default header values.
 
 Image
 */
@@ -54,7 +55,36 @@ type ListOpenstackImagesOK struct {
 	Payload []*models.Image
 }
 
+// IsSuccess returns true when this list openstack images o k response has a 2xx status code
+func (o *ListOpenstackImagesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list openstack images o k response has a 3xx status code
+func (o *ListOpenstackImagesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list openstack images o k response has a 4xx status code
+func (o *ListOpenstackImagesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list openstack images o k response has a 5xx status code
+func (o *ListOpenstackImagesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list openstack images o k response a status code equal to that given
+func (o *ListOpenstackImagesOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ListOpenstackImagesOK) Error() string {
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/images][%d] listOpenstackImagesOK  %+v", 200, o.Payload)
+}
+
+func (o *ListOpenstackImagesOK) String() string {
 	return fmt.Sprintf("[GET /api/v1/providers/openstack/images][%d] listOpenstackImagesOK  %+v", 200, o.Payload)
 }
 
@@ -79,7 +109,8 @@ func NewListOpenstackImagesDefault(code int) *ListOpenstackImagesDefault {
 	}
 }
 
-/*ListOpenstackImagesDefault handles this case with default header values.
+/*
+ListOpenstackImagesDefault describes a response with status code -1, with default header values.
 
 errorResponse
 */
@@ -94,7 +125,36 @@ func (o *ListOpenstackImagesDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this list openstack images default response has a 2xx status code
+func (o *ListOpenstackImagesDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this list openstack images default response has a 3xx status code
+func (o *ListOpenstackImagesDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this list openstack images default response has a 4xx status code
+func (o *ListOpenstackImagesDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this list openstack images default response has a 5xx status code
+func (o *ListOpenstackImagesDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this list openstack images default response a status code equal to that given
+func (o *ListOpenstackImagesDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *ListOpenstackImagesDefault) Error() string {
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/images][%d] listOpenstackImages default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *ListOpenstackImagesDefault) String() string {
 	return fmt.Sprintf("[GET /api/v1/providers/openstack/images][%d] listOpenstackImages default  %+v", o._statusCode, o.Payload)
 }
 

@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -23,7 +25,7 @@ type Image struct {
 
 	// Metadata provides free-form key/value pairs that further describe the
 	// image.
-	Metadata map[string]interface{} `json:"Metadata,omitempty"`
+	Metadata interface{} `json:"Metadata,omitempty"`
 
 	// MinDisk is the minimum amount of disk a flavor must have to be able
 	// to create a server based on the image, measured in GB.
@@ -48,6 +50,11 @@ type Image struct {
 
 // Validate validates this image
 func (m *Image) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this image based on context it is used
+func (m *Image) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

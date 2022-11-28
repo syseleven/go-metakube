@@ -46,7 +46,8 @@ func NewGetMetaKubeVersionsOK() *GetMetaKubeVersionsOK {
 	return &GetMetaKubeVersionsOK{}
 }
 
-/*GetMetaKubeVersionsOK handles this case with default header values.
+/*
+GetMetaKubeVersionsOK describes a response with status code 200, with default header values.
 
 MetaKubeVersions
 */
@@ -54,7 +55,36 @@ type GetMetaKubeVersionsOK struct {
 	Payload *models.KubermaticVersions
 }
 
+// IsSuccess returns true when this get meta kube versions o k response has a 2xx status code
+func (o *GetMetaKubeVersionsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get meta kube versions o k response has a 3xx status code
+func (o *GetMetaKubeVersionsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get meta kube versions o k response has a 4xx status code
+func (o *GetMetaKubeVersionsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get meta kube versions o k response has a 5xx status code
+func (o *GetMetaKubeVersionsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get meta kube versions o k response a status code equal to that given
+func (o *GetMetaKubeVersionsOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetMetaKubeVersionsOK) Error() string {
+	return fmt.Sprintf("[GET /api/v1/version][%d] getMetaKubeVersionsOK  %+v", 200, o.Payload)
+}
+
+func (o *GetMetaKubeVersionsOK) String() string {
 	return fmt.Sprintf("[GET /api/v1/version][%d] getMetaKubeVersionsOK  %+v", 200, o.Payload)
 }
 
@@ -81,7 +111,8 @@ func NewGetMetaKubeVersionsDefault(code int) *GetMetaKubeVersionsDefault {
 	}
 }
 
-/*GetMetaKubeVersionsDefault handles this case with default header values.
+/*
+GetMetaKubeVersionsDefault describes a response with status code -1, with default header values.
 
 errorResponse
 */
@@ -96,7 +127,36 @@ func (o *GetMetaKubeVersionsDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this get meta kube versions default response has a 2xx status code
+func (o *GetMetaKubeVersionsDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this get meta kube versions default response has a 3xx status code
+func (o *GetMetaKubeVersionsDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this get meta kube versions default response has a 4xx status code
+func (o *GetMetaKubeVersionsDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this get meta kube versions default response has a 5xx status code
+func (o *GetMetaKubeVersionsDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this get meta kube versions default response a status code equal to that given
+func (o *GetMetaKubeVersionsDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *GetMetaKubeVersionsDefault) Error() string {
+	return fmt.Sprintf("[GET /api/v1/version][%d] getMetaKubeVersions default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *GetMetaKubeVersionsDefault) String() string {
 	return fmt.Sprintf("[GET /api/v1/version][%d] getMetaKubeVersions default  %+v", o._statusCode, o.Payload)
 }
 

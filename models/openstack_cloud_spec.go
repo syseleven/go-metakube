@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -32,7 +34,7 @@ type OpenstackCloudSpec struct {
 	// When specified, all worker nodes will receive a public ip from this floating ip pool
 	//
 	// Note that the network is external if the "External" field is set to true
-	FloatingIPPool string `json:"floatingIpPool,omitempty"`
+	FloatingIPPool string `json:"floatingIPPool,omitempty"`
 
 	// Network holds the name of the internal network
 	// When specified, all worker nodes will be attached to this network. If not specified, a network, subnet & router will be created
@@ -42,6 +44,12 @@ type OpenstackCloudSpec struct {
 
 	// password
 	Password string `json:"password,omitempty"`
+
+	// project
+	Project string `json:"project,omitempty"`
+
+	// project ID
+	ProjectID string `json:"projectID,omitempty"`
 
 	// router ID
 	RouterID string `json:"routerID,omitempty"`
@@ -59,12 +67,6 @@ type OpenstackCloudSpec struct {
 	// subnet ID
 	SubnetID string `json:"subnetID,omitempty"`
 
-	// tenant
-	Tenant string `json:"tenant,omitempty"`
-
-	// tenant ID
-	TenantID string `json:"tenantID,omitempty"`
-
 	// Used internally during cluster creation
 	Token string `json:"token,omitempty"`
 
@@ -73,19 +75,19 @@ type OpenstackCloudSpec struct {
 	// Attention:Openstack CCM use Octavia as default load balancer
 	// implementation since v1.17.0
 	//
-	// Takes precedence over the 'use_octavia' flag provided at datacenter
+	// Takes precedence over the 'useOctavia' flag provided at datacenter
 	// level if both are specified.
 	// +optional
-	UseOctavia bool `json:"useOctavia"`
+	UseOctavia bool `json:"useOctavia,omitempty"`
 
 	// use token
-	UseToken bool `json:"useToken"`
+	UseToken bool `json:"useToken,omitempty"`
 
 	// username
 	Username string `json:"username,omitempty"`
 
 	// credentials reference
-	CredentialsReference GlobalSecretKeySelector `json:"credentialsReference,omitempty"`
+	CredentialsReference *GlobalSecretKeySelector `json:"credentialsReference,omitempty"`
 }
 
 // Validate validates this openstack cloud spec
@@ -103,16 +105,49 @@ func (m *OpenstackCloudSpec) Validate(formats strfmt.Registry) error {
 }
 
 func (m *OpenstackCloudSpec) validateCredentialsReference(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.CredentialsReference) { // not required
 		return nil
 	}
 
-	if err := m.CredentialsReference.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("credentialsReference")
+	if m.CredentialsReference != nil {
+		if err := m.CredentialsReference.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("credentialsReference")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("credentialsReference")
+			}
+			return err
 		}
-		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this openstack cloud spec based on the context it is used
+func (m *OpenstackCloudSpec) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateCredentialsReference(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *OpenstackCloudSpec) contextValidateCredentialsReference(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.CredentialsReference != nil {
+		if err := m.CredentialsReference.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("credentialsReference")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("credentialsReference")
+			}
+			return err
+		}
 	}
 
 	return nil

@@ -23,32 +23,37 @@ type Client struct {
 	formats   strfmt.Registry
 }
 
+// ClientOption is the option for Client methods
+type ClientOption func(*runtime.ClientOperation)
+
 // ClientService is the interface for Client methods
 type ClientService interface {
-	CreateOIDCKubeconfig(params *CreateOIDCKubeconfigParams, authInfo runtime.ClientAuthInfoWriter) (*CreateOIDCKubeconfigOK, error)
+	CreateOIDCKubeconfig(params *CreateOIDCKubeconfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOIDCKubeconfigOK, error)
 
-	GetAddonConfig(params *GetAddonConfigParams, authInfo runtime.ClientAuthInfoWriter) (*GetAddonConfigOK, error)
+	GetAddonConfig(params *GetAddonConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAddonConfigOK, error)
 
-	GetAdmissionPlugins(params *GetAdmissionPluginsParams, authInfo runtime.ClientAuthInfoWriter) (*GetAdmissionPluginsOK, error)
+	GetAdmissionPlugins(params *GetAdmissionPluginsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAdmissionPluginsOK, error)
 
-	ListAddonConfigs(params *ListAddonConfigsParams, authInfo runtime.ClientAuthInfoWriter) (*ListAddonConfigsOK, error)
+	ListAddonConfigs(params *ListAddonConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAddonConfigsOK, error)
 
-	ListSystemLabels(params *ListSystemLabelsParams, authInfo runtime.ClientAuthInfoWriter) (*ListSystemLabelsOK, error)
+	ListSystemLabels(params *ListSystemLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSystemLabelsOK, error)
+
+	MigrateClusterToExternalCCM(params *MigrateClusterToExternalCCMParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*MigrateClusterToExternalCCMOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-  CreateOIDCKubeconfig Starts OIDC flow and generates kubeconfig, the generated config
+	CreateOIDCKubeconfig Starts OIDC flow and generates kubeconfig, the generated config
+
 contains OIDC provider authentication info
 */
-func (a *Client) CreateOIDCKubeconfig(params *CreateOIDCKubeconfigParams, authInfo runtime.ClientAuthInfoWriter) (*CreateOIDCKubeconfigOK, error) {
+func (a *Client) CreateOIDCKubeconfig(params *CreateOIDCKubeconfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOIDCKubeconfigOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewCreateOIDCKubeconfigParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "createOIDCKubeconfig",
 		Method:             "GET",
 		PathPattern:        "/api/v1/kubeconfig",
@@ -60,7 +65,12 @@ func (a *Client) CreateOIDCKubeconfig(params *CreateOIDCKubeconfigParams, authIn
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -74,15 +84,14 @@ func (a *Client) CreateOIDCKubeconfig(params *CreateOIDCKubeconfigParams, authIn
 }
 
 /*
-  GetAddonConfig returns specified addon config
+GetAddonConfig returns specified addon config
 */
-func (a *Client) GetAddonConfig(params *GetAddonConfigParams, authInfo runtime.ClientAuthInfoWriter) (*GetAddonConfigOK, error) {
+func (a *Client) GetAddonConfig(params *GetAddonConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAddonConfigOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetAddonConfigParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "getAddonConfig",
 		Method:             "GET",
 		PathPattern:        "/api/v1/addonconfigs/{addon_id}",
@@ -94,7 +103,12 @@ func (a *Client) GetAddonConfig(params *GetAddonConfigParams, authInfo runtime.C
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -108,15 +122,14 @@ func (a *Client) GetAddonConfig(params *GetAddonConfigParams, authInfo runtime.C
 }
 
 /*
-  GetAdmissionPlugins returns specified addon config
+GetAdmissionPlugins returns specified addon config
 */
-func (a *Client) GetAdmissionPlugins(params *GetAdmissionPluginsParams, authInfo runtime.ClientAuthInfoWriter) (*GetAdmissionPluginsOK, error) {
+func (a *Client) GetAdmissionPlugins(params *GetAdmissionPluginsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAdmissionPluginsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetAdmissionPluginsParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "getAdmissionPlugins",
 		Method:             "GET",
 		PathPattern:        "/api/v1/admission/plugins/{version}",
@@ -128,7 +141,12 @@ func (a *Client) GetAdmissionPlugins(params *GetAdmissionPluginsParams, authInfo
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -142,15 +160,14 @@ func (a *Client) GetAdmissionPlugins(params *GetAdmissionPluginsParams, authInfo
 }
 
 /*
-  ListAddonConfigs returns all available addon configs
+ListAddonConfigs returns all available addon configs
 */
-func (a *Client) ListAddonConfigs(params *ListAddonConfigsParams, authInfo runtime.ClientAuthInfoWriter) (*ListAddonConfigsOK, error) {
+func (a *Client) ListAddonConfigs(params *ListAddonConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAddonConfigsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListAddonConfigsParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "listAddonConfigs",
 		Method:             "GET",
 		PathPattern:        "/api/v1/addonconfigs",
@@ -162,7 +179,12 @@ func (a *Client) ListAddonConfigs(params *ListAddonConfigsParams, authInfo runti
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -176,15 +198,14 @@ func (a *Client) ListAddonConfigs(params *ListAddonConfigsParams, authInfo runti
 }
 
 /*
-  ListSystemLabels List restricted system labels
+ListSystemLabels List restricted system labels
 */
-func (a *Client) ListSystemLabels(params *ListSystemLabelsParams, authInfo runtime.ClientAuthInfoWriter) (*ListSystemLabelsOK, error) {
+func (a *Client) ListSystemLabels(params *ListSystemLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSystemLabelsOK, error) {
 	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListSystemLabelsParams()
 	}
-
-	result, err := a.transport.Submit(&runtime.ClientOperation{
+	op := &runtime.ClientOperation{
 		ID:                 "listSystemLabels",
 		Method:             "GET",
 		PathPattern:        "/api/v1/labels/system",
@@ -196,7 +217,12 @@ func (a *Client) ListSystemLabels(params *ListSystemLabelsParams, authInfo runti
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
-	})
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
@@ -206,6 +232,44 @@ func (a *Client) ListSystemLabels(params *ListSystemLabelsParams, authInfo runti
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ListSystemLabelsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+MigrateClusterToExternalCCM Enable the migration to the external CCM for the given cluster
+*/
+func (a *Client) MigrateClusterToExternalCCM(params *MigrateClusterToExternalCCMParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*MigrateClusterToExternalCCMOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewMigrateClusterToExternalCCMParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "migrateClusterToExternalCCM",
+		Method:             "POST",
+		PathPattern:        "/api/v2/projects/{project_id}/clusters/{cluster_id}/externalccmmigration",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &MigrateClusterToExternalCCMReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*MigrateClusterToExternalCCMOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*MigrateClusterToExternalCCMDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -16,11 +18,16 @@ import (
 type DatacenterSpecAnexia struct {
 
 	// LocationID the location of the region
-	LocationID string `json:"location_id,omitempty"`
+	LocationID string `json:"locationID,omitempty"`
 }
 
 // Validate validates this datacenter spec anexia
 func (m *DatacenterSpecAnexia) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this datacenter spec anexia based on context it is used
+func (m *DatacenterSpecAnexia) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

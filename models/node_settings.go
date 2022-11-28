@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -16,27 +18,23 @@ import (
 // swagger:model NodeSettings
 type NodeSettings struct {
 
-	// Optional: The hyperkube image to use. Currently only Flatcar
-	// makes use of this option.
-	HyperkubeImage string `json:"hyperkube_image,omitempty"`
-
 	// Optional: These image registries will be configured as insecure
 	// on the container runtime.
-	InsecureRegistries []string `json:"insecure_registries"`
+	InsecureRegistries []string `json:"insecureRegistries"`
 
 	// Optional: Translates to --pod-infra-container-image on the kubelet.
 	// If not set, the kubelet will default it.
-	PauseImage string `json:"pause_image,omitempty"`
+	PauseImage string `json:"pauseImage,omitempty"`
 
 	// Optional: These image registries will be configured as registry mirrors
 	// on the container runtime.
-	RegistryMirrors []string `json:"registry_mirrors"`
+	RegistryMirrors []string `json:"registryMirrors"`
 
 	// http proxy
-	HTTPProxy ProxyValue `json:"http_proxy,omitempty"`
+	HTTPProxy ProxyValue `json:"httpProxy,omitempty"`
 
 	// no proxy
-	NoProxy ProxyValue `json:"no_proxy,omitempty"`
+	NoProxy ProxyValue `json:"noProxy,omitempty"`
 }
 
 // Validate validates this node settings
@@ -58,14 +56,15 @@ func (m *NodeSettings) Validate(formats strfmt.Registry) error {
 }
 
 func (m *NodeSettings) validateHTTPProxy(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.HTTPProxy) { // not required
 		return nil
 	}
 
 	if err := m.HTTPProxy.Validate(formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("http_proxy")
+			return ve.ValidateName("httpProxy")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("httpProxy")
 		}
 		return err
 	}
@@ -74,14 +73,61 @@ func (m *NodeSettings) validateHTTPProxy(formats strfmt.Registry) error {
 }
 
 func (m *NodeSettings) validateNoProxy(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.NoProxy) { // not required
 		return nil
 	}
 
 	if err := m.NoProxy.Validate(formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
-			return ve.ValidateName("no_proxy")
+			return ve.ValidateName("noProxy")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("noProxy")
+		}
+		return err
+	}
+
+	return nil
+}
+
+// ContextValidate validate this node settings based on the context it is used
+func (m *NodeSettings) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateHTTPProxy(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateNoProxy(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *NodeSettings) contextValidateHTTPProxy(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.HTTPProxy.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("httpProxy")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("httpProxy")
+		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *NodeSettings) contextValidateNoProxy(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.NoProxy.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("noProxy")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("noProxy")
 		}
 		return err
 	}

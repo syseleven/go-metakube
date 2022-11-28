@@ -6,6 +6,7 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -67,7 +68,6 @@ func (m *NodeStatus) Validate(formats strfmt.Registry) error {
 }
 
 func (m *NodeStatus) validateAddresses(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Addresses) { // not required
 		return nil
 	}
@@ -81,6 +81,8 @@ func (m *NodeStatus) validateAddresses(formats strfmt.Registry) error {
 			if err := m.Addresses[i].Validate(formats); err != nil {
 				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("addresses" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("addresses" + "." + strconv.Itoa(i))
 				}
 				return err
 			}
@@ -92,7 +94,6 @@ func (m *NodeStatus) validateAddresses(formats strfmt.Registry) error {
 }
 
 func (m *NodeStatus) validateAllocatable(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Allocatable) { // not required
 		return nil
 	}
@@ -101,6 +102,8 @@ func (m *NodeStatus) validateAllocatable(formats strfmt.Registry) error {
 		if err := m.Allocatable.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("allocatable")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("allocatable")
 			}
 			return err
 		}
@@ -110,7 +113,6 @@ func (m *NodeStatus) validateAllocatable(formats strfmt.Registry) error {
 }
 
 func (m *NodeStatus) validateCapacity(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Capacity) { // not required
 		return nil
 	}
@@ -119,6 +121,8 @@ func (m *NodeStatus) validateCapacity(formats strfmt.Registry) error {
 		if err := m.Capacity.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("capacity")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("capacity")
 			}
 			return err
 		}
@@ -128,7 +132,6 @@ func (m *NodeStatus) validateCapacity(formats strfmt.Registry) error {
 }
 
 func (m *NodeStatus) validateNodeInfo(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.NodeInfo) { // not required
 		return nil
 	}
@@ -137,6 +140,102 @@ func (m *NodeStatus) validateNodeInfo(formats strfmt.Registry) error {
 		if err := m.NodeInfo.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("nodeInfo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("nodeInfo")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this node status based on the context it is used
+func (m *NodeStatus) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateAddresses(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateAllocatable(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateCapacity(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateNodeInfo(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *NodeStatus) contextValidateAddresses(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Addresses); i++ {
+
+		if m.Addresses[i] != nil {
+			if err := m.Addresses[i].ContextValidate(ctx, formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("addresses" + "." + strconv.Itoa(i))
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("addresses" + "." + strconv.Itoa(i))
+				}
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *NodeStatus) contextValidateAllocatable(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Allocatable != nil {
+		if err := m.Allocatable.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("allocatable")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("allocatable")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *NodeStatus) contextValidateCapacity(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Capacity != nil {
+		if err := m.Capacity.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("capacity")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("capacity")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *NodeStatus) contextValidateNodeInfo(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.NodeInfo != nil {
+		if err := m.NodeInfo.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("nodeInfo")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("nodeInfo")
 			}
 			return err
 		}

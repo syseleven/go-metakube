@@ -14,54 +14,102 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
+	"github.com/go-openapi/swag"
 )
 
-// NewListOpenstackImagesParams creates a new ListOpenstackImagesParams object
-// with the default values initialized.
+// NewListOpenstackImagesParams creates a new ListOpenstackImagesParams object,
+// with the default timeout for this client.
+//
+// Default values are not hydrated, since defaults are normally applied by the API server side.
+//
+// To enforce default values in parameter, use SetDefaults or WithDefaults.
 func NewListOpenstackImagesParams() *ListOpenstackImagesParams {
-
 	return &ListOpenstackImagesParams{
-
 		timeout: cr.DefaultTimeout,
 	}
 }
 
 // NewListOpenstackImagesParamsWithTimeout creates a new ListOpenstackImagesParams object
-// with the default values initialized, and the ability to set a timeout on a request
+// with the ability to set a timeout on a request.
 func NewListOpenstackImagesParamsWithTimeout(timeout time.Duration) *ListOpenstackImagesParams {
-
 	return &ListOpenstackImagesParams{
-
 		timeout: timeout,
 	}
 }
 
 // NewListOpenstackImagesParamsWithContext creates a new ListOpenstackImagesParams object
-// with the default values initialized, and the ability to set a context for a request
+// with the ability to set a context for a request.
 func NewListOpenstackImagesParamsWithContext(ctx context.Context) *ListOpenstackImagesParams {
-
 	return &ListOpenstackImagesParams{
-
 		Context: ctx,
 	}
 }
 
 // NewListOpenstackImagesParamsWithHTTPClient creates a new ListOpenstackImagesParams object
-// with the default values initialized, and the ability to set a custom HTTPClient for a request
+// with the ability to set a custom HTTPClient for a request.
 func NewListOpenstackImagesParamsWithHTTPClient(client *http.Client) *ListOpenstackImagesParams {
-
 	return &ListOpenstackImagesParams{
 		HTTPClient: client,
 	}
 }
 
-/*ListOpenstackImagesParams contains all the parameters to send to the API endpoint
-for the list openstack images operation typically these are written to a http.Request
+/*
+ListOpenstackImagesParams contains all the parameters to send to the API endpoint
+
+	for the list openstack images operation.
+
+	Typically these are written to a http.Request.
 */
 type ListOpenstackImagesParams struct {
+
+	// ApplicationCredentialID.
+	ApplicationCredentialID *string
+
+	// ApplicationCredentialSecret.
+	ApplicationCredentialSecret *string
+
+	// Credential.
+	Credential *string
+
+	// DatacenterName.
+	DatacenterName *string
+
+	// Domain.
+	Domain *string
+
+	// OIDCAuthentication.
+	OIDCAuthentication *bool
+
+	// Password.
+	Password *string
+
+	// Tenant.
+	Tenant *string
+
+	// TenantID.
+	TenantID *string
+
+	// Username.
+	Username *string
+
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
+}
+
+// WithDefaults hydrates default values in the list openstack images params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ListOpenstackImagesParams) WithDefaults() *ListOpenstackImagesParams {
+	o.SetDefaults()
+	return o
+}
+
+// SetDefaults hydrates default values in the list openstack images params (not the query body).
+//
+// All values with no default are reset to their zero value.
+func (o *ListOpenstackImagesParams) SetDefaults() {
+	// no default values defined for this parameter
 }
 
 // WithTimeout adds the timeout to the list openstack images params
@@ -97,6 +145,116 @@ func (o *ListOpenstackImagesParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithApplicationCredentialID adds the applicationCredentialID to the list openstack images params
+func (o *ListOpenstackImagesParams) WithApplicationCredentialID(applicationCredentialID *string) *ListOpenstackImagesParams {
+	o.SetApplicationCredentialID(applicationCredentialID)
+	return o
+}
+
+// SetApplicationCredentialID adds the applicationCredentialId to the list openstack images params
+func (o *ListOpenstackImagesParams) SetApplicationCredentialID(applicationCredentialID *string) {
+	o.ApplicationCredentialID = applicationCredentialID
+}
+
+// WithApplicationCredentialSecret adds the applicationCredentialSecret to the list openstack images params
+func (o *ListOpenstackImagesParams) WithApplicationCredentialSecret(applicationCredentialSecret *string) *ListOpenstackImagesParams {
+	o.SetApplicationCredentialSecret(applicationCredentialSecret)
+	return o
+}
+
+// SetApplicationCredentialSecret adds the applicationCredentialSecret to the list openstack images params
+func (o *ListOpenstackImagesParams) SetApplicationCredentialSecret(applicationCredentialSecret *string) {
+	o.ApplicationCredentialSecret = applicationCredentialSecret
+}
+
+// WithCredential adds the credential to the list openstack images params
+func (o *ListOpenstackImagesParams) WithCredential(credential *string) *ListOpenstackImagesParams {
+	o.SetCredential(credential)
+	return o
+}
+
+// SetCredential adds the credential to the list openstack images params
+func (o *ListOpenstackImagesParams) SetCredential(credential *string) {
+	o.Credential = credential
+}
+
+// WithDatacenterName adds the datacenterName to the list openstack images params
+func (o *ListOpenstackImagesParams) WithDatacenterName(datacenterName *string) *ListOpenstackImagesParams {
+	o.SetDatacenterName(datacenterName)
+	return o
+}
+
+// SetDatacenterName adds the datacenterName to the list openstack images params
+func (o *ListOpenstackImagesParams) SetDatacenterName(datacenterName *string) {
+	o.DatacenterName = datacenterName
+}
+
+// WithDomain adds the domain to the list openstack images params
+func (o *ListOpenstackImagesParams) WithDomain(domain *string) *ListOpenstackImagesParams {
+	o.SetDomain(domain)
+	return o
+}
+
+// SetDomain adds the domain to the list openstack images params
+func (o *ListOpenstackImagesParams) SetDomain(domain *string) {
+	o.Domain = domain
+}
+
+// WithOIDCAuthentication adds the oIDCAuthentication to the list openstack images params
+func (o *ListOpenstackImagesParams) WithOIDCAuthentication(oIDCAuthentication *bool) *ListOpenstackImagesParams {
+	o.SetOIDCAuthentication(oIDCAuthentication)
+	return o
+}
+
+// SetOIDCAuthentication adds the oIdCAuthentication to the list openstack images params
+func (o *ListOpenstackImagesParams) SetOIDCAuthentication(oIDCAuthentication *bool) {
+	o.OIDCAuthentication = oIDCAuthentication
+}
+
+// WithPassword adds the password to the list openstack images params
+func (o *ListOpenstackImagesParams) WithPassword(password *string) *ListOpenstackImagesParams {
+	o.SetPassword(password)
+	return o
+}
+
+// SetPassword adds the password to the list openstack images params
+func (o *ListOpenstackImagesParams) SetPassword(password *string) {
+	o.Password = password
+}
+
+// WithTenant adds the tenant to the list openstack images params
+func (o *ListOpenstackImagesParams) WithTenant(tenant *string) *ListOpenstackImagesParams {
+	o.SetTenant(tenant)
+	return o
+}
+
+// SetTenant adds the tenant to the list openstack images params
+func (o *ListOpenstackImagesParams) SetTenant(tenant *string) {
+	o.Tenant = tenant
+}
+
+// WithTenantID adds the tenantID to the list openstack images params
+func (o *ListOpenstackImagesParams) WithTenantID(tenantID *string) *ListOpenstackImagesParams {
+	o.SetTenantID(tenantID)
+	return o
+}
+
+// SetTenantID adds the tenantId to the list openstack images params
+func (o *ListOpenstackImagesParams) SetTenantID(tenantID *string) {
+	o.TenantID = tenantID
+}
+
+// WithUsername adds the username to the list openstack images params
+func (o *ListOpenstackImagesParams) WithUsername(username *string) *ListOpenstackImagesParams {
+	o.SetUsername(username)
+	return o
+}
+
+// SetUsername adds the username to the list openstack images params
+func (o *ListOpenstackImagesParams) SetUsername(username *string) {
+	o.Username = username
+}
+
 // WriteToRequest writes these params to a swagger request
 func (o *ListOpenstackImagesParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -104,6 +262,86 @@ func (o *ListOpenstackImagesParams) WriteToRequest(r runtime.ClientRequest, reg 
 		return err
 	}
 	var res []error
+
+	if o.ApplicationCredentialID != nil {
+
+		// header param ApplicationCredentialID
+		if err := r.SetHeaderParam("ApplicationCredentialID", *o.ApplicationCredentialID); err != nil {
+			return err
+		}
+	}
+
+	if o.ApplicationCredentialSecret != nil {
+
+		// header param ApplicationCredentialSecret
+		if err := r.SetHeaderParam("ApplicationCredentialSecret", *o.ApplicationCredentialSecret); err != nil {
+			return err
+		}
+	}
+
+	if o.Credential != nil {
+
+		// header param Credential
+		if err := r.SetHeaderParam("Credential", *o.Credential); err != nil {
+			return err
+		}
+	}
+
+	if o.DatacenterName != nil {
+
+		// header param DatacenterName
+		if err := r.SetHeaderParam("DatacenterName", *o.DatacenterName); err != nil {
+			return err
+		}
+	}
+
+	if o.Domain != nil {
+
+		// header param Domain
+		if err := r.SetHeaderParam("Domain", *o.Domain); err != nil {
+			return err
+		}
+	}
+
+	if o.OIDCAuthentication != nil {
+
+		// header param OIDCAuthentication
+		if err := r.SetHeaderParam("OIDCAuthentication", swag.FormatBool(*o.OIDCAuthentication)); err != nil {
+			return err
+		}
+	}
+
+	if o.Password != nil {
+
+		// header param Password
+		if err := r.SetHeaderParam("Password", *o.Password); err != nil {
+			return err
+		}
+	}
+
+	if o.Tenant != nil {
+
+		// header param Tenant
+		if err := r.SetHeaderParam("Tenant", *o.Tenant); err != nil {
+			return err
+		}
+	}
+
+	if o.TenantID != nil {
+
+		// header param TenantID
+		if err := r.SetHeaderParam("TenantID", *o.TenantID); err != nil {
+			return err
+		}
+	}
+
+	if o.Username != nil {
+
+		// header param Username
+		if err := r.SetHeaderParam("Username", *o.Username); err != nil {
+			return err
+		}
+	}
 
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)

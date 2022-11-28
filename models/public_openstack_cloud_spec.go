@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -24,6 +26,12 @@ type PublicOpenstackCloudSpec struct {
 	// network
 	Network string `json:"network,omitempty"`
 
+	// project
+	Project string `json:"project,omitempty"`
+
+	// project ID
+	ProjectID string `json:"projectID,omitempty"`
+
 	// router ID
 	RouterID string `json:"routerID,omitempty"`
 
@@ -35,16 +43,15 @@ type PublicOpenstackCloudSpec struct {
 
 	// subnet ID
 	SubnetID string `json:"subnetID,omitempty"`
-
-	// tenant
-	Tenant string `json:"tenant,omitempty"`
-
-	// tenant ID
-	TenantID string `json:"tenantID,omitempty"`
 }
 
 // Validate validates this public openstack cloud spec
 func (m *PublicOpenstackCloudSpec) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this public openstack cloud spec based on context it is used
+func (m *PublicOpenstackCloudSpec) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

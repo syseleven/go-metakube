@@ -46,7 +46,8 @@ func NewListSeedNamesOK() *ListSeedNamesOK {
 	return &ListSeedNamesOK{}
 }
 
-/*ListSeedNamesOK handles this case with default header values.
+/*
+ListSeedNamesOK describes a response with status code 200, with default header values.
 
 SeedNamesList
 */
@@ -54,7 +55,36 @@ type ListSeedNamesOK struct {
 	Payload models.SeedNamesList
 }
 
+// IsSuccess returns true when this list seed names o k response has a 2xx status code
+func (o *ListSeedNamesOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list seed names o k response has a 3xx status code
+func (o *ListSeedNamesOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list seed names o k response has a 4xx status code
+func (o *ListSeedNamesOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list seed names o k response has a 5xx status code
+func (o *ListSeedNamesOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list seed names o k response a status code equal to that given
+func (o *ListSeedNamesOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ListSeedNamesOK) Error() string {
+	return fmt.Sprintf("[GET /api/v1/seed][%d] listSeedNamesOK  %+v", 200, o.Payload)
+}
+
+func (o *ListSeedNamesOK) String() string {
 	return fmt.Sprintf("[GET /api/v1/seed][%d] listSeedNamesOK  %+v", 200, o.Payload)
 }
 
@@ -79,7 +109,8 @@ func NewListSeedNamesDefault(code int) *ListSeedNamesDefault {
 	}
 }
 
-/*ListSeedNamesDefault handles this case with default header values.
+/*
+ListSeedNamesDefault describes a response with status code -1, with default header values.
 
 errorResponse
 */
@@ -94,7 +125,36 @@ func (o *ListSeedNamesDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this list seed names default response has a 2xx status code
+func (o *ListSeedNamesDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this list seed names default response has a 3xx status code
+func (o *ListSeedNamesDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this list seed names default response has a 4xx status code
+func (o *ListSeedNamesDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this list seed names default response has a 5xx status code
+func (o *ListSeedNamesDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this list seed names default response a status code equal to that given
+func (o *ListSeedNamesDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *ListSeedNamesDefault) Error() string {
+	return fmt.Sprintf("[GET /api/v1/seed][%d] listSeedNames default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *ListSeedNamesDefault) String() string {
 	return fmt.Sprintf("[GET /api/v1/seed][%d] listSeedNames default  %+v", o._statusCode, o.Payload)
 }
 

@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -34,6 +36,9 @@ type SeedSpec struct {
 	// across all seeds).
 	SeedDatacenters map[string]Datacenter `json:"datacenters,omitempty"`
 
+	// backup restore
+	BackupRestore *BackupRestore `json:"backupRestore,omitempty"`
+
 	// expose strategy
 	ExposeStrategy ExposeStrategy `json:"expose_strategy,omitempty"`
 
@@ -49,6 +54,10 @@ func (m *SeedSpec) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateSeedDatacenters(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateBackupRestore(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -71,7 +80,6 @@ func (m *SeedSpec) Validate(formats strfmt.Registry) error {
 }
 
 func (m *SeedSpec) validateSeedDatacenters(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.SeedDatacenters) { // not required
 		return nil
 	}
@@ -83,6 +91,11 @@ func (m *SeedSpec) validateSeedDatacenters(formats strfmt.Registry) error {
 		}
 		if val, ok := m.SeedDatacenters[k]; ok {
 			if err := val.Validate(formats); err != nil {
+				if ve, ok := err.(*errors.Validation); ok {
+					return ve.ValidateName("datacenters" + "." + k)
+				} else if ce, ok := err.(*errors.CompositeError); ok {
+					return ce.ValidateName("datacenters" + "." + k)
+				}
 				return err
 			}
 		}
@@ -92,8 +105,26 @@ func (m *SeedSpec) validateSeedDatacenters(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *SeedSpec) validateExposeStrategy(formats strfmt.Registry) error {
+func (m *SeedSpec) validateBackupRestore(formats strfmt.Registry) error {
+	if swag.IsZero(m.BackupRestore) { // not required
+		return nil
+	}
 
+	if m.BackupRestore != nil {
+		if err := m.BackupRestore.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("backupRestore")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("backupRestore")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *SeedSpec) validateExposeStrategy(formats strfmt.Registry) error {
 	if swag.IsZero(m.ExposeStrategy) { // not required
 		return nil
 	}
@@ -101,6 +132,8 @@ func (m *SeedSpec) validateExposeStrategy(formats strfmt.Registry) error {
 	if err := m.ExposeStrategy.Validate(formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("expose_strategy")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("expose_strategy")
 		}
 		return err
 	}
@@ -109,7 +142,6 @@ func (m *SeedSpec) validateExposeStrategy(formats strfmt.Registry) error {
 }
 
 func (m *SeedSpec) validateKubeconfig(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.Kubeconfig) { // not required
 		return nil
 	}
@@ -118,6 +150,8 @@ func (m *SeedSpec) validateKubeconfig(formats strfmt.Registry) error {
 		if err := m.Kubeconfig.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("kubeconfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("kubeconfig")
 			}
 			return err
 		}
@@ -127,7 +161,6 @@ func (m *SeedSpec) validateKubeconfig(formats strfmt.Registry) error {
 }
 
 func (m *SeedSpec) validateProxySettings(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.ProxySettings) { // not required
 		return nil
 	}
@@ -136,6 +169,115 @@ func (m *SeedSpec) validateProxySettings(formats strfmt.Registry) error {
 		if err := m.ProxySettings.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("proxy_settings")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("proxy_settings")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this seed spec based on the context it is used
+func (m *SeedSpec) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateSeedDatacenters(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateBackupRestore(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateExposeStrategy(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateKubeconfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateProxySettings(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *SeedSpec) contextValidateSeedDatacenters(ctx context.Context, formats strfmt.Registry) error {
+
+	for k := range m.SeedDatacenters {
+
+		if val, ok := m.SeedDatacenters[k]; ok {
+			if err := val.ContextValidate(ctx, formats); err != nil {
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+func (m *SeedSpec) contextValidateBackupRestore(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.BackupRestore != nil {
+		if err := m.BackupRestore.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("backupRestore")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("backupRestore")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *SeedSpec) contextValidateExposeStrategy(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.ExposeStrategy.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("expose_strategy")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("expose_strategy")
+		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *SeedSpec) contextValidateKubeconfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Kubeconfig != nil {
+		if err := m.Kubeconfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("kubeconfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("kubeconfig")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *SeedSpec) contextValidateProxySettings(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.ProxySettings != nil {
+		if err := m.ProxySettings.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("proxy_settings")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("proxy_settings")
 			}
 			return err
 		}

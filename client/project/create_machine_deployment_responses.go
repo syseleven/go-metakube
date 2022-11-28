@@ -58,7 +58,8 @@ func NewCreateMachineDeploymentCreated() *CreateMachineDeploymentCreated {
 	return &CreateMachineDeploymentCreated{}
 }
 
-/*CreateMachineDeploymentCreated handles this case with default header values.
+/*
+CreateMachineDeploymentCreated describes a response with status code 201, with default header values.
 
 NodeDeployment
 */
@@ -66,7 +67,36 @@ type CreateMachineDeploymentCreated struct {
 	Payload *models.NodeDeployment
 }
 
+// IsSuccess returns true when this create machine deployment created response has a 2xx status code
+func (o *CreateMachineDeploymentCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create machine deployment created response has a 3xx status code
+func (o *CreateMachineDeploymentCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create machine deployment created response has a 4xx status code
+func (o *CreateMachineDeploymentCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create machine deployment created response has a 5xx status code
+func (o *CreateMachineDeploymentCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create machine deployment created response a status code equal to that given
+func (o *CreateMachineDeploymentCreated) IsCode(code int) bool {
+	return code == 201
+}
+
 func (o *CreateMachineDeploymentCreated) Error() string {
+	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments][%d] createMachineDeploymentCreated  %+v", 201, o.Payload)
+}
+
+func (o *CreateMachineDeploymentCreated) String() string {
 	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments][%d] createMachineDeploymentCreated  %+v", 201, o.Payload)
 }
 
@@ -91,14 +121,44 @@ func NewCreateMachineDeploymentUnauthorized() *CreateMachineDeploymentUnauthoriz
 	return &CreateMachineDeploymentUnauthorized{}
 }
 
-/*CreateMachineDeploymentUnauthorized handles this case with default header values.
+/*
+CreateMachineDeploymentUnauthorized describes a response with status code 401, with default header values.
 
 EmptyResponse is a empty response
 */
 type CreateMachineDeploymentUnauthorized struct {
 }
 
+// IsSuccess returns true when this create machine deployment unauthorized response has a 2xx status code
+func (o *CreateMachineDeploymentUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create machine deployment unauthorized response has a 3xx status code
+func (o *CreateMachineDeploymentUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create machine deployment unauthorized response has a 4xx status code
+func (o *CreateMachineDeploymentUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create machine deployment unauthorized response has a 5xx status code
+func (o *CreateMachineDeploymentUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create machine deployment unauthorized response a status code equal to that given
+func (o *CreateMachineDeploymentUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *CreateMachineDeploymentUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments][%d] createMachineDeploymentUnauthorized ", 401)
+}
+
+func (o *CreateMachineDeploymentUnauthorized) String() string {
 	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments][%d] createMachineDeploymentUnauthorized ", 401)
 }
 
@@ -112,14 +172,44 @@ func NewCreateMachineDeploymentForbidden() *CreateMachineDeploymentForbidden {
 	return &CreateMachineDeploymentForbidden{}
 }
 
-/*CreateMachineDeploymentForbidden handles this case with default header values.
+/*
+CreateMachineDeploymentForbidden describes a response with status code 403, with default header values.
 
 EmptyResponse is a empty response
 */
 type CreateMachineDeploymentForbidden struct {
 }
 
+// IsSuccess returns true when this create machine deployment forbidden response has a 2xx status code
+func (o *CreateMachineDeploymentForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this create machine deployment forbidden response has a 3xx status code
+func (o *CreateMachineDeploymentForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create machine deployment forbidden response has a 4xx status code
+func (o *CreateMachineDeploymentForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this create machine deployment forbidden response has a 5xx status code
+func (o *CreateMachineDeploymentForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create machine deployment forbidden response a status code equal to that given
+func (o *CreateMachineDeploymentForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *CreateMachineDeploymentForbidden) Error() string {
+	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments][%d] createMachineDeploymentForbidden ", 403)
+}
+
+func (o *CreateMachineDeploymentForbidden) String() string {
 	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments][%d] createMachineDeploymentForbidden ", 403)
 }
 
@@ -135,7 +225,8 @@ func NewCreateMachineDeploymentDefault(code int) *CreateMachineDeploymentDefault
 	}
 }
 
-/*CreateMachineDeploymentDefault handles this case with default header values.
+/*
+CreateMachineDeploymentDefault describes a response with status code -1, with default header values.
 
 errorResponse
 */
@@ -150,7 +241,36 @@ func (o *CreateMachineDeploymentDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this create machine deployment default response has a 2xx status code
+func (o *CreateMachineDeploymentDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this create machine deployment default response has a 3xx status code
+func (o *CreateMachineDeploymentDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this create machine deployment default response has a 4xx status code
+func (o *CreateMachineDeploymentDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this create machine deployment default response has a 5xx status code
+func (o *CreateMachineDeploymentDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this create machine deployment default response a status code equal to that given
+func (o *CreateMachineDeploymentDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *CreateMachineDeploymentDefault) Error() string {
+	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments][%d] createMachineDeployment default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *CreateMachineDeploymentDefault) String() string {
 	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments][%d] createMachineDeployment default  %+v", o._statusCode, o.Payload)
 }
 

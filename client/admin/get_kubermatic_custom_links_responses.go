@@ -58,7 +58,8 @@ func NewGetKubermaticCustomLinksOK() *GetKubermaticCustomLinksOK {
 	return &GetKubermaticCustomLinksOK{}
 }
 
-/*GetKubermaticCustomLinksOK handles this case with default header values.
+/*
+GetKubermaticCustomLinksOK describes a response with status code 200, with default header values.
 
 GlobalCustomLinks
 */
@@ -66,7 +67,36 @@ type GetKubermaticCustomLinksOK struct {
 	Payload models.GlobalCustomLinks
 }
 
+// IsSuccess returns true when this get kubermatic custom links o k response has a 2xx status code
+func (o *GetKubermaticCustomLinksOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this get kubermatic custom links o k response has a 3xx status code
+func (o *GetKubermaticCustomLinksOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get kubermatic custom links o k response has a 4xx status code
+func (o *GetKubermaticCustomLinksOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this get kubermatic custom links o k response has a 5xx status code
+func (o *GetKubermaticCustomLinksOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get kubermatic custom links o k response a status code equal to that given
+func (o *GetKubermaticCustomLinksOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *GetKubermaticCustomLinksOK) Error() string {
+	return fmt.Sprintf("[GET /api/v1/admin/settings/customlinks][%d] getKubermaticCustomLinksOK  %+v", 200, o.Payload)
+}
+
+func (o *GetKubermaticCustomLinksOK) String() string {
 	return fmt.Sprintf("[GET /api/v1/admin/settings/customlinks][%d] getKubermaticCustomLinksOK  %+v", 200, o.Payload)
 }
 
@@ -89,14 +119,44 @@ func NewGetKubermaticCustomLinksUnauthorized() *GetKubermaticCustomLinksUnauthor
 	return &GetKubermaticCustomLinksUnauthorized{}
 }
 
-/*GetKubermaticCustomLinksUnauthorized handles this case with default header values.
+/*
+GetKubermaticCustomLinksUnauthorized describes a response with status code 401, with default header values.
 
 EmptyResponse is a empty response
 */
 type GetKubermaticCustomLinksUnauthorized struct {
 }
 
+// IsSuccess returns true when this get kubermatic custom links unauthorized response has a 2xx status code
+func (o *GetKubermaticCustomLinksUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get kubermatic custom links unauthorized response has a 3xx status code
+func (o *GetKubermaticCustomLinksUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get kubermatic custom links unauthorized response has a 4xx status code
+func (o *GetKubermaticCustomLinksUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get kubermatic custom links unauthorized response has a 5xx status code
+func (o *GetKubermaticCustomLinksUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get kubermatic custom links unauthorized response a status code equal to that given
+func (o *GetKubermaticCustomLinksUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *GetKubermaticCustomLinksUnauthorized) Error() string {
+	return fmt.Sprintf("[GET /api/v1/admin/settings/customlinks][%d] getKubermaticCustomLinksUnauthorized ", 401)
+}
+
+func (o *GetKubermaticCustomLinksUnauthorized) String() string {
 	return fmt.Sprintf("[GET /api/v1/admin/settings/customlinks][%d] getKubermaticCustomLinksUnauthorized ", 401)
 }
 
@@ -110,14 +170,44 @@ func NewGetKubermaticCustomLinksForbidden() *GetKubermaticCustomLinksForbidden {
 	return &GetKubermaticCustomLinksForbidden{}
 }
 
-/*GetKubermaticCustomLinksForbidden handles this case with default header values.
+/*
+GetKubermaticCustomLinksForbidden describes a response with status code 403, with default header values.
 
 EmptyResponse is a empty response
 */
 type GetKubermaticCustomLinksForbidden struct {
 }
 
+// IsSuccess returns true when this get kubermatic custom links forbidden response has a 2xx status code
+func (o *GetKubermaticCustomLinksForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this get kubermatic custom links forbidden response has a 3xx status code
+func (o *GetKubermaticCustomLinksForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this get kubermatic custom links forbidden response has a 4xx status code
+func (o *GetKubermaticCustomLinksForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this get kubermatic custom links forbidden response has a 5xx status code
+func (o *GetKubermaticCustomLinksForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this get kubermatic custom links forbidden response a status code equal to that given
+func (o *GetKubermaticCustomLinksForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *GetKubermaticCustomLinksForbidden) Error() string {
+	return fmt.Sprintf("[GET /api/v1/admin/settings/customlinks][%d] getKubermaticCustomLinksForbidden ", 403)
+}
+
+func (o *GetKubermaticCustomLinksForbidden) String() string {
 	return fmt.Sprintf("[GET /api/v1/admin/settings/customlinks][%d] getKubermaticCustomLinksForbidden ", 403)
 }
 
@@ -133,7 +223,8 @@ func NewGetKubermaticCustomLinksDefault(code int) *GetKubermaticCustomLinksDefau
 	}
 }
 
-/*GetKubermaticCustomLinksDefault handles this case with default header values.
+/*
+GetKubermaticCustomLinksDefault describes a response with status code -1, with default header values.
 
 errorResponse
 */
@@ -148,7 +239,36 @@ func (o *GetKubermaticCustomLinksDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this get kubermatic custom links default response has a 2xx status code
+func (o *GetKubermaticCustomLinksDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this get kubermatic custom links default response has a 3xx status code
+func (o *GetKubermaticCustomLinksDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this get kubermatic custom links default response has a 4xx status code
+func (o *GetKubermaticCustomLinksDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this get kubermatic custom links default response has a 5xx status code
+func (o *GetKubermaticCustomLinksDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this get kubermatic custom links default response a status code equal to that given
+func (o *GetKubermaticCustomLinksDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *GetKubermaticCustomLinksDefault) Error() string {
+	return fmt.Sprintf("[GET /api/v1/admin/settings/customlinks][%d] getKubermaticCustomLinks default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *GetKubermaticCustomLinksDefault) String() string {
 	return fmt.Sprintf("[GET /api/v1/admin/settings/customlinks][%d] getKubermaticCustomLinks default  %+v", o._statusCode, o.Payload)
 }
 

@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -54,9 +56,6 @@ type SettingSpec struct {
 
 	// machine deployment VM resource quota
 	MachineDeploymentVMResourceQuota *MachineDeploymentVMResourceQuota `json:"machineDeploymentVMResourceQuota,omitempty"`
-
-	// opa options
-	OpaOptions *OpaOptions `json:"opaOptions,omitempty"`
 }
 
 // Validate validates this setting spec
@@ -79,10 +78,6 @@ func (m *SettingSpec) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
-	if err := m.validateOpaOptions(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -90,7 +85,6 @@ func (m *SettingSpec) Validate(formats strfmt.Registry) error {
 }
 
 func (m *SettingSpec) validateCleanupOptions(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.CleanupOptions) { // not required
 		return nil
 	}
@@ -99,6 +93,8 @@ func (m *SettingSpec) validateCleanupOptions(formats strfmt.Registry) error {
 		if err := m.CleanupOptions.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cleanupOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("cleanupOptions")
 			}
 			return err
 		}
@@ -108,7 +104,6 @@ func (m *SettingSpec) validateCleanupOptions(formats strfmt.Registry) error {
 }
 
 func (m *SettingSpec) validateClusterTypeOptions(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.ClusterTypeOptions) { // not required
 		return nil
 	}
@@ -116,6 +111,8 @@ func (m *SettingSpec) validateClusterTypeOptions(formats strfmt.Registry) error 
 	if err := m.ClusterTypeOptions.Validate(formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("clusterTypeOptions")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("clusterTypeOptions")
 		}
 		return err
 	}
@@ -124,7 +121,6 @@ func (m *SettingSpec) validateClusterTypeOptions(formats strfmt.Registry) error 
 }
 
 func (m *SettingSpec) validateCustomLinks(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.CustomLinks) { // not required
 		return nil
 	}
@@ -132,6 +128,8 @@ func (m *SettingSpec) validateCustomLinks(formats strfmt.Registry) error {
 	if err := m.CustomLinks.Validate(formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("customLinks")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("customLinks")
 		}
 		return err
 	}
@@ -140,7 +138,6 @@ func (m *SettingSpec) validateCustomLinks(formats strfmt.Registry) error {
 }
 
 func (m *SettingSpec) validateMachineDeploymentVMResourceQuota(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.MachineDeploymentVMResourceQuota) { // not required
 		return nil
 	}
@@ -149,6 +146,8 @@ func (m *SettingSpec) validateMachineDeploymentVMResourceQuota(formats strfmt.Re
 		if err := m.MachineDeploymentVMResourceQuota.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("machineDeploymentVMResourceQuota")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("machineDeploymentVMResourceQuota")
 			}
 			return err
 		}
@@ -157,16 +156,84 @@ func (m *SettingSpec) validateMachineDeploymentVMResourceQuota(formats strfmt.Re
 	return nil
 }
 
-func (m *SettingSpec) validateOpaOptions(formats strfmt.Registry) error {
+// ContextValidate validate this setting spec based on the context it is used
+func (m *SettingSpec) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
 
-	if swag.IsZero(m.OpaOptions) { // not required
-		return nil
+	if err := m.contextValidateCleanupOptions(ctx, formats); err != nil {
+		res = append(res, err)
 	}
 
-	if m.OpaOptions != nil {
-		if err := m.OpaOptions.Validate(formats); err != nil {
+	if err := m.contextValidateClusterTypeOptions(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateCustomLinks(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateMachineDeploymentVMResourceQuota(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *SettingSpec) contextValidateCleanupOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.CleanupOptions != nil {
+		if err := m.CleanupOptions.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("opaOptions")
+				return ve.ValidateName("cleanupOptions")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("cleanupOptions")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *SettingSpec) contextValidateClusterTypeOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.ClusterTypeOptions.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("clusterTypeOptions")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("clusterTypeOptions")
+		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *SettingSpec) contextValidateCustomLinks(ctx context.Context, formats strfmt.Registry) error {
+
+	if err := m.CustomLinks.ContextValidate(ctx, formats); err != nil {
+		if ve, ok := err.(*errors.Validation); ok {
+			return ve.ValidateName("customLinks")
+		} else if ce, ok := err.(*errors.CompositeError); ok {
+			return ce.ValidateName("customLinks")
+		}
+		return err
+	}
+
+	return nil
+}
+
+func (m *SettingSpec) contextValidateMachineDeploymentVMResourceQuota(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.MachineDeploymentVMResourceQuota != nil {
+		if err := m.MachineDeploymentVMResourceQuota.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("machineDeploymentVMResourceQuota")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("machineDeploymentVMResourceQuota")
 			}
 			return err
 		}

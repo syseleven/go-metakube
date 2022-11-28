@@ -58,7 +58,8 @@ func NewAddUserToProjectCreated() *AddUserToProjectCreated {
 	return &AddUserToProjectCreated{}
 }
 
-/*AddUserToProjectCreated handles this case with default header values.
+/*
+AddUserToProjectCreated describes a response with status code 201, with default header values.
 
 User
 */
@@ -66,7 +67,36 @@ type AddUserToProjectCreated struct {
 	Payload *models.User
 }
 
+// IsSuccess returns true when this add user to project created response has a 2xx status code
+func (o *AddUserToProjectCreated) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this add user to project created response has a 3xx status code
+func (o *AddUserToProjectCreated) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this add user to project created response has a 4xx status code
+func (o *AddUserToProjectCreated) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this add user to project created response has a 5xx status code
+func (o *AddUserToProjectCreated) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this add user to project created response a status code equal to that given
+func (o *AddUserToProjectCreated) IsCode(code int) bool {
+	return code == 201
+}
+
 func (o *AddUserToProjectCreated) Error() string {
+	return fmt.Sprintf("[POST /api/v1/projects/{project_id}/users][%d] addUserToProjectCreated  %+v", 201, o.Payload)
+}
+
+func (o *AddUserToProjectCreated) String() string {
 	return fmt.Sprintf("[POST /api/v1/projects/{project_id}/users][%d] addUserToProjectCreated  %+v", 201, o.Payload)
 }
 
@@ -91,14 +121,44 @@ func NewAddUserToProjectUnauthorized() *AddUserToProjectUnauthorized {
 	return &AddUserToProjectUnauthorized{}
 }
 
-/*AddUserToProjectUnauthorized handles this case with default header values.
+/*
+AddUserToProjectUnauthorized describes a response with status code 401, with default header values.
 
 EmptyResponse is a empty response
 */
 type AddUserToProjectUnauthorized struct {
 }
 
+// IsSuccess returns true when this add user to project unauthorized response has a 2xx status code
+func (o *AddUserToProjectUnauthorized) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this add user to project unauthorized response has a 3xx status code
+func (o *AddUserToProjectUnauthorized) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this add user to project unauthorized response has a 4xx status code
+func (o *AddUserToProjectUnauthorized) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this add user to project unauthorized response has a 5xx status code
+func (o *AddUserToProjectUnauthorized) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this add user to project unauthorized response a status code equal to that given
+func (o *AddUserToProjectUnauthorized) IsCode(code int) bool {
+	return code == 401
+}
+
 func (o *AddUserToProjectUnauthorized) Error() string {
+	return fmt.Sprintf("[POST /api/v1/projects/{project_id}/users][%d] addUserToProjectUnauthorized ", 401)
+}
+
+func (o *AddUserToProjectUnauthorized) String() string {
 	return fmt.Sprintf("[POST /api/v1/projects/{project_id}/users][%d] addUserToProjectUnauthorized ", 401)
 }
 
@@ -112,14 +172,44 @@ func NewAddUserToProjectForbidden() *AddUserToProjectForbidden {
 	return &AddUserToProjectForbidden{}
 }
 
-/*AddUserToProjectForbidden handles this case with default header values.
+/*
+AddUserToProjectForbidden describes a response with status code 403, with default header values.
 
 EmptyResponse is a empty response
 */
 type AddUserToProjectForbidden struct {
 }
 
+// IsSuccess returns true when this add user to project forbidden response has a 2xx status code
+func (o *AddUserToProjectForbidden) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this add user to project forbidden response has a 3xx status code
+func (o *AddUserToProjectForbidden) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this add user to project forbidden response has a 4xx status code
+func (o *AddUserToProjectForbidden) IsClientError() bool {
+	return true
+}
+
+// IsServerError returns true when this add user to project forbidden response has a 5xx status code
+func (o *AddUserToProjectForbidden) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this add user to project forbidden response a status code equal to that given
+func (o *AddUserToProjectForbidden) IsCode(code int) bool {
+	return code == 403
+}
+
 func (o *AddUserToProjectForbidden) Error() string {
+	return fmt.Sprintf("[POST /api/v1/projects/{project_id}/users][%d] addUserToProjectForbidden ", 403)
+}
+
+func (o *AddUserToProjectForbidden) String() string {
 	return fmt.Sprintf("[POST /api/v1/projects/{project_id}/users][%d] addUserToProjectForbidden ", 403)
 }
 
@@ -135,7 +225,8 @@ func NewAddUserToProjectDefault(code int) *AddUserToProjectDefault {
 	}
 }
 
-/*AddUserToProjectDefault handles this case with default header values.
+/*
+AddUserToProjectDefault describes a response with status code -1, with default header values.
 
 errorResponse
 */
@@ -150,7 +241,36 @@ func (o *AddUserToProjectDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this add user to project default response has a 2xx status code
+func (o *AddUserToProjectDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this add user to project default response has a 3xx status code
+func (o *AddUserToProjectDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this add user to project default response has a 4xx status code
+func (o *AddUserToProjectDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this add user to project default response has a 5xx status code
+func (o *AddUserToProjectDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this add user to project default response a status code equal to that given
+func (o *AddUserToProjectDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *AddUserToProjectDefault) Error() string {
+	return fmt.Sprintf("[POST /api/v1/projects/{project_id}/users][%d] addUserToProject default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *AddUserToProjectDefault) String() string {
 	return fmt.Sprintf("[POST /api/v1/projects/{project_id}/users][%d] addUserToProject default  %+v", o._statusCode, o.Payload)
 }
 

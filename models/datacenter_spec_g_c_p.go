@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -26,11 +28,16 @@ type DatacenterSpecGCP struct {
 
 	// List of enabled zones, for example [a, c]. See the link above for the available
 	// zones in your chosen region.
-	ZoneSuffixes []string `json:"zone_suffixes"`
+	ZoneSuffixes []string `json:"zoneSuffixes"`
 }
 
 // Validate validates this datacenter spec g c p
 func (m *DatacenterSpecGCP) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this datacenter spec g c p based on context it is used
+func (m *DatacenterSpecGCP) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

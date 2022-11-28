@@ -16,11 +16,14 @@ import (
 	"github.com/syseleven/go-metakube/client/anexia"
 	"github.com/syseleven/go-metakube/client/aws"
 	"github.com/syseleven/go-metakube/client/azure"
-	"github.com/syseleven/go-metakube/client/constrainttemplates"
+	"github.com/syseleven/go-metakube/client/backupcredentials"
 	"github.com/syseleven/go-metakube/client/credentials"
 	"github.com/syseleven/go-metakube/client/datacenter"
 	"github.com/syseleven/go-metakube/client/digitalocean"
+	"github.com/syseleven/go-metakube/client/etcdbackupconfig"
+	"github.com/syseleven/go-metakube/client/etcdrestore"
 	"github.com/syseleven/go-metakube/client/gcp"
+	"github.com/syseleven/go-metakube/client/get"
 	"github.com/syseleven/go-metakube/client/hetzner"
 	"github.com/syseleven/go-metakube/client/metric"
 	"github.com/syseleven/go-metakube/client/openstack"
@@ -33,6 +36,7 @@ import (
 	"github.com/syseleven/go-metakube/client/settings"
 	"github.com/syseleven/go-metakube/client/tokens"
 	"github.com/syseleven/go-metakube/client/users"
+	"github.com/syseleven/go-metakube/client/version"
 	"github.com/syseleven/go-metakube/client/versions"
 	"github.com/syseleven/go-metakube/client/vsphere"
 )
@@ -85,11 +89,14 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *MetaKubeAP
 	cli.Anexia = anexia.New(transport, formats)
 	cli.Aws = aws.New(transport, formats)
 	cli.Azure = azure.New(transport, formats)
-	cli.Constrainttemplates = constrainttemplates.New(transport, formats)
+	cli.Backupcredentials = backupcredentials.New(transport, formats)
 	cli.Credentials = credentials.New(transport, formats)
 	cli.Datacenter = datacenter.New(transport, formats)
 	cli.Digitalocean = digitalocean.New(transport, formats)
+	cli.Etcdbackupconfig = etcdbackupconfig.New(transport, formats)
+	cli.Etcdrestore = etcdrestore.New(transport, formats)
 	cli.Gcp = gcp.New(transport, formats)
+	cli.Get = get.New(transport, formats)
 	cli.Hetzner = hetzner.New(transport, formats)
 	cli.Metric = metric.New(transport, formats)
 	cli.Openstack = openstack.New(transport, formats)
@@ -102,6 +109,7 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *MetaKubeAP
 	cli.Settings = settings.New(transport, formats)
 	cli.Tokens = tokens.New(transport, formats)
 	cli.Users = users.New(transport, formats)
+	cli.Version = version.New(transport, formats)
 	cli.Versions = versions.New(transport, formats)
 	cli.Vsphere = vsphere.New(transport, formats)
 	return cli
@@ -160,7 +168,7 @@ type MetaKubeAPI struct {
 
 	Azure azure.ClientService
 
-	Constrainttemplates constrainttemplates.ClientService
+	Backupcredentials backupcredentials.ClientService
 
 	Credentials credentials.ClientService
 
@@ -168,7 +176,13 @@ type MetaKubeAPI struct {
 
 	Digitalocean digitalocean.ClientService
 
+	Etcdbackupconfig etcdbackupconfig.ClientService
+
+	Etcdrestore etcdrestore.ClientService
+
 	Gcp gcp.ClientService
+
+	Get get.ClientService
 
 	Hetzner hetzner.ClientService
 
@@ -194,6 +208,8 @@ type MetaKubeAPI struct {
 
 	Users users.ClientService
 
+	Version version.ClientService
+
 	Versions versions.ClientService
 
 	Vsphere vsphere.ClientService
@@ -210,11 +226,14 @@ func (c *MetaKubeAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Anexia.SetTransport(transport)
 	c.Aws.SetTransport(transport)
 	c.Azure.SetTransport(transport)
-	c.Constrainttemplates.SetTransport(transport)
+	c.Backupcredentials.SetTransport(transport)
 	c.Credentials.SetTransport(transport)
 	c.Datacenter.SetTransport(transport)
 	c.Digitalocean.SetTransport(transport)
+	c.Etcdbackupconfig.SetTransport(transport)
+	c.Etcdrestore.SetTransport(transport)
 	c.Gcp.SetTransport(transport)
+	c.Get.SetTransport(transport)
 	c.Hetzner.SetTransport(transport)
 	c.Metric.SetTransport(transport)
 	c.Openstack.SetTransport(transport)
@@ -227,6 +246,7 @@ func (c *MetaKubeAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Settings.SetTransport(transport)
 	c.Tokens.SetTransport(transport)
 	c.Users.SetTransport(transport)
+	c.Version.SetTransport(transport)
 	c.Versions.SetTransport(transport)
 	c.Vsphere.SetTransport(transport)
 }

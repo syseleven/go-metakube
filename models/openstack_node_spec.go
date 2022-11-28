@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -35,13 +37,13 @@ type OpenstackNodeSpec struct {
 	InstanceReadyCheckTimeout string `json:"instanceReadyCheckTimeout,omitempty"`
 
 	// if set, the rootDisk will be a volume. If not, the rootDisk will be on ephemeral storage and its size will be derived from the flavor
-	RootDiskSizeGB int64 `json:"diskSize"`
+	RootDiskSizeGB int64 `json:"diskSize,omitempty"`
 
 	// Additional metadata to set
 	Tags map[string]string `json:"tags,omitempty"`
 
 	// Defines whether floating ip should be used
-	UseFloatingIP bool `json:"useFloatingIP"`
+	UseFloatingIP bool `json:"useFloatingIP,omitempty"`
 }
 
 // Validate validates this openstack node spec
@@ -77,6 +79,11 @@ func (m *OpenstackNodeSpec) validateImage(formats strfmt.Registry) error {
 		return err
 	}
 
+	return nil
+}
+
+// ContextValidate validates this openstack node spec based on context it is used
+func (m *OpenstackNodeSpec) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

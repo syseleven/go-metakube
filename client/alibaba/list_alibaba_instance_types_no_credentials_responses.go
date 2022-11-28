@@ -46,7 +46,8 @@ func NewListAlibabaInstanceTypesNoCredentialsOK() *ListAlibabaInstanceTypesNoCre
 	return &ListAlibabaInstanceTypesNoCredentialsOK{}
 }
 
-/*ListAlibabaInstanceTypesNoCredentialsOK handles this case with default header values.
+/*
+ListAlibabaInstanceTypesNoCredentialsOK describes a response with status code 200, with default header values.
 
 AlibabaInstanceTypeList
 */
@@ -54,7 +55,36 @@ type ListAlibabaInstanceTypesNoCredentialsOK struct {
 	Payload models.AlibabaInstanceTypeList
 }
 
+// IsSuccess returns true when this list alibaba instance types no credentials o k response has a 2xx status code
+func (o *ListAlibabaInstanceTypesNoCredentialsOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this list alibaba instance types no credentials o k response has a 3xx status code
+func (o *ListAlibabaInstanceTypesNoCredentialsOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this list alibaba instance types no credentials o k response has a 4xx status code
+func (o *ListAlibabaInstanceTypesNoCredentialsOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this list alibaba instance types no credentials o k response has a 5xx status code
+func (o *ListAlibabaInstanceTypesNoCredentialsOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this list alibaba instance types no credentials o k response a status code equal to that given
+func (o *ListAlibabaInstanceTypesNoCredentialsOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *ListAlibabaInstanceTypesNoCredentialsOK) Error() string {
+	return fmt.Sprintf("[GET /api/v1/projects/{project_id}/dc/{dc}/clusters/{cluster_id}/providers/alibaba/instancetypes][%d] listAlibabaInstanceTypesNoCredentialsOK  %+v", 200, o.Payload)
+}
+
+func (o *ListAlibabaInstanceTypesNoCredentialsOK) String() string {
 	return fmt.Sprintf("[GET /api/v1/projects/{project_id}/dc/{dc}/clusters/{cluster_id}/providers/alibaba/instancetypes][%d] listAlibabaInstanceTypesNoCredentialsOK  %+v", 200, o.Payload)
 }
 
@@ -79,7 +109,8 @@ func NewListAlibabaInstanceTypesNoCredentialsDefault(code int) *ListAlibabaInsta
 	}
 }
 
-/*ListAlibabaInstanceTypesNoCredentialsDefault handles this case with default header values.
+/*
+ListAlibabaInstanceTypesNoCredentialsDefault describes a response with status code -1, with default header values.
 
 errorResponse
 */
@@ -94,7 +125,36 @@ func (o *ListAlibabaInstanceTypesNoCredentialsDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this list alibaba instance types no credentials default response has a 2xx status code
+func (o *ListAlibabaInstanceTypesNoCredentialsDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this list alibaba instance types no credentials default response has a 3xx status code
+func (o *ListAlibabaInstanceTypesNoCredentialsDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this list alibaba instance types no credentials default response has a 4xx status code
+func (o *ListAlibabaInstanceTypesNoCredentialsDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this list alibaba instance types no credentials default response has a 5xx status code
+func (o *ListAlibabaInstanceTypesNoCredentialsDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this list alibaba instance types no credentials default response a status code equal to that given
+func (o *ListAlibabaInstanceTypesNoCredentialsDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *ListAlibabaInstanceTypesNoCredentialsDefault) Error() string {
+	return fmt.Sprintf("[GET /api/v1/projects/{project_id}/dc/{dc}/clusters/{cluster_id}/providers/alibaba/instancetypes][%d] listAlibabaInstanceTypesNoCredentials default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *ListAlibabaInstanceTypesNoCredentialsDefault) String() string {
 	return fmt.Sprintf("[GET /api/v1/projects/{project_id}/dc/{dc}/clusters/{cluster_id}/providers/alibaba/instancetypes][%d] listAlibabaInstanceTypesNoCredentials default  %+v", o._statusCode, o.Payload)
 }
 

@@ -46,7 +46,8 @@ func NewCreateOIDCKubeconfigOK() *CreateOIDCKubeconfigOK {
 	return &CreateOIDCKubeconfigOK{}
 }
 
-/*CreateOIDCKubeconfigOK handles this case with default header values.
+/*
+CreateOIDCKubeconfigOK describes a response with status code 200, with default header values.
 
 Kubeconfig is a clusters kubeconfig
 */
@@ -54,7 +55,36 @@ type CreateOIDCKubeconfigOK struct {
 	Payload []uint8
 }
 
+// IsSuccess returns true when this create o Id c kubeconfig o k response has a 2xx status code
+func (o *CreateOIDCKubeconfigOK) IsSuccess() bool {
+	return true
+}
+
+// IsRedirect returns true when this create o Id c kubeconfig o k response has a 3xx status code
+func (o *CreateOIDCKubeconfigOK) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this create o Id c kubeconfig o k response has a 4xx status code
+func (o *CreateOIDCKubeconfigOK) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this create o Id c kubeconfig o k response has a 5xx status code
+func (o *CreateOIDCKubeconfigOK) IsServerError() bool {
+	return false
+}
+
+// IsCode returns true when this create o Id c kubeconfig o k response a status code equal to that given
+func (o *CreateOIDCKubeconfigOK) IsCode(code int) bool {
+	return code == 200
+}
+
 func (o *CreateOIDCKubeconfigOK) Error() string {
+	return fmt.Sprintf("[GET /api/v1/kubeconfig][%d] createOIdCKubeconfigOK  %+v", 200, o.Payload)
+}
+
+func (o *CreateOIDCKubeconfigOK) String() string {
 	return fmt.Sprintf("[GET /api/v1/kubeconfig][%d] createOIdCKubeconfigOK  %+v", 200, o.Payload)
 }
 
@@ -79,7 +109,8 @@ func NewCreateOIDCKubeconfigDefault(code int) *CreateOIDCKubeconfigDefault {
 	}
 }
 
-/*CreateOIDCKubeconfigDefault handles this case with default header values.
+/*
+CreateOIDCKubeconfigDefault describes a response with status code -1, with default header values.
 
 errorResponse
 */
@@ -94,7 +125,36 @@ func (o *CreateOIDCKubeconfigDefault) Code() int {
 	return o._statusCode
 }
 
+// IsSuccess returns true when this create o ID c kubeconfig default response has a 2xx status code
+func (o *CreateOIDCKubeconfigDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this create o ID c kubeconfig default response has a 3xx status code
+func (o *CreateOIDCKubeconfigDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this create o ID c kubeconfig default response has a 4xx status code
+func (o *CreateOIDCKubeconfigDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this create o ID c kubeconfig default response has a 5xx status code
+func (o *CreateOIDCKubeconfigDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this create o ID c kubeconfig default response a status code equal to that given
+func (o *CreateOIDCKubeconfigDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 func (o *CreateOIDCKubeconfigDefault) Error() string {
+	return fmt.Sprintf("[GET /api/v1/kubeconfig][%d] createOIDCKubeconfig default  %+v", o._statusCode, o.Payload)
+}
+
+func (o *CreateOIDCKubeconfigDefault) String() string {
 	return fmt.Sprintf("[GET /api/v1/kubeconfig][%d] createOIDCKubeconfig default  %+v", o._statusCode, o.Payload)
 }
 

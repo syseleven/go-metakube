@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -16,14 +18,19 @@ import (
 type OpenstackNodeSizeRequirements struct {
 
 	// MinimumMemory is the minimum required amount of memory, measured in MB
-	MinimumMemory int64 `json:"minimum_memory,omitempty"`
+	MinimumMemory int64 `json:"minimumMemory,omitempty"`
 
 	// VCPUs is the minimum required amount of (virtual) CPUs
-	MinimumVCPUs int64 `json:"minimum_vcpus,omitempty"`
+	MinimumVCPUs int64 `json:"minimumVCPUs,omitempty"`
 }
 
 // Validate validates this openstack node size requirements
 func (m *OpenstackNodeSizeRequirements) Validate(formats strfmt.Registry) error {
+	return nil
+}
+
+// ContextValidate validates this openstack node size requirements based on context it is used
+func (m *OpenstackNodeSizeRequirements) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	return nil
 }
 

@@ -6,6 +6,8 @@ package models
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
+
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
@@ -19,10 +21,10 @@ type DatacenterSpecKubevirt struct {
 	// DNSPolicy represents the dns policy for the pod. Valid values are 'ClusterFirstWithHostNet', 'ClusterFirst',
 	// 'Default' or 'None'. Defaults to "ClusterFirst". DNS parameters given in DNSConfig will be merged with the
 	// policy selected with DNSPolicy.
-	DNSPolicy string `json:"dns_policy,omitempty"`
+	DNSPolicy string `json:"dnsPolicy,omitempty"`
 
 	// dns config
-	DNSConfig *PodDNSConfig `json:"dns_config,omitempty"`
+	DNSConfig *PodDNSConfig `json:"dnsConfig,omitempty"`
 }
 
 // Validate validates this datacenter spec kubevirt
@@ -40,7 +42,6 @@ func (m *DatacenterSpecKubevirt) Validate(formats strfmt.Registry) error {
 }
 
 func (m *DatacenterSpecKubevirt) validateDNSConfig(formats strfmt.Registry) error {
-
 	if swag.IsZero(m.DNSConfig) { // not required
 		return nil
 	}
@@ -48,7 +49,39 @@ func (m *DatacenterSpecKubevirt) validateDNSConfig(formats strfmt.Registry) erro
 	if m.DNSConfig != nil {
 		if err := m.DNSConfig.Validate(formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("dns_config")
+				return ve.ValidateName("dnsConfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("dnsConfig")
+			}
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this datacenter spec kubevirt based on the context it is used
+func (m *DatacenterSpecKubevirt) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateDNSConfig(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *DatacenterSpecKubevirt) contextValidateDNSConfig(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.DNSConfig != nil {
+		if err := m.DNSConfig.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("dnsConfig")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("dnsConfig")
 			}
 			return err
 		}
