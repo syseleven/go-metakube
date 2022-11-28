@@ -30,11 +30,7 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	CreateOIDCKubeconfig(params *CreateOIDCKubeconfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOIDCKubeconfigOK, error)
 
-	GetAddonConfig(params *GetAddonConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAddonConfigOK, error)
-
 	GetAdmissionPlugins(params *GetAdmissionPluginsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAdmissionPluginsOK, error)
-
-	ListAddonConfigs(params *ListAddonConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAddonConfigsOK, error)
 
 	ListSystemLabels(params *ListSystemLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSystemLabelsOK, error)
 
@@ -84,44 +80,6 @@ func (a *Client) CreateOIDCKubeconfig(params *CreateOIDCKubeconfigParams, authIn
 }
 
 /*
-GetAddonConfig returns specified addon config
-*/
-func (a *Client) GetAddonConfig(params *GetAddonConfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAddonConfigOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetAddonConfigParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getAddonConfig",
-		Method:             "GET",
-		PathPattern:        "/api/v1/addonconfigs/{addon_id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetAddonConfigReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetAddonConfigOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*GetAddonConfigDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
 GetAdmissionPlugins returns specified addon config
 */
 func (a *Client) GetAdmissionPlugins(params *GetAdmissionPluginsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAdmissionPluginsOK, error) {
@@ -156,44 +114,6 @@ func (a *Client) GetAdmissionPlugins(params *GetAdmissionPluginsParams, authInfo
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetAdmissionPluginsDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-ListAddonConfigs returns all available addon configs
-*/
-func (a *Client) ListAddonConfigs(params *ListAddonConfigsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAddonConfigsOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewListAddonConfigsParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "listAddonConfigs",
-		Method:             "GET",
-		PathPattern:        "/api/v1/addonconfigs",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &ListAddonConfigsReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*ListAddonConfigsOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*ListAddonConfigsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

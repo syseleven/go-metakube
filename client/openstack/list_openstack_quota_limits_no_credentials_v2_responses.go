@@ -81,11 +81,11 @@ func (o *ListOpenstackQuotaLimitsNoCredentialsV2OK) IsCode(code int) bool {
 }
 
 func (o *ListOpenstackQuotaLimitsNoCredentialsV2OK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/projects/{project_id}/clusters/{cluster_id}/providers/openstack/quotalimits][%d] listOpenstackQuotaLimitsNoCredentialsV2OK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/providers/openstack/quotalimits][%d] listOpenstackQuotaLimitsNoCredentialsV2OK  %+v", 200, o.Payload)
 }
 
 func (o *ListOpenstackQuotaLimitsNoCredentialsV2OK) String() string {
-	return fmt.Sprintf("[GET /api/v1/projects/{project_id}/clusters/{cluster_id}/providers/openstack/quotalimits][%d] listOpenstackQuotaLimitsNoCredentialsV2OK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/providers/openstack/quotalimits][%d] listOpenstackQuotaLimitsNoCredentialsV2OK  %+v", 200, o.Payload)
 }
 
 func (o *ListOpenstackQuotaLimitsNoCredentialsV2OK) GetPayload() *models.Quotas {
@@ -153,11 +153,11 @@ func (o *ListOpenstackQuotaLimitsNoCredentialsV2Default) IsCode(code int) bool {
 }
 
 func (o *ListOpenstackQuotaLimitsNoCredentialsV2Default) Error() string {
-	return fmt.Sprintf("[GET /api/v1/projects/{project_id}/clusters/{cluster_id}/providers/openstack/quotalimits][%d] listOpenstackQuotaLimitsNoCredentialsV2 default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/providers/openstack/quotalimits][%d] listOpenstackQuotaLimitsNoCredentialsV2 default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *ListOpenstackQuotaLimitsNoCredentialsV2Default) String() string {
-	return fmt.Sprintf("[GET /api/v1/projects/{project_id}/clusters/{cluster_id}/providers/openstack/quotalimits][%d] listOpenstackQuotaLimitsNoCredentialsV2 default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/providers/openstack/quotalimits][%d] listOpenstackQuotaLimitsNoCredentialsV2 default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *ListOpenstackQuotaLimitsNoCredentialsV2Default) GetPayload() *models.ErrorResponse {

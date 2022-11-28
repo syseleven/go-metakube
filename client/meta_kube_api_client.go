@@ -10,7 +10,6 @@ import (
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/syseleven/go-metakube/client/addon"
 	"github.com/syseleven/go-metakube/client/admin"
 	"github.com/syseleven/go-metakube/client/alibaba"
 	"github.com/syseleven/go-metakube/client/anexia"
@@ -83,7 +82,6 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *MetaKubeAP
 
 	cli := new(MetaKubeAPI)
 	cli.Transport = transport
-	cli.Addon = addon.New(transport, formats)
 	cli.Admin = admin.New(transport, formats)
 	cli.Alibaba = alibaba.New(transport, formats)
 	cli.Anexia = anexia.New(transport, formats)
@@ -156,8 +154,6 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 
 // MetaKubeAPI is a client for meta kube API
 type MetaKubeAPI struct {
-	Addon addon.ClientService
-
 	Admin admin.ClientService
 
 	Alibaba alibaba.ClientService
@@ -220,7 +216,6 @@ type MetaKubeAPI struct {
 // SetTransport changes the transport on the client and all its subresources
 func (c *MetaKubeAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
-	c.Addon.SetTransport(transport)
 	c.Admin.SetTransport(transport)
 	c.Alibaba.SetTransport(transport)
 	c.Anexia.SetTransport(transport)

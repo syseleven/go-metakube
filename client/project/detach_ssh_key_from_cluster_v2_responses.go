@@ -92,11 +92,11 @@ func (o *DetachSSHKeyFromClusterV2OK) IsCode(code int) bool {
 }
 
 func (o *DetachSSHKeyFromClusterV2OK) Error() string {
-	return fmt.Sprintf("[DELETE /api/projects/{project_id}/clusters/{cluster_id}/sshkeys/{key_id}][%d] detachSshKeyFromClusterV2OK ", 200)
+	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/sshkeys/{key_id}][%d] detachSshKeyFromClusterV2OK ", 200)
 }
 
 func (o *DetachSSHKeyFromClusterV2OK) String() string {
-	return fmt.Sprintf("[DELETE /api/projects/{project_id}/clusters/{cluster_id}/sshkeys/{key_id}][%d] detachSshKeyFromClusterV2OK ", 200)
+	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/sshkeys/{key_id}][%d] detachSshKeyFromClusterV2OK ", 200)
 }
 
 func (o *DetachSSHKeyFromClusterV2OK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -143,11 +143,11 @@ func (o *DetachSSHKeyFromClusterV2Unauthorized) IsCode(code int) bool {
 }
 
 func (o *DetachSSHKeyFromClusterV2Unauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /api/projects/{project_id}/clusters/{cluster_id}/sshkeys/{key_id}][%d] detachSshKeyFromClusterV2Unauthorized ", 401)
+	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/sshkeys/{key_id}][%d] detachSshKeyFromClusterV2Unauthorized ", 401)
 }
 
 func (o *DetachSSHKeyFromClusterV2Unauthorized) String() string {
-	return fmt.Sprintf("[DELETE /api/projects/{project_id}/clusters/{cluster_id}/sshkeys/{key_id}][%d] detachSshKeyFromClusterV2Unauthorized ", 401)
+	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/sshkeys/{key_id}][%d] detachSshKeyFromClusterV2Unauthorized ", 401)
 }
 
 func (o *DetachSSHKeyFromClusterV2Unauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -194,11 +194,11 @@ func (o *DetachSSHKeyFromClusterV2Forbidden) IsCode(code int) bool {
 }
 
 func (o *DetachSSHKeyFromClusterV2Forbidden) Error() string {
-	return fmt.Sprintf("[DELETE /api/projects/{project_id}/clusters/{cluster_id}/sshkeys/{key_id}][%d] detachSshKeyFromClusterV2Forbidden ", 403)
+	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/sshkeys/{key_id}][%d] detachSshKeyFromClusterV2Forbidden ", 403)
 }
 
 func (o *DetachSSHKeyFromClusterV2Forbidden) String() string {
-	return fmt.Sprintf("[DELETE /api/projects/{project_id}/clusters/{cluster_id}/sshkeys/{key_id}][%d] detachSshKeyFromClusterV2Forbidden ", 403)
+	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/sshkeys/{key_id}][%d] detachSshKeyFromClusterV2Forbidden ", 403)
 }
 
 func (o *DetachSSHKeyFromClusterV2Forbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -255,11 +255,11 @@ func (o *DetachSSHKeyFromClusterV2Default) IsCode(code int) bool {
 }
 
 func (o *DetachSSHKeyFromClusterV2Default) Error() string {
-	return fmt.Sprintf("[DELETE /api/projects/{project_id}/clusters/{cluster_id}/sshkeys/{key_id}][%d] detachSSHKeyFromClusterV2 default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/sshkeys/{key_id}][%d] detachSSHKeyFromClusterV2 default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *DetachSSHKeyFromClusterV2Default) String() string {
-	return fmt.Sprintf("[DELETE /api/projects/{project_id}/clusters/{cluster_id}/sshkeys/{key_id}][%d] detachSSHKeyFromClusterV2 default  %+v", o._statusCode, o.Payload)
+	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/sshkeys/{key_id}][%d] detachSSHKeyFromClusterV2 default  %+v", o._statusCode, o.Payload)
 }
 
 func (o *DetachSSHKeyFromClusterV2Default) GetPayload() *models.ErrorResponse {

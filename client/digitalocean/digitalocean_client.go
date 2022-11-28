@@ -30,8 +30,6 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	ListDigitaloceanSizes(params *ListDigitaloceanSizesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListDigitaloceanSizesOK, error)
 
-	ListDigitaloceanSizesNoCredentials(params *ListDigitaloceanSizesNoCredentialsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListDigitaloceanSizesNoCredentialsOK, error)
-
 	ListDigitaloceanSizesNoCredentialsV2(params *ListDigitaloceanSizesNoCredentialsV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListDigitaloceanSizesNoCredentialsV2OK, error)
 
 	SetTransport(transport runtime.ClientTransport)
@@ -72,44 +70,6 @@ func (a *Client) ListDigitaloceanSizes(params *ListDigitaloceanSizesParams, auth
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ListDigitaloceanSizesDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-ListDigitaloceanSizesNoCredentials Lists sizes from digitalocean
-*/
-func (a *Client) ListDigitaloceanSizesNoCredentials(params *ListDigitaloceanSizesNoCredentialsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListDigitaloceanSizesNoCredentialsOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewListDigitaloceanSizesNoCredentialsParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "listDigitaloceanSizesNoCredentials",
-		Method:             "GET",
-		PathPattern:        "/api/v1/projects/{project_id}/dc/{dc}/clusters/{cluster_id}/providers/digitalocean/sizes",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &ListDigitaloceanSizesNoCredentialsReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*ListDigitaloceanSizesNoCredentialsOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*ListDigitaloceanSizesNoCredentialsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
