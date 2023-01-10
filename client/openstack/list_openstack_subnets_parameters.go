@@ -68,9 +68,6 @@ type ListOpenstackSubnetsParams struct {
 	// ApplicationCredentialSecret.
 	ApplicationCredentialSecret *string
 
-	// Credential.
-	Credential *string
-
 	// DatacenterName.
 	DatacenterName *string
 
@@ -168,17 +165,6 @@ func (o *ListOpenstackSubnetsParams) WithApplicationCredentialSecret(application
 // SetApplicationCredentialSecret adds the applicationCredentialSecret to the list openstack subnets params
 func (o *ListOpenstackSubnetsParams) SetApplicationCredentialSecret(applicationCredentialSecret *string) {
 	o.ApplicationCredentialSecret = applicationCredentialSecret
-}
-
-// WithCredential adds the credential to the list openstack subnets params
-func (o *ListOpenstackSubnetsParams) WithCredential(credential *string) *ListOpenstackSubnetsParams {
-	o.SetCredential(credential)
-	return o
-}
-
-// SetCredential adds the credential to the list openstack subnets params
-func (o *ListOpenstackSubnetsParams) SetCredential(credential *string) {
-	o.Credential = credential
 }
 
 // WithDatacenterName adds the datacenterName to the list openstack subnets params
@@ -289,14 +275,6 @@ func (o *ListOpenstackSubnetsParams) WriteToRequest(r runtime.ClientRequest, reg
 
 		// header param ApplicationCredentialSecret
 		if err := r.SetHeaderParam("ApplicationCredentialSecret", *o.ApplicationCredentialSecret); err != nil {
-			return err
-		}
-	}
-
-	if o.Credential != nil {
-
-		// header param Credential
-		if err := r.SetHeaderParam("Credential", *o.Credential); err != nil {
 			return err
 		}
 	}

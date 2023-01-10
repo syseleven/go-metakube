@@ -64,9 +64,6 @@ type ListAWSSubnetsParams struct {
 	// AccessKeyID.
 	AccessKeyID *string
 
-	// Credential.
-	Credential *string
-
 	// SecretAccessKey.
 	SecretAccessKey *string
 
@@ -140,17 +137,6 @@ func (o *ListAWSSubnetsParams) SetAccessKeyID(accessKeyID *string) {
 	o.AccessKeyID = accessKeyID
 }
 
-// WithCredential adds the credential to the list a w s subnets params
-func (o *ListAWSSubnetsParams) WithCredential(credential *string) *ListAWSSubnetsParams {
-	o.SetCredential(credential)
-	return o
-}
-
-// SetCredential adds the credential to the list a w s subnets params
-func (o *ListAWSSubnetsParams) SetCredential(credential *string) {
-	o.Credential = credential
-}
-
 // WithSecretAccessKey adds the secretAccessKey to the list a w s subnets params
 func (o *ListAWSSubnetsParams) WithSecretAccessKey(secretAccessKey *string) *ListAWSSubnetsParams {
 	o.SetSecretAccessKey(secretAccessKey)
@@ -196,14 +182,6 @@ func (o *ListAWSSubnetsParams) WriteToRequest(r runtime.ClientRequest, reg strfm
 
 		// header param AccessKeyID
 		if err := r.SetHeaderParam("AccessKeyID", *o.AccessKeyID); err != nil {
-			return err
-		}
-	}
-
-	if o.Credential != nil {
-
-		// header param Credential
-		if err := r.SetHeaderParam("Credential", *o.Credential); err != nil {
 			return err
 		}
 	}

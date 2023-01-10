@@ -21,44 +21,17 @@ type PublicCloudSpec struct {
 	// datacenter name
 	DatacenterName string `json:"dc,omitempty"`
 
-	// alibaba
-	Alibaba PublicAlibabaCloudSpec `json:"alibaba,omitempty"`
-
-	// anexia
-	Anexia PublicAnexiaCloudSpec `json:"anexia,omitempty"`
-
 	// aws
 	Aws PublicAWSCloudSpec `json:"aws,omitempty"`
 
 	// azure
 	Azure *PublicAzureCloudSpec `json:"azure,omitempty"`
 
-	// bringyourown
-	Bringyourown PublicBringYourOwnCloudSpec `json:"bringyourown,omitempty"`
-
-	// digitalocean
-	Digitalocean PublicDigitaloceanCloudSpec `json:"digitalocean,omitempty"`
-
 	// fake
 	Fake PublicFakeCloudSpec `json:"fake,omitempty"`
 
-	// gcp
-	Gcp PublicGCPCloudSpec `json:"gcp,omitempty"`
-
-	// hetzner
-	Hetzner PublicHetznerCloudSpec `json:"hetzner,omitempty"`
-
-	// kubevirt
-	Kubevirt PublicKubevirtCloudSpec `json:"kubevirt,omitempty"`
-
 	// openstack
 	Openstack *PublicOpenstackCloudSpec `json:"openstack,omitempty"`
-
-	// packet
-	Packet PublicPacketCloudSpec `json:"packet,omitempty"`
-
-	// vsphere
-	Vsphere PublicVSphereCloudSpec `json:"vsphere,omitempty"`
 }
 
 // Validate validates this public cloud spec

@@ -17,25 +17,25 @@ import (
 // swagger:model UserSettings
 type UserSettings struct {
 
-	// collapse sidenav
+	// +optional
 	CollapseSidenav bool `json:"collapseSidenav,omitempty"`
 
-	// display all projects for admin
+	// +optional
 	DisplayAllProjectsForAdmin bool `json:"displayAllProjectsForAdmin,omitempty"`
 
-	// items per page
+	// +optional
 	ItemsPerPage int8 `json:"itemsPerPage,omitempty"`
 
-	// last seen changelog version
+	// +optional
 	LastSeenChangelogVersion string `json:"lastSeenChangelogVersion,omitempty"`
 
-	// select project table view
+	// +optional
 	SelectProjectTableView bool `json:"selectProjectTableView,omitempty"`
 
-	// selected project ID
+	// +optional
 	SelectedProjectID string `json:"selectedProjectId,omitempty"`
 
-	// selected theme
+	// +optional
 	SelectedTheme string `json:"selectedTheme,omitempty"`
 }
 

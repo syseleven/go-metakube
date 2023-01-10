@@ -18,13 +18,13 @@ import (
 // swagger:model OpenstackCloudSpec
 type OpenstackCloudSpec struct {
 
-	// application credential ID
+	// +optional
 	ApplicationCredentialID string `json:"applicationCredentialID,omitempty"`
 
-	// application credential secret
+	// +optional
 	ApplicationCredentialSecret string `json:"applicationCredentialSecret,omitempty"`
 
-	// domain
+	// +optional
 	Domain string `json:"domain,omitempty"`
 
 	// FloatingIPPool holds the name of the public network
@@ -42,13 +42,13 @@ type OpenstackCloudSpec struct {
 	// Note that the network is internal if the "External" field is set to false
 	Network string `json:"network,omitempty"`
 
-	// password
+	// +optional
 	Password string `json:"password,omitempty"`
 
-	// project
+	// +optional
 	Project string `json:"project,omitempty"`
 
-	// project ID
+	// +optional
 	ProjectID string `json:"projectID,omitempty"`
 
 	// router ID
@@ -59,15 +59,17 @@ type OpenstackCloudSpec struct {
 
 	// ServerGroupID used as schedule hint shared between all machines in the cluster,
 	// When not specified, soft-anti-affinity server group will be automatically created
+	// +optional
 	ServerGroupID string `json:"serverGroupID,omitempty"`
 
-	// subnet c ID r
+	// +optional
 	SubnetCIDR string `json:"subnetCIDR,omitempty"`
 
 	// subnet ID
 	SubnetID string `json:"subnetID,omitempty"`
 
 	// Used internally during cluster creation
+	// +optional
 	Token string `json:"token,omitempty"`
 
 	// Whether or not to use Octavia for LoadBalancer type of Service
@@ -80,10 +82,10 @@ type OpenstackCloudSpec struct {
 	// +optional
 	UseOctavia bool `json:"useOctavia,omitempty"`
 
-	// use token
+	// +optional
 	UseToken bool `json:"useToken,omitempty"`
 
-	// username
+	// +optional
 	Username string `json:"username,omitempty"`
 
 	// credentials reference

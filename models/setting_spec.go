@@ -33,9 +33,6 @@ type SettingSpec struct {
 	// enable dashboard
 	EnableDashboard bool `json:"enableDashboard,omitempty"`
 
-	// enable external cluster import
-	EnableExternalClusterImport bool `json:"enableExternalClusterImport,omitempty"`
-
 	// enable o ID c kubeconfig
 	EnableOIDCKubeconfig bool `json:"enableOIDCKubeconfig,omitempty"`
 

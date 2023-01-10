@@ -18,19 +18,19 @@ import (
 // swagger:model AzureCloudSpec
 type AzureCloudSpec struct {
 
-	// assign availability set
+	// +optional
 	AssignAvailabilitySet bool `json:"assignAvailabilitySet,omitempty"`
 
 	// availability set
 	AvailabilitySet string `json:"availabilitySet,omitempty"`
 
-	// client ID
+	// +optional
 	ClientID string `json:"clientID,omitempty"`
 
-	// client secret
+	// +optional
 	ClientSecret string `json:"clientSecret,omitempty"`
 
-	// openstack billing tenant
+	// +optional
 	OpenstackBillingTenant string `json:"openstackBillingTenant,omitempty"`
 
 	// resource group
@@ -45,10 +45,10 @@ type AzureCloudSpec struct {
 	// subnet name
 	SubnetName string `json:"subnet,omitempty"`
 
-	// subscription ID
+	// +optional
 	SubscriptionID string `json:"subscriptionID,omitempty"`
 
-	// tenant ID
+	// +optional
 	TenantID string `json:"tenantID,omitempty"`
 
 	// v net name

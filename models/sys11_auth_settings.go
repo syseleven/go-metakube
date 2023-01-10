@@ -17,7 +17,7 @@ import (
 // swagger:model Sys11AuthSettings
 type Sys11AuthSettings struct {
 
-	// realm
+	// +optional
 	Realm string `json:"realm,omitempty"`
 }
 

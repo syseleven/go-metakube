@@ -68,9 +68,6 @@ type ListOpenstackTenantsParams struct {
 	// ApplicationCredentialSecret.
 	ApplicationCredentialSecret *string
 
-	// Credential.
-	Credential *string
-
 	// DatacenterName.
 	DatacenterName *string
 
@@ -161,17 +158,6 @@ func (o *ListOpenstackTenantsParams) SetApplicationCredentialSecret(applicationC
 	o.ApplicationCredentialSecret = applicationCredentialSecret
 }
 
-// WithCredential adds the credential to the list openstack tenants params
-func (o *ListOpenstackTenantsParams) WithCredential(credential *string) *ListOpenstackTenantsParams {
-	o.SetCredential(credential)
-	return o
-}
-
-// SetCredential adds the credential to the list openstack tenants params
-func (o *ListOpenstackTenantsParams) SetCredential(credential *string) {
-	o.Credential = credential
-}
-
 // WithDatacenterName adds the datacenterName to the list openstack tenants params
 func (o *ListOpenstackTenantsParams) WithDatacenterName(datacenterName *string) *ListOpenstackTenantsParams {
 	o.SetDatacenterName(datacenterName)
@@ -247,14 +233,6 @@ func (o *ListOpenstackTenantsParams) WriteToRequest(r runtime.ClientRequest, reg
 
 		// header param ApplicationCredentialSecret
 		if err := r.SetHeaderParam("ApplicationCredentialSecret", *o.ApplicationCredentialSecret); err != nil {
-			return err
-		}
-	}
-
-	if o.Credential != nil {
-
-		// header param Credential
-		if err := r.SetHeaderParam("Credential", *o.Credential); err != nil {
 			return err
 		}
 	}

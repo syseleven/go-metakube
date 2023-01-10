@@ -68,9 +68,6 @@ type ListOpenstackSecurityGroupsParams struct {
 	// ApplicationCredentialSecret.
 	ApplicationCredentialSecret *string
 
-	// Credential.
-	Credential *string
-
 	// DatacenterName.
 	DatacenterName *string
 
@@ -165,17 +162,6 @@ func (o *ListOpenstackSecurityGroupsParams) WithApplicationCredentialSecret(appl
 // SetApplicationCredentialSecret adds the applicationCredentialSecret to the list openstack security groups params
 func (o *ListOpenstackSecurityGroupsParams) SetApplicationCredentialSecret(applicationCredentialSecret *string) {
 	o.ApplicationCredentialSecret = applicationCredentialSecret
-}
-
-// WithCredential adds the credential to the list openstack security groups params
-func (o *ListOpenstackSecurityGroupsParams) WithCredential(credential *string) *ListOpenstackSecurityGroupsParams {
-	o.SetCredential(credential)
-	return o
-}
-
-// SetCredential adds the credential to the list openstack security groups params
-func (o *ListOpenstackSecurityGroupsParams) SetCredential(credential *string) {
-	o.Credential = credential
 }
 
 // WithDatacenterName adds the datacenterName to the list openstack security groups params
@@ -275,14 +261,6 @@ func (o *ListOpenstackSecurityGroupsParams) WriteToRequest(r runtime.ClientReque
 
 		// header param ApplicationCredentialSecret
 		if err := r.SetHeaderParam("ApplicationCredentialSecret", *o.ApplicationCredentialSecret); err != nil {
-			return err
-		}
-	}
-
-	if o.Credential != nil {
-
-		// header param Credential
-		if err := r.SetHeaderParam("Credential", *o.Credential); err != nil {
 			return err
 		}
 	}

@@ -27,34 +27,40 @@ type DatacenterSpecOpenstack struct {
 	// Used for automatic network creation
 	DNSServers []string `json:"dnsServers"`
 
-	// Optional: List of enabled flavors for the given datacenter
+	// EnabledFlavors lists enabled flavors for the given datacenter
+	// +optional
 	EnabledFlavors []string `json:"enabledFlavors"`
 
-	// Optional
+	// EnforceFloatingIP
+	// +optional
 	EnforceFloatingIP bool `json:"enforceFloatingIP,omitempty"`
 
-	// Optional
+	// IgnoreVomluAZ
+	// +optional
 	IgnoreVolumeAZ bool `json:"ignoreVolumeAZ,omitempty"`
 
-	// Optional: Gets mapped to the "manage-security-groups" setting in the cloud config.
+	// ManageSecurityGroups sets mapped to the "manage-security-groups" setting in the cloud config.
 	// See https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/#load-balancer
 	// This setting defaults to true.
+	// +optional
 	ManageSecurityGroups bool `json:"manageSecurityGroups,omitempty"`
 
-	// node volume attach limit
+	// +optional
 	NodeVolumeAttachLimit uint64 `json:"nodeVolumeAttachLimit,omitempty"`
 
 	// region
 	Region string `json:"region,omitempty"`
 
-	// Optional: Gets mapped to the "trust-device-path" setting in the cloud config.
+	// TrustDevicePath gets mapped to the "trust-device-path" setting in the cloud config.
 	// See https://kubernetes.io/docs/concepts/cluster-administration/cloud-providers/#block-storage
 	// This setting defaults to false.
+	// +optional
 	TrustDevicePath bool `json:"trustDevicePath,omitempty"`
 
-	// Optional: Gets mapped to the "use-octavia" setting in the cloud config.
+	// UseOctavia gets mapped to the "use-octavia" setting in the cloud config.
 	// use-octavia is enabled by default in CCM since v1.17.0, and disabled by
 	// default with the in-tree cloud provider.
+	// +optional
 	UseOctavia bool `json:"useOctavia,omitempty"`
 
 	// images

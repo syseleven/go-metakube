@@ -18,16 +18,19 @@ import (
 // swagger:model NodeSettings
 type NodeSettings struct {
 
-	// Optional: These image registries will be configured as insecure
+	// InsecureRegistries these image registries will be configured as insecure
 	// on the container runtime.
+	// +optional
 	InsecureRegistries []string `json:"insecureRegistries"`
 
-	// Optional: Translates to --pod-infra-container-image on the kubelet.
+	// PauseImage translates to --pod-infra-container-image on the kubelet.
 	// If not set, the kubelet will default it.
+	// +optional
 	PauseImage string `json:"pauseImage,omitempty"`
 
-	// Optional: These image registries will be configured as registry mirrors
+	// RegistryMirrors image registries will be configured as registry mirrors
 	// on the container runtime.
+	// +optional
 	RegistryMirrors []string `json:"registryMirrors"`
 
 	// http proxy

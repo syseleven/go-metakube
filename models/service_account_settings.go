@@ -19,13 +19,15 @@ type ServiceAccountSettings struct {
 
 	// APIAudiences are the Identifiers of the API
 	// If this is not specified, it will be set to a single element list containing the issuer URL
+	// +optional
 	APIAudiences []string `json:"apiAudiences"`
 
 	// Issuer is the identifier of the service account token issuer
 	// If this is not specified, it will be set to the URL of apiserver by default
+	// +optional
 	Issuer string `json:"issuer,omitempty"`
 
-	// token volume projection enabled
+	// +optional
 	TokenVolumeProjectionEnabled bool `json:"tokenVolumeProjectionEnabled,omitempty"`
 }
 

@@ -23,10 +23,13 @@ type ClusterNetworkingConfig struct {
 	DNSDomain string `json:"dnsDomain,omitempty"`
 
 	// KonnectivityEnabled enables konnectivity for controlplane to node network communication.
+	// Deprecated: Konnectivity is always enabled.
+	// +optional
 	KonnectivityEnabled bool `json:"konnectivityEnabled,omitempty"`
 
 	// NodeLocalDNSCacheEnabled controls whether the NodeLocal DNS Cache feature is enabled.
 	// Defaults to true.
+	// +optional
 	NodeLocalDNSCacheEnabled bool `json:"nodeLocalDNSCacheEnabled,omitempty"`
 
 	// ProxyMode defines the kube-proxy mode (ipvs/iptables).

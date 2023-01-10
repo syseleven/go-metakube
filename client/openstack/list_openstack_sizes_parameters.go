@@ -68,9 +68,6 @@ type ListOpenstackSizesParams struct {
 	// ApplicationCredentialSecret.
 	ApplicationCredentialSecret *string
 
-	// Credential.
-	Credential *string
-
 	// DatacenterName.
 	DatacenterName *string
 
@@ -165,17 +162,6 @@ func (o *ListOpenstackSizesParams) WithApplicationCredentialSecret(applicationCr
 // SetApplicationCredentialSecret adds the applicationCredentialSecret to the list openstack sizes params
 func (o *ListOpenstackSizesParams) SetApplicationCredentialSecret(applicationCredentialSecret *string) {
 	o.ApplicationCredentialSecret = applicationCredentialSecret
-}
-
-// WithCredential adds the credential to the list openstack sizes params
-func (o *ListOpenstackSizesParams) WithCredential(credential *string) *ListOpenstackSizesParams {
-	o.SetCredential(credential)
-	return o
-}
-
-// SetCredential adds the credential to the list openstack sizes params
-func (o *ListOpenstackSizesParams) SetCredential(credential *string) {
-	o.Credential = credential
 }
 
 // WithDatacenterName adds the datacenterName to the list openstack sizes params
@@ -275,14 +261,6 @@ func (o *ListOpenstackSizesParams) WriteToRequest(r runtime.ClientRequest, reg s
 
 		// header param ApplicationCredentialSecret
 		if err := r.SetHeaderParam("ApplicationCredentialSecret", *o.ApplicationCredentialSecret); err != nil {
-			return err
-		}
-	}
-
-	if o.Credential != nil {
-
-		// header param Credential
-		if err := r.SetHeaderParam("Credential", *o.Credential); err != nil {
 			return err
 		}
 	}

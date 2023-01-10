@@ -30,8 +30,6 @@ type ClientOption func(*runtime.ClientOperation)
 type ClientService interface {
 	CreateOIDCKubeconfig(params *CreateOIDCKubeconfigParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOIDCKubeconfigOK, error)
 
-	GetAdmissionPlugins(params *GetAdmissionPluginsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAdmissionPluginsOK, error)
-
 	ListSystemLabels(params *ListSystemLabelsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListSystemLabelsOK, error)
 
 	MigrateClusterToExternalCCM(params *MigrateClusterToExternalCCMParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*MigrateClusterToExternalCCMOK, error)
@@ -76,44 +74,6 @@ func (a *Client) CreateOIDCKubeconfig(params *CreateOIDCKubeconfigParams, authIn
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*CreateOIDCKubeconfigDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-GetAdmissionPlugins returns specified addon config
-*/
-func (a *Client) GetAdmissionPlugins(params *GetAdmissionPluginsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetAdmissionPluginsOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetAdmissionPluginsParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getAdmissionPlugins",
-		Method:             "GET",
-		PathPattern:        "/api/v1/admission/plugins/{version}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetAdmissionPluginsReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetAdmissionPluginsOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*GetAdmissionPluginsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

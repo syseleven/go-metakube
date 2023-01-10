@@ -34,13 +34,7 @@ type ClientService interface {
 
 	BindUserToRoleV2(params *BindUserToRoleV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*BindUserToRoleV2OK, error)
 
-	CreateClusterTemplate(params *CreateClusterTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateClusterTemplateCreated, error)
-
-	CreateClusterTemplateInstance(params *CreateClusterTemplateInstanceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateClusterTemplateInstanceCreated, error)
-
 	CreateClusterV2(params *CreateClusterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateClusterV2Created, error)
-
-	CreateExternalCluster(params *CreateExternalClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateExternalClusterCreated, error)
 
 	CreateMachineDeployment(params *CreateMachineDeploymentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateMachineDeploymentCreated, error)
 
@@ -48,11 +42,7 @@ type ClientService interface {
 
 	CreateSSHKey(params *CreateSSHKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSSHKeyCreated, error)
 
-	DeleteClusterTemplate(params *DeleteClusterTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteClusterTemplateOK, error)
-
 	DeleteClusterV2(params *DeleteClusterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteClusterV2OK, error)
-
-	DeleteExternalCluster(params *DeleteExternalClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteExternalClusterOK, error)
 
 	DeleteMachineDeployment(params *DeleteMachineDeploymentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteMachineDeploymentOK, error)
 
@@ -74,17 +64,9 @@ type ClientService interface {
 
 	GetClusterOidc(params *GetClusterOidcParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetClusterOidcOK, error)
 
-	GetClusterTemplate(params *GetClusterTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetClusterTemplateOK, error)
-
 	GetClusterUpgradesV2(params *GetClusterUpgradesV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetClusterUpgradesV2OK, error)
 
 	GetClusterV2(params *GetClusterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetClusterV2OK, error)
-
-	GetExternalCluster(params *GetExternalClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetExternalClusterOK, error)
-
-	GetExternalClusterMetrics(params *GetExternalClusterMetricsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetExternalClusterMetricsOK, error)
-
-	GetExternalClusterNode(params *GetExternalClusterNodeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetExternalClusterNodeOK, error)
 
 	GetKubeLoginClusterKubeconfigV2(params *GetKubeLoginClusterKubeconfigV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetKubeLoginClusterKubeconfigV2OK, error)
 
@@ -100,17 +82,7 @@ type ClientService interface {
 
 	ListClusterRoleV2(params *ListClusterRoleV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListClusterRoleV2OK, error)
 
-	ListClusterTemplates(params *ListClusterTemplatesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListClusterTemplatesOK, error)
-
 	ListClustersV2(params *ListClustersV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListClustersV2OK, error)
-
-	ListExternalClusterEvents(params *ListExternalClusterEventsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListExternalClusterEventsOK, error)
-
-	ListExternalClusterNodes(params *ListExternalClusterNodesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListExternalClusterNodesOK, error)
-
-	ListExternalClusterNodesMetrics(params *ListExternalClusterNodesMetricsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListExternalClusterNodesMetricsOK, error)
-
-	ListExternalClusters(params *ListExternalClustersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListExternalClustersOK, error)
 
 	ListMachineDeploymentNodes(params *ListMachineDeploymentNodesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListMachineDeploymentNodesOK, error)
 
@@ -147,8 +119,6 @@ type ClientService interface {
 	UnbindUserFromClusterRoleBindingV2(params *UnbindUserFromClusterRoleBindingV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UnbindUserFromClusterRoleBindingV2OK, error)
 
 	UnbindUserFromRoleBindingV2(params *UnbindUserFromRoleBindingV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UnbindUserFromRoleBindingV2OK, error)
-
-	UpdateExternalCluster(params *UpdateExternalClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateExternalClusterOK, error)
 
 	UpdateProject(params *UpdateProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateProjectOK, error)
 
@@ -272,82 +242,6 @@ func (a *Client) BindUserToRoleV2(params *BindUserToRoleV2Params, authInfo runti
 }
 
 /*
-CreateClusterTemplate creates a cluster templates for the given project
-*/
-func (a *Client) CreateClusterTemplate(params *CreateClusterTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateClusterTemplateCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewCreateClusterTemplateParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "createClusterTemplate",
-		Method:             "POST",
-		PathPattern:        "/api/v2/projects/{project_id}/clustertemplates",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &CreateClusterTemplateReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*CreateClusterTemplateCreated)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*CreateClusterTemplateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-CreateClusterTemplateInstance creates cluster template instance
-*/
-func (a *Client) CreateClusterTemplateInstance(params *CreateClusterTemplateInstanceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateClusterTemplateInstanceCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewCreateClusterTemplateInstanceParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "createClusterTemplateInstance",
-		Method:             "POST",
-		PathPattern:        "/api/v2/projects/{project_id}/clustertemplates/{template_id}/instances",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &CreateClusterTemplateInstanceReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*CreateClusterTemplateInstanceCreated)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*CreateClusterTemplateInstanceDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
 CreateClusterV2 creates a cluster for the given project
 */
 func (a *Client) CreateClusterV2(params *CreateClusterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateClusterV2Created, error) {
@@ -382,44 +276,6 @@ func (a *Client) CreateClusterV2(params *CreateClusterV2Params, authInfo runtime
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*CreateClusterV2Default)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-CreateExternalCluster creates an external cluster for the given project
-*/
-func (a *Client) CreateExternalCluster(params *CreateExternalClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateExternalClusterCreated, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewCreateExternalClusterParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "createExternalCluster",
-		Method:             "POST",
-		PathPattern:        "/api/v2/projects/{project_id}/kubernetes/clusters",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &CreateExternalClusterReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*CreateExternalClusterCreated)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*CreateExternalClusterDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -540,44 +396,6 @@ func (a *Client) CreateSSHKey(params *CreateSSHKeyParams, authInfo runtime.Clien
 }
 
 /*
-DeleteClusterTemplate deletes cluster template
-*/
-func (a *Client) DeleteClusterTemplate(params *DeleteClusterTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteClusterTemplateOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDeleteClusterTemplateParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "deleteClusterTemplate",
-		Method:             "DELETE",
-		PathPattern:        "/api/v2/projects/{project_id}/clustertemplates/{template_id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &DeleteClusterTemplateReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*DeleteClusterTemplateOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*DeleteClusterTemplateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
 DeleteClusterV2 Deletes the specified cluster
 */
 func (a *Client) DeleteClusterV2(params *DeleteClusterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteClusterV2OK, error) {
@@ -612,44 +430,6 @@ func (a *Client) DeleteClusterV2(params *DeleteClusterV2Params, authInfo runtime
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*DeleteClusterV2Default)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-DeleteExternalCluster Deletes the specified external cluster
-*/
-func (a *Client) DeleteExternalCluster(params *DeleteExternalClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteExternalClusterOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewDeleteExternalClusterParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "deleteExternalCluster",
-		Method:             "DELETE",
-		PathPattern:        "/api/v2/projects/{project_id}/kubernetes/clusters/{cluster_id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &DeleteExternalClusterReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*DeleteExternalClusterOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*DeleteExternalClusterDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1034,44 +814,6 @@ func (a *Client) GetClusterOidc(params *GetClusterOidcParams, authInfo runtime.C
 }
 
 /*
-GetClusterTemplate gets cluster template
-*/
-func (a *Client) GetClusterTemplate(params *GetClusterTemplateParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetClusterTemplateOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetClusterTemplateParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getClusterTemplate",
-		Method:             "GET",
-		PathPattern:        "/api/v2/projects/{project_id}/clustertemplates/{template_id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetClusterTemplateReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetClusterTemplateOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*GetClusterTemplateDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
 GetClusterUpgradesV2 Gets possible cluster upgrades
 */
 func (a *Client) GetClusterUpgradesV2(params *GetClusterUpgradesV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetClusterUpgradesV2OK, error) {
@@ -1144,120 +886,6 @@ func (a *Client) GetClusterV2(params *GetClusterV2Params, authInfo runtime.Clien
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*GetClusterV2Default)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-GetExternalCluster gets an external cluster for the given project
-*/
-func (a *Client) GetExternalCluster(params *GetExternalClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetExternalClusterOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetExternalClusterParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getExternalCluster",
-		Method:             "GET",
-		PathPattern:        "/api/v2/projects/{project_id}/kubernetes/clusters/{cluster_id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetExternalClusterReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetExternalClusterOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*GetExternalClusterDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-GetExternalClusterMetrics Gets cluster metrics
-*/
-func (a *Client) GetExternalClusterMetrics(params *GetExternalClusterMetricsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetExternalClusterMetricsOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetExternalClusterMetricsParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getExternalClusterMetrics",
-		Method:             "GET",
-		PathPattern:        "/api/v2/projects/{project_id}/kubernetes/clusters/{cluster_id}/metrics",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetExternalClusterMetricsReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetExternalClusterMetricsOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*GetExternalClusterMetricsDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-GetExternalClusterNode gets an external cluster node
-*/
-func (a *Client) GetExternalClusterNode(params *GetExternalClusterNodeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetExternalClusterNodeOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewGetExternalClusterNodeParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getExternalClusterNode",
-		Method:             "GET",
-		PathPattern:        "/api/v2/projects/{project_id}/kubernetes/clusters/{cluster_id}/nodes/{node_id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetExternalClusterNodeReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*GetExternalClusterNodeOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*GetExternalClusterNodeDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1528,44 +1156,6 @@ func (a *Client) ListClusterRoleV2(params *ListClusterRoleV2Params, authInfo run
 }
 
 /*
-ListClusterTemplates lists cluster templates for the given project
-*/
-func (a *Client) ListClusterTemplates(params *ListClusterTemplatesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListClusterTemplatesOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewListClusterTemplatesParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "listClusterTemplates",
-		Method:             "GET",
-		PathPattern:        "/api/v2/projects/{project_id}/clustertemplates",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &ListClusterTemplatesReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*ListClusterTemplatesOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*ListClusterTemplatesDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
 ListClustersV2 lists clusters for the specified project
 */
 func (a *Client) ListClustersV2(params *ListClustersV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListClustersV2OK, error) {
@@ -1600,158 +1190,6 @@ func (a *Client) ListClustersV2(params *ListClustersV2Params, authInfo runtime.C
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ListClustersV2Default)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-ListExternalClusterEvents gets an external cluster events
-*/
-func (a *Client) ListExternalClusterEvents(params *ListExternalClusterEventsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListExternalClusterEventsOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewListExternalClusterEventsParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "listExternalClusterEvents",
-		Method:             "GET",
-		PathPattern:        "/api/v2/projects/{project_id}/kubernetes/clusters/{cluster_id}/events",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &ListExternalClusterEventsReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*ListExternalClusterEventsOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*ListExternalClusterEventsDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-ListExternalClusterNodes gets an external cluster nodes
-*/
-func (a *Client) ListExternalClusterNodes(params *ListExternalClusterNodesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListExternalClusterNodesOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewListExternalClusterNodesParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "listExternalClusterNodes",
-		Method:             "GET",
-		PathPattern:        "/api/v2/projects/{project_id}/kubernetes/clusters/{cluster_id}/nodes",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &ListExternalClusterNodesReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*ListExternalClusterNodesOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*ListExternalClusterNodesDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-ListExternalClusterNodesMetrics gets an external cluster nodes metrics
-*/
-func (a *Client) ListExternalClusterNodesMetrics(params *ListExternalClusterNodesMetricsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListExternalClusterNodesMetricsOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewListExternalClusterNodesMetricsParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "listExternalClusterNodesMetrics",
-		Method:             "GET",
-		PathPattern:        "/api/v2/projects/{project_id}/kubernetes/clusters/{cluster_id}/nodesmetrics",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &ListExternalClusterNodesMetricsReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*ListExternalClusterNodesMetricsOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*ListExternalClusterNodesMetricsDefault)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-ListExternalClusters lists external clusters for the specified project
-*/
-func (a *Client) ListExternalClusters(params *ListExternalClustersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListExternalClustersOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewListExternalClustersParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "listExternalClusters",
-		Method:             "GET",
-		PathPattern:        "/api/v2/projects/{project_id}/kubernetes/clusters",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &ListExternalClustersReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*ListExternalClustersOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*ListExternalClustersDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -2444,44 +1882,6 @@ func (a *Client) UnbindUserFromRoleBindingV2(params *UnbindUserFromRoleBindingV2
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*UnbindUserFromRoleBindingV2Default)
-	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
-}
-
-/*
-UpdateExternalCluster updates an external cluster for the given project
-*/
-func (a *Client) UpdateExternalCluster(params *UpdateExternalClusterParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateExternalClusterOK, error) {
-	// TODO: Validate the params before sending
-	if params == nil {
-		params = NewUpdateExternalClusterParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "updateExternalCluster",
-		Method:             "PUT",
-		PathPattern:        "/api/v2/projects/{project_id}/kubernetes/clusters/{cluster_id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &UpdateExternalClusterReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-	success, ok := result.(*UpdateExternalClusterOK)
-	if ok {
-		return success, nil
-	}
-	// unexpected success response
-	unexpectedSuccess := result.(*UpdateExternalClusterDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

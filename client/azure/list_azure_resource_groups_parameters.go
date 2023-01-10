@@ -67,9 +67,6 @@ type ListAzureResourceGroupsParams struct {
 	// ClientSecret.
 	ClientSecret *string
 
-	// Credential.
-	Credential *string
-
 	// Location.
 	Location *string
 
@@ -154,17 +151,6 @@ func (o *ListAzureResourceGroupsParams) SetClientSecret(clientSecret *string) {
 	o.ClientSecret = clientSecret
 }
 
-// WithCredential adds the credential to the list azure resource groups params
-func (o *ListAzureResourceGroupsParams) WithCredential(credential *string) *ListAzureResourceGroupsParams {
-	o.SetCredential(credential)
-	return o
-}
-
-// SetCredential adds the credential to the list azure resource groups params
-func (o *ListAzureResourceGroupsParams) SetCredential(credential *string) {
-	o.Credential = credential
-}
-
 // WithLocation adds the location to the list azure resource groups params
 func (o *ListAzureResourceGroupsParams) WithLocation(location *string) *ListAzureResourceGroupsParams {
 	o.SetLocation(location)
@@ -218,14 +204,6 @@ func (o *ListAzureResourceGroupsParams) WriteToRequest(r runtime.ClientRequest, 
 
 		// header param ClientSecret
 		if err := r.SetHeaderParam("ClientSecret", *o.ClientSecret); err != nil {
-			return err
-		}
-	}
-
-	if o.Credential != nil {
-
-		// header param Credential
-		if err := r.SetHeaderParam("Credential", *o.Credential); err != nil {
 			return err
 		}
 	}

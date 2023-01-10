@@ -30,7 +30,7 @@ type Cluster struct {
 	// Format: date-time
 	CreationTimestamp strfmt.DateTime `json:"creationTimestamp,omitempty"`
 
-	// credential
+	// TODO: delete field if unused
 	Credential string `json:"credential,omitempty"`
 
 	// DeletionTimestamp is a timestamp representing the server time when this object was deleted.

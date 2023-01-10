@@ -11,24 +11,15 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/syseleven/go-metakube/client/admin"
-	"github.com/syseleven/go-metakube/client/alibaba"
-	"github.com/syseleven/go-metakube/client/anexia"
 	"github.com/syseleven/go-metakube/client/aws"
 	"github.com/syseleven/go-metakube/client/azure"
 	"github.com/syseleven/go-metakube/client/backupcredentials"
-	"github.com/syseleven/go-metakube/client/credentials"
 	"github.com/syseleven/go-metakube/client/datacenter"
-	"github.com/syseleven/go-metakube/client/digitalocean"
 	"github.com/syseleven/go-metakube/client/etcdbackupconfig"
 	"github.com/syseleven/go-metakube/client/etcdrestore"
-	"github.com/syseleven/go-metakube/client/gcp"
-	"github.com/syseleven/go-metakube/client/get"
-	"github.com/syseleven/go-metakube/client/hetzner"
 	"github.com/syseleven/go-metakube/client/metric"
 	"github.com/syseleven/go-metakube/client/openstack"
 	"github.com/syseleven/go-metakube/client/operations"
-	"github.com/syseleven/go-metakube/client/packet"
-	"github.com/syseleven/go-metakube/client/preset"
 	"github.com/syseleven/go-metakube/client/project"
 	"github.com/syseleven/go-metakube/client/seed"
 	"github.com/syseleven/go-metakube/client/serviceaccounts"
@@ -37,7 +28,6 @@ import (
 	"github.com/syseleven/go-metakube/client/users"
 	"github.com/syseleven/go-metakube/client/version"
 	"github.com/syseleven/go-metakube/client/versions"
-	"github.com/syseleven/go-metakube/client/vsphere"
 )
 
 // Default meta kube API HTTP client.
@@ -83,24 +73,15 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *MetaKubeAP
 	cli := new(MetaKubeAPI)
 	cli.Transport = transport
 	cli.Admin = admin.New(transport, formats)
-	cli.Alibaba = alibaba.New(transport, formats)
-	cli.Anexia = anexia.New(transport, formats)
 	cli.Aws = aws.New(transport, formats)
 	cli.Azure = azure.New(transport, formats)
 	cli.Backupcredentials = backupcredentials.New(transport, formats)
-	cli.Credentials = credentials.New(transport, formats)
 	cli.Datacenter = datacenter.New(transport, formats)
-	cli.Digitalocean = digitalocean.New(transport, formats)
 	cli.Etcdbackupconfig = etcdbackupconfig.New(transport, formats)
 	cli.Etcdrestore = etcdrestore.New(transport, formats)
-	cli.Gcp = gcp.New(transport, formats)
-	cli.Get = get.New(transport, formats)
-	cli.Hetzner = hetzner.New(transport, formats)
 	cli.Metric = metric.New(transport, formats)
 	cli.Openstack = openstack.New(transport, formats)
 	cli.Operations = operations.New(transport, formats)
-	cli.Packet = packet.New(transport, formats)
-	cli.Preset = preset.New(transport, formats)
 	cli.Project = project.New(transport, formats)
 	cli.Seed = seed.New(transport, formats)
 	cli.Serviceaccounts = serviceaccounts.New(transport, formats)
@@ -109,7 +90,6 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *MetaKubeAP
 	cli.Users = users.New(transport, formats)
 	cli.Version = version.New(transport, formats)
 	cli.Versions = versions.New(transport, formats)
-	cli.Vsphere = vsphere.New(transport, formats)
 	return cli
 }
 
@@ -156,41 +136,23 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 type MetaKubeAPI struct {
 	Admin admin.ClientService
 
-	Alibaba alibaba.ClientService
-
-	Anexia anexia.ClientService
-
 	Aws aws.ClientService
 
 	Azure azure.ClientService
 
 	Backupcredentials backupcredentials.ClientService
 
-	Credentials credentials.ClientService
-
 	Datacenter datacenter.ClientService
-
-	Digitalocean digitalocean.ClientService
 
 	Etcdbackupconfig etcdbackupconfig.ClientService
 
 	Etcdrestore etcdrestore.ClientService
-
-	Gcp gcp.ClientService
-
-	Get get.ClientService
-
-	Hetzner hetzner.ClientService
 
 	Metric metric.ClientService
 
 	Openstack openstack.ClientService
 
 	Operations operations.ClientService
-
-	Packet packet.ClientService
-
-	Preset preset.ClientService
 
 	Project project.ClientService
 
@@ -208,8 +170,6 @@ type MetaKubeAPI struct {
 
 	Versions versions.ClientService
 
-	Vsphere vsphere.ClientService
-
 	Transport runtime.ClientTransport
 }
 
@@ -217,24 +177,15 @@ type MetaKubeAPI struct {
 func (c *MetaKubeAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 	c.Admin.SetTransport(transport)
-	c.Alibaba.SetTransport(transport)
-	c.Anexia.SetTransport(transport)
 	c.Aws.SetTransport(transport)
 	c.Azure.SetTransport(transport)
 	c.Backupcredentials.SetTransport(transport)
-	c.Credentials.SetTransport(transport)
 	c.Datacenter.SetTransport(transport)
-	c.Digitalocean.SetTransport(transport)
 	c.Etcdbackupconfig.SetTransport(transport)
 	c.Etcdrestore.SetTransport(transport)
-	c.Gcp.SetTransport(transport)
-	c.Get.SetTransport(transport)
-	c.Hetzner.SetTransport(transport)
 	c.Metric.SetTransport(transport)
 	c.Openstack.SetTransport(transport)
 	c.Operations.SetTransport(transport)
-	c.Packet.SetTransport(transport)
-	c.Preset.SetTransport(transport)
 	c.Project.SetTransport(transport)
 	c.Seed.SetTransport(transport)
 	c.Serviceaccounts.SetTransport(transport)
@@ -243,5 +194,4 @@ func (c *MetaKubeAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Users.SetTransport(transport)
 	c.Version.SetTransport(transport)
 	c.Versions.SetTransport(transport)
-	c.Vsphere.SetTransport(transport)
 }

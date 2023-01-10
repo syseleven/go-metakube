@@ -67,9 +67,6 @@ type ListAzureSubnetsParams struct {
 	// ClientSecret.
 	ClientSecret *string
 
-	// Credential.
-	Credential *string
-
 	// ResourceGroup.
 	ResourceGroup *string
 
@@ -157,17 +154,6 @@ func (o *ListAzureSubnetsParams) SetClientSecret(clientSecret *string) {
 	o.ClientSecret = clientSecret
 }
 
-// WithCredential adds the credential to the list azure subnets params
-func (o *ListAzureSubnetsParams) WithCredential(credential *string) *ListAzureSubnetsParams {
-	o.SetCredential(credential)
-	return o
-}
-
-// SetCredential adds the credential to the list azure subnets params
-func (o *ListAzureSubnetsParams) SetCredential(credential *string) {
-	o.Credential = credential
-}
-
 // WithResourceGroup adds the resourceGroup to the list azure subnets params
 func (o *ListAzureSubnetsParams) WithResourceGroup(resourceGroup *string) *ListAzureSubnetsParams {
 	o.SetResourceGroup(resourceGroup)
@@ -232,14 +218,6 @@ func (o *ListAzureSubnetsParams) WriteToRequest(r runtime.ClientRequest, reg str
 
 		// header param ClientSecret
 		if err := r.SetHeaderParam("ClientSecret", *o.ClientSecret); err != nil {
-			return err
-		}
-	}
-
-	if o.Credential != nil {
-
-		// header param Credential
-		if err := r.SetHeaderParam("Credential", *o.Credential); err != nil {
 			return err
 		}
 	}

@@ -17,25 +17,25 @@ import (
 // swagger:model OIDCSettings
 type OIDCSettings struct {
 
-	// client ID
+	// +optional
 	ClientID string `json:"clientId,omitempty"`
 
-	// client secret
+	// +optional
 	ClientSecret string `json:"clientSecret,omitempty"`
 
-	// extra scopes
+	// +optional
 	ExtraScopes string `json:"extraScopes,omitempty"`
 
-	// groups claim
+	// +optional
 	GroupsClaim string `json:"groupsClaim,omitempty"`
 
-	// issuer URL
+	// +optional
 	IssuerURL string `json:"issuerUrl,omitempty"`
 
-	// required claim
+	// +optional
 	RequiredClaim string `json:"requiredClaim,omitempty"`
 
-	// username claim
+	// +optional
 	UsernameClaim string `json:"usernameClaim,omitempty"`
 }
 

@@ -67,9 +67,6 @@ type ListAzureRouteTablesParams struct {
 	// ClientSecret.
 	ClientSecret *string
 
-	// Credential.
-	Credential *string
-
 	// Location.
 	Location *string
 
@@ -157,17 +154,6 @@ func (o *ListAzureRouteTablesParams) SetClientSecret(clientSecret *string) {
 	o.ClientSecret = clientSecret
 }
 
-// WithCredential adds the credential to the list azure route tables params
-func (o *ListAzureRouteTablesParams) WithCredential(credential *string) *ListAzureRouteTablesParams {
-	o.SetCredential(credential)
-	return o
-}
-
-// SetCredential adds the credential to the list azure route tables params
-func (o *ListAzureRouteTablesParams) SetCredential(credential *string) {
-	o.Credential = credential
-}
-
 // WithLocation adds the location to the list azure route tables params
 func (o *ListAzureRouteTablesParams) WithLocation(location *string) *ListAzureRouteTablesParams {
 	o.SetLocation(location)
@@ -232,14 +218,6 @@ func (o *ListAzureRouteTablesParams) WriteToRequest(r runtime.ClientRequest, reg
 
 		// header param ClientSecret
 		if err := r.SetHeaderParam("ClientSecret", *o.ClientSecret); err != nil {
-			return err
-		}
-	}
-
-	if o.Credential != nil {
-
-		// header param Credential
-		if err := r.SetHeaderParam("Credential", *o.Credential); err != nil {
 			return err
 		}
 	}
