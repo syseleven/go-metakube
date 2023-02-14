@@ -34,6 +34,8 @@ type ClientService interface {
 
 	ListDatacenters(params *ListDatacentersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListDatacentersOK, error)
 
+	ListDatacentersV2(params *ListDatacentersV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListDatacentersV2OK, error)
+
 	SetTransport(transport runtime.ClientTransport)
 }
 
@@ -148,6 +150,44 @@ func (a *Client) ListDatacenters(params *ListDatacentersParams, authInfo runtime
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ListDatacentersDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListDatacentersV2 Lists datacenters
+*/
+func (a *Client) ListDatacentersV2(params *ListDatacentersV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListDatacentersV2OK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListDatacentersV2Params()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "listDatacentersV2",
+		Method:             "GET",
+		PathPattern:        "/api/v2/datacenters",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListDatacentersV2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListDatacentersV2OK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListDatacentersV2Default)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

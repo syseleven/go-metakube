@@ -7,7 +7,6 @@ package models
 
 import (
 	"context"
-	"strconv"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -34,9 +33,6 @@ type ClusterSpec struct {
 	// the cluster creation any attached ssh keys won't be synced to the worker nodes. Once the agent is enabled/disabled
 	// it cannot be changed after the cluster is being created.
 	EnableUserSSHKeyAgent bool `json:"enableUserSSHKeyAgent,omitempty"`
-
-	// MachineNetworks optionally specifies the parameters for IPAM.
-	MachineNetworks []*MachineNetworkingConfig `json:"machineNetworks"`
 
 	// PodNodeSelectorAdmissionPluginConfig provides the configuration for the PodNodeSelector.
 	// It's used by the backend to create a configuration file for this plugin.
@@ -83,10 +79,6 @@ type ClusterSpec struct {
 func (m *ClusterSpec) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateMachineNetworks(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateAuditLogging(formats); err != nil {
 		res = append(res, err)
 	}
@@ -122,32 +114,6 @@ func (m *ClusterSpec) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *ClusterSpec) validateMachineNetworks(formats strfmt.Registry) error {
-	if swag.IsZero(m.MachineNetworks) { // not required
-		return nil
-	}
-
-	for i := 0; i < len(m.MachineNetworks); i++ {
-		if swag.IsZero(m.MachineNetworks[i]) { // not required
-			continue
-		}
-
-		if m.MachineNetworks[i] != nil {
-			if err := m.MachineNetworks[i].Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("machineNetworks" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("machineNetworks" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
 	return nil
 }
 
@@ -305,10 +271,6 @@ func (m *ClusterSpec) validateVersion(formats strfmt.Registry) error {
 func (m *ClusterSpec) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateMachineNetworks(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateAuditLogging(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -344,26 +306,6 @@ func (m *ClusterSpec) ContextValidate(ctx context.Context, formats strfmt.Regist
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *ClusterSpec) contextValidateMachineNetworks(ctx context.Context, formats strfmt.Registry) error {
-
-	for i := 0; i < len(m.MachineNetworks); i++ {
-
-		if m.MachineNetworks[i] != nil {
-			if err := m.MachineNetworks[i].ContextValidate(ctx, formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
-					return ve.ValidateName("machineNetworks" + "." + strconv.Itoa(i))
-				} else if ce, ok := err.(*errors.CompositeError); ok {
-					return ce.ValidateName("machineNetworks" + "." + strconv.Itoa(i))
-				}
-				return err
-			}
-		}
-
-	}
-
 	return nil
 }
 
