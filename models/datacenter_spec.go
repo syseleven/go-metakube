@@ -44,9 +44,6 @@ type DatacenterSpec struct {
 	// required emails
 	RequiredEmails []string `json:"requiredEmails"`
 
-	// Name of the seed this datacenter belongs to.
-	Seed string `json:"seed,omitempty"`
-
 	// aws
 	Aws *DatacenterSpecAWS `json:"aws,omitempty"`
 

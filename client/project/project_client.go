@@ -38,6 +38,8 @@ type ClientService interface {
 
 	CreateMachineDeployment(params *CreateMachineDeploymentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateMachineDeploymentCreated, error)
 
+	CreateMaintenanceCronJob(params *CreateMaintenanceCronJobParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateMaintenanceCronJobCreated, error)
+
 	CreateProject(params *CreateProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateProjectCreated, error)
 
 	CreateSSHKey(params *CreateSSHKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateSSHKeyCreated, error)
@@ -47,6 +49,8 @@ type ClientService interface {
 	DeleteMachineDeployment(params *DeleteMachineDeploymentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteMachineDeploymentOK, error)
 
 	DeleteMachineDeploymentNode(params *DeleteMachineDeploymentNodeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteMachineDeploymentNodeOK, error)
+
+	DeleteMaintenanceCronJob(params *DeleteMaintenanceCronJobParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteMaintenanceCronJobOK, error)
 
 	DeleteProject(params *DeleteProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteProjectOK, error)
 
@@ -72,6 +76,8 @@ type ClientService interface {
 
 	GetMachineDeployment(params *GetMachineDeploymentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMachineDeploymentOK, error)
 
+	GetMaintenanceCronJob(params *GetMaintenanceCronJobParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMaintenanceCronJobOK, error)
+
 	GetOidcClusterKubeconfigV2(params *GetOidcClusterKubeconfigV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOidcClusterKubeconfigV2OK, error)
 
 	GetProject(params *GetProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetProjectOK, error)
@@ -89,6 +95,8 @@ type ClientService interface {
 	ListMachineDeploymentNodesEvents(params *ListMachineDeploymentNodesEventsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListMachineDeploymentNodesEventsOK, error)
 
 	ListMachineDeployments(params *ListMachineDeploymentsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListMachineDeploymentsOK, error)
+
+	ListMaintenanceCronJobs(params *ListMaintenanceCronJobsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListMaintenanceCronJobsOK, error)
 
 	ListNamespaceV2(params *ListNamespaceV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListNamespaceV2OK, error)
 
@@ -109,6 +117,8 @@ type ClientService interface {
 	PatchClusterV2(params *PatchClusterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchClusterV2OK, error)
 
 	PatchMachineDeployment(params *PatchMachineDeploymentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchMachineDeploymentOK, error)
+
+	PatchMaintenanceCronJob(params *PatchMaintenanceCronJobParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchMaintenanceCronJobOK, error)
 
 	RestartMachineDeployment(params *RestartMachineDeploymentParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*RestartMachineDeploymentOK, error)
 
@@ -318,6 +328,44 @@ func (a *Client) CreateMachineDeployment(params *CreateMachineDeploymentParams, 
 }
 
 /*
+CreateMaintenanceCronJob Creates a maintenance cronjob that will belong to the given cluster
+*/
+func (a *Client) CreateMaintenanceCronJob(params *CreateMaintenanceCronJobParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateMaintenanceCronJobCreated, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewCreateMaintenanceCronJobParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "createMaintenanceCronJob",
+		Method:             "POST",
+		PathPattern:        "/api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &CreateMaintenanceCronJobReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*CreateMaintenanceCronJobCreated)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*CreateMaintenanceCronJobDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 CreateProject creates a brand new project
 
 Note that this endpoint can be consumed by every authenticated user.
@@ -506,6 +554,44 @@ func (a *Client) DeleteMachineDeploymentNode(params *DeleteMachineDeploymentNode
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*DeleteMachineDeploymentNodeDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+DeleteMaintenanceCronJob deletes the given maintenance cronjob that belongs to the cluster
+*/
+func (a *Client) DeleteMaintenanceCronJob(params *DeleteMaintenanceCronJobParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteMaintenanceCronJobOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewDeleteMaintenanceCronJobParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "deleteMaintenanceCronJob",
+		Method:             "DELETE",
+		PathPattern:        "/api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &DeleteMaintenanceCronJobReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*DeleteMaintenanceCronJobOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*DeleteMaintenanceCronJobDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -966,6 +1052,44 @@ func (a *Client) GetMachineDeployment(params *GetMachineDeploymentParams, authIn
 }
 
 /*
+GetMaintenanceCronJob gets a maintenance cronjob that is assigned to the given cluster
+*/
+func (a *Client) GetMaintenanceCronJob(params *GetMaintenanceCronJobParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMaintenanceCronJobOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewGetMaintenanceCronJobParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getMaintenanceCronJob",
+		Method:             "GET",
+		PathPattern:        "/api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetMaintenanceCronJobReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*GetMaintenanceCronJobOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*GetMaintenanceCronJobDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
 GetOidcClusterKubeconfigV2 gets the kubeconfig for the specified cluster with oidc authentication
 */
 func (a *Client) GetOidcClusterKubeconfigV2(params *GetOidcClusterKubeconfigV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOidcClusterKubeconfigV2OK, error) {
@@ -1306,6 +1430,44 @@ func (a *Client) ListMachineDeployments(params *ListMachineDeploymentsParams, au
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*ListMachineDeploymentsDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+ListMaintenanceCronJobs Lists maintenance cronjobs that belong to the given cluster
+*/
+func (a *Client) ListMaintenanceCronJobs(params *ListMaintenanceCronJobsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListMaintenanceCronJobsOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewListMaintenanceCronJobsParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "listMaintenanceCronJobs",
+		Method:             "GET",
+		PathPattern:        "/api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListMaintenanceCronJobsReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*ListMaintenanceCronJobsOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*ListMaintenanceCronJobsDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -1692,6 +1854,44 @@ func (a *Client) PatchMachineDeployment(params *PatchMachineDeploymentParams, au
 	}
 	// unexpected success response
 	unexpectedSuccess := result.(*PatchMachineDeploymentDefault)
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+/*
+PatchMaintenanceCronJob patches a maintenance cronjob that is assigned to the given cluster
+*/
+func (a *Client) PatchMaintenanceCronJob(params *PatchMaintenanceCronJobParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchMaintenanceCronJobOK, error) {
+	// TODO: Validate the params before sending
+	if params == nil {
+		params = NewPatchMaintenanceCronJobParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "patchMaintenanceCronJob",
+		Method:             "PATCH",
+		PathPattern:        "/api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &PatchMaintenanceCronJobReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+	success, ok := result.(*PatchMaintenanceCronJobOK)
+	if ok {
+		return success, nil
+	}
+	// unexpected success response
+	unexpectedSuccess := result.(*PatchMaintenanceCronJobDefault)
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
