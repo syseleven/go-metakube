@@ -24,6 +24,16 @@ type DatacenterSpecOpenstack struct {
 	// availability zone
 	AvailabilityZone string `json:"availabilityZone,omitempty"`
 
+	// Openstack API client timeout, as a duration string (e.g. "60s").
+	// Defaults to machine-controller-internal default.
+	// +optional
+	ClientTimeout string `json:"clientTimeout,omitempty"`
+
+	// Openstack compute API (nova) client timeout, as a duration string (e.g. "60s").
+	// Defaults to ClientTimeout.
+	// +optional
+	ComputeClientTimeout string `json:"computeClientTimeout,omitempty"`
+
 	// Used for automatic network creation
 	DNSServers []string `json:"dnsServers"`
 

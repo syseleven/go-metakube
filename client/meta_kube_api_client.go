@@ -12,7 +12,6 @@ import (
 
 	"github.com/syseleven/go-metakube/client/admin"
 	"github.com/syseleven/go-metakube/client/aws"
-	"github.com/syseleven/go-metakube/client/azure"
 	"github.com/syseleven/go-metakube/client/backupcredentials"
 	"github.com/syseleven/go-metakube/client/datacenter"
 	"github.com/syseleven/go-metakube/client/etcdbackupconfig"
@@ -74,7 +73,6 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *MetaKubeAP
 	cli.Transport = transport
 	cli.Admin = admin.New(transport, formats)
 	cli.Aws = aws.New(transport, formats)
-	cli.Azure = azure.New(transport, formats)
 	cli.Backupcredentials = backupcredentials.New(transport, formats)
 	cli.Datacenter = datacenter.New(transport, formats)
 	cli.Etcdbackupconfig = etcdbackupconfig.New(transport, formats)
@@ -138,8 +136,6 @@ type MetaKubeAPI struct {
 
 	Aws aws.ClientService
 
-	Azure azure.ClientService
-
 	Backupcredentials backupcredentials.ClientService
 
 	Datacenter datacenter.ClientService
@@ -178,7 +174,6 @@ func (c *MetaKubeAPI) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 	c.Admin.SetTransport(transport)
 	c.Aws.SetTransport(transport)
-	c.Azure.SetTransport(transport)
 	c.Backupcredentials.SetTransport(transport)
 	c.Datacenter.SetTransport(transport)
 	c.Etcdbackupconfig.SetTransport(transport)
