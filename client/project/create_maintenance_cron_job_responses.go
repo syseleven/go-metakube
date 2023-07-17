@@ -92,6 +92,11 @@ func (o *CreateMaintenanceCronJobCreated) IsCode(code int) bool {
 	return code == 201
 }
 
+// Code gets the status code for the create maintenance cron job created response
+func (o *CreateMaintenanceCronJobCreated) Code() int {
+	return 201
+}
+
 func (o *CreateMaintenanceCronJobCreated) Error() string {
 	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs][%d] createMaintenanceCronJobCreated  %+v", 201, o.Payload)
 }
@@ -154,6 +159,11 @@ func (o *CreateMaintenanceCronJobUnauthorized) IsCode(code int) bool {
 	return code == 401
 }
 
+// Code gets the status code for the create maintenance cron job unauthorized response
+func (o *CreateMaintenanceCronJobUnauthorized) Code() int {
+	return 401
+}
+
 func (o *CreateMaintenanceCronJobUnauthorized) Error() string {
 	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs][%d] createMaintenanceCronJobUnauthorized ", 401)
 }
@@ -205,6 +215,11 @@ func (o *CreateMaintenanceCronJobForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the create maintenance cron job forbidden response
+func (o *CreateMaintenanceCronJobForbidden) Code() int {
+	return 403
+}
+
 func (o *CreateMaintenanceCronJobForbidden) Error() string {
 	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs][%d] createMaintenanceCronJobForbidden ", 403)
 }
@@ -236,11 +251,6 @@ type CreateMaintenanceCronJobDefault struct {
 	Payload *models.ErrorResponse
 }
 
-// Code gets the status code for the create maintenance cron job default response
-func (o *CreateMaintenanceCronJobDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this create maintenance cron job default response has a 2xx status code
 func (o *CreateMaintenanceCronJobDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -264,6 +274,11 @@ func (o *CreateMaintenanceCronJobDefault) IsServerError() bool {
 // IsCode returns true when this create maintenance cron job default response a status code equal to that given
 func (o *CreateMaintenanceCronJobDefault) IsCode(code int) bool {
 	return o._statusCode == code
+}
+
+// Code gets the status code for the create maintenance cron job default response
+func (o *CreateMaintenanceCronJobDefault) Code() int {
+	return o._statusCode
 }
 
 func (o *CreateMaintenanceCronJobDefault) Error() string {
