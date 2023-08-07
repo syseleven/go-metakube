@@ -13,31 +13,16 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// MaintenanceCronJobSpec MaintenanceCronJobSpec specifies details of a maintenance cron job
+// MaintenanceCronJobSpec MaintenanceCronJobSpec represents an object holding the configuration for maintenance cron jobs.
 //
 // swagger:model MaintenanceCronJobSpec
 type MaintenanceCronJobSpec struct {
 
-	// FailedJobsHistoryLimit is the number of failed finished maintenance jobs to retain.
-	// This is a pointer to distinguish between explicit zero and not specified.
-	// +optional
-	FailedJobsHistoryLimit int32 `json:"failedJobsHistoryLimit,omitempty"`
-
-	// Schedule is a schedule in cron format
+	// Schedule is a cron expression defining when to perform the maintenance.
 	Schedule string `json:"schedule,omitempty"`
 
-	// StartingDeadlineSeconds is an optional deadline in seconds for starting the
-	// maintenance job if it misses scheduled time for any reason.
-	// +optional
-	StartingDeadlineSeconds int64 `json:"startingDeadlineSeconds,omitempty"`
-
-	// SuccessfulJobsHistoryLimit is the number of successful finished maintenance jobs to retain.
-	// This is a pointer to distinguish between explicit zero and not specified.
-	// +optional
-	SuccessfulJobsHistoryLimit int32 `json:"successfulJobsHistoryLimit,omitempty"`
-
 	// maintenance job template
-	MaintenanceJobTemplate *MaintenanceJobTemplateSpec `json:"maintenanceJobTemplate,omitempty"`
+	MaintenanceJobTemplate *MaintenanceJobTemplate `json:"maintenanceJobTemplate,omitempty"`
 }
 
 // Validate validates this maintenance cron job spec
