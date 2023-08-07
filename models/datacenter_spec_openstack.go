@@ -24,6 +24,10 @@ type DatacenterSpecOpenstack struct {
 	// availability zone
 	AvailabilityZone string `json:"availabilityZone,omitempty"`
 
+	// CephVolumeType creates a ceph StorageClass with the given volume type if set
+	// +optional
+	CephVolumeType string `json:"cephVolumeType,omitempty"`
+
 	// Openstack API client timeout, as a duration string (e.g. "60s").
 	// Defaults to machine-controller-internal default.
 	// +optional
