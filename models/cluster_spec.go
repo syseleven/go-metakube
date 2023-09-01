@@ -32,7 +32,7 @@ type ClusterSpec struct {
 	// to the created cluster. If the agent was disabled, it won't be deployed in the user cluster, thus after
 	// the cluster creation any attached ssh keys won't be synced to the worker nodes. Once the agent is enabled/disabled
 	// it cannot be changed after the cluster is being created.
-	EnableUserSSHKeyAgent bool `json:"enableUserSSHKeyAgent,omitempty"`
+	EnableUserSSHKeyAgent *bool `json:"enableUserSSHKeyAgent,omitempty"`
 
 	// PodNodeSelectorAdmissionPluginConfig provides the configuration for the PodNodeSelector.
 	// It's used by the backend to create a configuration file for this plugin.
@@ -342,6 +342,11 @@ func (m *ClusterSpec) ContextValidate(ctx context.Context, formats strfmt.Regist
 func (m *ClusterSpec) contextValidateAuditLogging(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.AuditLogging != nil {
+
+		if swag.IsZero(m.AuditLogging) { // not required
+			return nil
+		}
+
 		if err := m.AuditLogging.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("auditLogging")
@@ -358,6 +363,11 @@ func (m *ClusterSpec) contextValidateAuditLogging(ctx context.Context, formats s
 func (m *ClusterSpec) contextValidateCloud(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Cloud != nil {
+
+		if swag.IsZero(m.Cloud) { // not required
+			return nil
+		}
+
 		if err := m.Cloud.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cloud")
@@ -374,6 +384,11 @@ func (m *ClusterSpec) contextValidateCloud(ctx context.Context, formats strfmt.R
 func (m *ClusterSpec) contextValidateClusterNetwork(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ClusterNetwork != nil {
+
+		if swag.IsZero(m.ClusterNetwork) { // not required
+			return nil
+		}
+
 		if err := m.ClusterNetwork.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("clusterNetwork")
@@ -390,6 +405,11 @@ func (m *ClusterSpec) contextValidateClusterNetwork(ctx context.Context, formats
 func (m *ClusterSpec) contextValidateCniPlugin(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.CniPlugin != nil {
+
+		if swag.IsZero(m.CniPlugin) { // not required
+			return nil
+		}
+
 		if err := m.CniPlugin.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cniPlugin")
@@ -406,6 +426,11 @@ func (m *ClusterSpec) contextValidateCniPlugin(ctx context.Context, formats strf
 func (m *ClusterSpec) contextValidateOidc(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Oidc != nil {
+
+		if swag.IsZero(m.Oidc) { // not required
+			return nil
+		}
+
 		if err := m.Oidc.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("oidc")
@@ -422,6 +447,11 @@ func (m *ClusterSpec) contextValidateOidc(ctx context.Context, formats strfmt.Re
 func (m *ClusterSpec) contextValidateServiceAccount(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ServiceAccount != nil {
+
+		if swag.IsZero(m.ServiceAccount) { // not required
+			return nil
+		}
+
 		if err := m.ServiceAccount.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("serviceAccount")
@@ -438,6 +468,11 @@ func (m *ClusterSpec) contextValidateServiceAccount(ctx context.Context, formats
 func (m *ClusterSpec) contextValidateSys11auth(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Sys11auth != nil {
+
+		if swag.IsZero(m.Sys11auth) { // not required
+			return nil
+		}
+
 		if err := m.Sys11auth.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("sys11auth")
@@ -454,6 +489,11 @@ func (m *ClusterSpec) contextValidateSys11auth(ctx context.Context, formats strf
 func (m *ClusterSpec) contextValidateUpdateWindow(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.UpdateWindow != nil {
+
+		if swag.IsZero(m.UpdateWindow) { // not required
+			return nil
+		}
+
 		if err := m.UpdateWindow.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("updateWindow")
@@ -468,6 +508,10 @@ func (m *ClusterSpec) contextValidateUpdateWindow(ctx context.Context, formats s
 }
 
 func (m *ClusterSpec) contextValidateVersion(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Version) { // not required
+		return nil
+	}
 
 	if err := m.Version.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
