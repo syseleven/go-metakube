@@ -39,6 +39,10 @@ type OpenstackNodeSpec struct {
 	// if set, the rootDisk will be a volume. If not, the rootDisk will be on ephemeral storage and its size will be derived from the flavor
 	RootDiskSizeGB int64 `json:"diskSize,omitempty"`
 
+	// Openstack server group ID of the instance
+	// Defaults to the corresponding setting from the cluster spec
+	ServerGroupID string `json:"serverGroupID,omitempty"`
+
 	// Additional metadata to set
 	Tags map[string]string `json:"tags,omitempty"`
 
