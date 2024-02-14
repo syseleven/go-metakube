@@ -59,6 +59,10 @@ type DatacenterSpecOpenstack struct {
 	// +optional
 	ManageSecurityGroups bool `json:"manageSecurityGroups,omitempty"`
 
+	// NeutronMaxMTU is the maximum MTU that Neutron allows on networks
+	// +optional
+	NeutronMaxMTU uint64 `json:"neutronMaxMTU,omitempty"`
+
 	// +optional
 	NodeVolumeAttachLimit uint64 `json:"nodeVolumeAttachLimit,omitempty"`
 

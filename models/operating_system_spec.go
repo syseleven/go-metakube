@@ -27,9 +27,6 @@ type OperatingSystemSpec struct {
 	// rhel
 	Rhel *RHELSpec `json:"rhel,omitempty"`
 
-	// sles
-	Sles *SLESSpec `json:"sles,omitempty"`
-
 	// ubuntu
 	Ubuntu *UbuntuSpec `json:"ubuntu,omitempty"`
 }
@@ -47,10 +44,6 @@ func (m *OperatingSystemSpec) Validate(formats strfmt.Registry) error {
 	}
 
 	if err := m.validateRhel(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateSles(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -121,25 +114,6 @@ func (m *OperatingSystemSpec) validateRhel(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *OperatingSystemSpec) validateSles(formats strfmt.Registry) error {
-	if swag.IsZero(m.Sles) { // not required
-		return nil
-	}
-
-	if m.Sles != nil {
-		if err := m.Sles.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("sles")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("sles")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *OperatingSystemSpec) validateUbuntu(formats strfmt.Registry) error {
 	if swag.IsZero(m.Ubuntu) { // not required
 		return nil
@@ -172,10 +146,6 @@ func (m *OperatingSystemSpec) ContextValidate(ctx context.Context, formats strfm
 	}
 
 	if err := m.contextValidateRhel(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateSles(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -229,22 +199,6 @@ func (m *OperatingSystemSpec) contextValidateRhel(ctx context.Context, formats s
 				return ve.ValidateName("rhel")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("rhel")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *OperatingSystemSpec) contextValidateSles(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Sles != nil {
-		if err := m.Sles.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("sles")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("sles")
 			}
 			return err
 		}

@@ -75,11 +75,6 @@ func (m *MaintenanceCronJobSpec) ContextValidate(ctx context.Context, formats st
 func (m *MaintenanceCronJobSpec) contextValidateMaintenanceJobTemplate(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.MaintenanceJobTemplate != nil {
-
-		if swag.IsZero(m.MaintenanceJobTemplate) { // not required
-			return nil
-		}
-
 		if err := m.MaintenanceJobTemplate.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("maintenanceJobTemplate")

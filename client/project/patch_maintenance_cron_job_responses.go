@@ -92,11 +92,6 @@ func (o *PatchMaintenanceCronJobOK) IsCode(code int) bool {
 	return code == 200
 }
 
-// Code gets the status code for the patch maintenance cron job o k response
-func (o *PatchMaintenanceCronJobOK) Code() int {
-	return 200
-}
-
 func (o *PatchMaintenanceCronJobOK) Error() string {
 	return fmt.Sprintf("[PATCH /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] patchMaintenanceCronJobOK  %+v", 200, o.Payload)
 }
@@ -159,11 +154,6 @@ func (o *PatchMaintenanceCronJobUnauthorized) IsCode(code int) bool {
 	return code == 401
 }
 
-// Code gets the status code for the patch maintenance cron job unauthorized response
-func (o *PatchMaintenanceCronJobUnauthorized) Code() int {
-	return 401
-}
-
 func (o *PatchMaintenanceCronJobUnauthorized) Error() string {
 	return fmt.Sprintf("[PATCH /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] patchMaintenanceCronJobUnauthorized ", 401)
 }
@@ -215,11 +205,6 @@ func (o *PatchMaintenanceCronJobForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
-// Code gets the status code for the patch maintenance cron job forbidden response
-func (o *PatchMaintenanceCronJobForbidden) Code() int {
-	return 403
-}
-
 func (o *PatchMaintenanceCronJobForbidden) Error() string {
 	return fmt.Sprintf("[PATCH /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] patchMaintenanceCronJobForbidden ", 403)
 }
@@ -251,6 +236,11 @@ type PatchMaintenanceCronJobDefault struct {
 	Payload *models.ErrorResponse
 }
 
+// Code gets the status code for the patch maintenance cron job default response
+func (o *PatchMaintenanceCronJobDefault) Code() int {
+	return o._statusCode
+}
+
 // IsSuccess returns true when this patch maintenance cron job default response has a 2xx status code
 func (o *PatchMaintenanceCronJobDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -274,11 +264,6 @@ func (o *PatchMaintenanceCronJobDefault) IsServerError() bool {
 // IsCode returns true when this patch maintenance cron job default response a status code equal to that given
 func (o *PatchMaintenanceCronJobDefault) IsCode(code int) bool {
 	return o._statusCode == code
-}
-
-// Code gets the status code for the patch maintenance cron job default response
-func (o *PatchMaintenanceCronJobDefault) Code() int {
-	return o._statusCode
 }
 
 func (o *PatchMaintenanceCronJobDefault) Error() string {

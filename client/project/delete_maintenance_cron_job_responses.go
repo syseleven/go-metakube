@@ -91,11 +91,6 @@ func (o *DeleteMaintenanceCronJobOK) IsCode(code int) bool {
 	return code == 200
 }
 
-// Code gets the status code for the delete maintenance cron job o k response
-func (o *DeleteMaintenanceCronJobOK) Code() int {
-	return 200
-}
-
 func (o *DeleteMaintenanceCronJobOK) Error() string {
 	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] deleteMaintenanceCronJobOK ", 200)
 }
@@ -145,11 +140,6 @@ func (o *DeleteMaintenanceCronJobUnauthorized) IsServerError() bool {
 // IsCode returns true when this delete maintenance cron job unauthorized response a status code equal to that given
 func (o *DeleteMaintenanceCronJobUnauthorized) IsCode(code int) bool {
 	return code == 401
-}
-
-// Code gets the status code for the delete maintenance cron job unauthorized response
-func (o *DeleteMaintenanceCronJobUnauthorized) Code() int {
-	return 401
 }
 
 func (o *DeleteMaintenanceCronJobUnauthorized) Error() string {
@@ -203,11 +193,6 @@ func (o *DeleteMaintenanceCronJobForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
-// Code gets the status code for the delete maintenance cron job forbidden response
-func (o *DeleteMaintenanceCronJobForbidden) Code() int {
-	return 403
-}
-
 func (o *DeleteMaintenanceCronJobForbidden) Error() string {
 	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] deleteMaintenanceCronJobForbidden ", 403)
 }
@@ -239,6 +224,11 @@ type DeleteMaintenanceCronJobDefault struct {
 	Payload *models.ErrorResponse
 }
 
+// Code gets the status code for the delete maintenance cron job default response
+func (o *DeleteMaintenanceCronJobDefault) Code() int {
+	return o._statusCode
+}
+
 // IsSuccess returns true when this delete maintenance cron job default response has a 2xx status code
 func (o *DeleteMaintenanceCronJobDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -262,11 +252,6 @@ func (o *DeleteMaintenanceCronJobDefault) IsServerError() bool {
 // IsCode returns true when this delete maintenance cron job default response a status code equal to that given
 func (o *DeleteMaintenanceCronJobDefault) IsCode(code int) bool {
 	return o._statusCode == code
-}
-
-// Code gets the status code for the delete maintenance cron job default response
-func (o *DeleteMaintenanceCronJobDefault) Code() int {
-	return o._statusCode
 }
 
 func (o *DeleteMaintenanceCronJobDefault) Error() string {
