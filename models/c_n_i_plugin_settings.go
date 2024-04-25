@@ -21,6 +21,9 @@ type CNIPluginSettings struct {
 	// version
 	Version string `json:"version,omitempty"`
 
+	// cilium
+	Cilium *CiliumCNISettings `json:"cilium,omitempty"`
+
 	// type
 	Type CNIPluginType `json:"type,omitempty"`
 }
@@ -29,6 +32,10 @@ type CNIPluginSettings struct {
 func (m *CNIPluginSettings) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateCilium(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateType(formats); err != nil {
 		res = append(res, err)
 	}
@@ -36,6 +43,25 @@ func (m *CNIPluginSettings) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *CNIPluginSettings) validateCilium(formats strfmt.Registry) error {
+	if swag.IsZero(m.Cilium) { // not required
+		return nil
+	}
+
+	if m.Cilium != nil {
+		if err := m.Cilium.Validate(formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("cilium")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("cilium")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -60,6 +86,10 @@ func (m *CNIPluginSettings) validateType(formats strfmt.Registry) error {
 func (m *CNIPluginSettings) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.contextValidateCilium(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.contextValidateType(ctx, formats); err != nil {
 		res = append(res, err)
 	}
@@ -67,6 +97,22 @@ func (m *CNIPluginSettings) ContextValidate(ctx context.Context, formats strfmt.
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *CNIPluginSettings) contextValidateCilium(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Cilium != nil {
+		if err := m.Cilium.ContextValidate(ctx, formats); err != nil {
+			if ve, ok := err.(*errors.Validation); ok {
+				return ve.ValidateName("cilium")
+			} else if ce, ok := err.(*errors.CompositeError); ok {
+				return ce.ValidateName("cilium")
+			}
+			return err
+		}
+	}
+
 	return nil
 }
 
