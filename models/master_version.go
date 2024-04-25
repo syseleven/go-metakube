@@ -24,6 +24,9 @@ type MasterVersion struct {
 	// with one of the kubelets inside cluster and shouldn't be used.
 	RestrictedByKubeletVersion bool `json:"restrictedByKubeletVersion,omitempty"`
 
+	// status
+	Status string `json:"status,omitempty"`
+
 	// version
 	Version string `json:"version,omitempty"`
 }

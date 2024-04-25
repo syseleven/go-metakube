@@ -27,7 +27,7 @@ type OpenstackCloudSpec struct {
 	// +optional
 	Domain string `json:"domain,omitempty"`
 
-	// FloatingIPPool holds the name of the public network
+	// FloatingIPPool holds the name or ID of the public network
 	// The public network is reachable from the outside world
 	// and should provide the pool of IP addresses to choose from.
 	//
