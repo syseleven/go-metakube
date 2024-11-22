@@ -6,6 +6,7 @@ package aws
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -80,12 +81,19 @@ func (o *ListAWSVPCSOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list a w s v p c s o k response
+func (o *ListAWSVPCSOK) Code() int {
+	return 200
+}
+
 func (o *ListAWSVPCSOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/providers/aws/{dc}/vpcs][%d] listAWSVPCSOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/aws/{dc}/vpcs][%d] listAWSVPCSOK %s", 200, payload)
 }
 
 func (o *ListAWSVPCSOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/providers/aws/{dc}/vpcs][%d] listAWSVPCSOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/aws/{dc}/vpcs][%d] listAWSVPCSOK %s", 200, payload)
 }
 
 func (o *ListAWSVPCSOK) GetPayload() models.AWSVPCList {
@@ -120,11 +128,6 @@ type ListAWSVPCSDefault struct {
 	Payload *models.ErrorResponse
 }
 
-// Code gets the status code for the list a w s v p c s default response
-func (o *ListAWSVPCSDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this list a w s v p c s default response has a 2xx status code
 func (o *ListAWSVPCSDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -150,12 +153,19 @@ func (o *ListAWSVPCSDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the list a w s v p c s default response
+func (o *ListAWSVPCSDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *ListAWSVPCSDefault) Error() string {
-	return fmt.Sprintf("[GET /api/v1/providers/aws/{dc}/vpcs][%d] listAWSVPCS default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/aws/{dc}/vpcs][%d] listAWSVPCS default %s", o._statusCode, payload)
 }
 
 func (o *ListAWSVPCSDefault) String() string {
-	return fmt.Sprintf("[GET /api/v1/providers/aws/{dc}/vpcs][%d] listAWSVPCS default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/aws/{dc}/vpcs][%d] listAWSVPCS default %s", o._statusCode, payload)
 }
 
 func (o *ListAWSVPCSDefault) GetPayload() *models.ErrorResponse {

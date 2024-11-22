@@ -6,6 +6,7 @@ package openstack
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -80,12 +81,19 @@ func (o *ListOpenstackImagesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list openstack images o k response
+func (o *ListOpenstackImagesOK) Code() int {
+	return 200
+}
+
 func (o *ListOpenstackImagesOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/providers/openstack/images][%d] listOpenstackImagesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/images][%d] listOpenstackImagesOK %s", 200, payload)
 }
 
 func (o *ListOpenstackImagesOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/providers/openstack/images][%d] listOpenstackImagesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/images][%d] listOpenstackImagesOK %s", 200, payload)
 }
 
 func (o *ListOpenstackImagesOK) GetPayload() []*models.Image {
@@ -120,11 +128,6 @@ type ListOpenstackImagesDefault struct {
 	Payload *models.ErrorResponse
 }
 
-// Code gets the status code for the list openstack images default response
-func (o *ListOpenstackImagesDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this list openstack images default response has a 2xx status code
 func (o *ListOpenstackImagesDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -150,12 +153,19 @@ func (o *ListOpenstackImagesDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the list openstack images default response
+func (o *ListOpenstackImagesDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *ListOpenstackImagesDefault) Error() string {
-	return fmt.Sprintf("[GET /api/v1/providers/openstack/images][%d] listOpenstackImages default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/images][%d] listOpenstackImages default %s", o._statusCode, payload)
 }
 
 func (o *ListOpenstackImagesDefault) String() string {
-	return fmt.Sprintf("[GET /api/v1/providers/openstack/images][%d] listOpenstackImages default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/images][%d] listOpenstackImages default %s", o._statusCode, payload)
 }
 
 func (o *ListOpenstackImagesDefault) GetPayload() *models.ErrorResponse {

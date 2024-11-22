@@ -6,6 +6,7 @@ package openstack
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -80,12 +81,19 @@ func (o *ListOpenstackNetworksOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list openstack networks o k response
+func (o *ListOpenstackNetworksOK) Code() int {
+	return 200
+}
+
 func (o *ListOpenstackNetworksOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/providers/openstack/networks][%d] listOpenstackNetworksOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/networks][%d] listOpenstackNetworksOK %s", 200, payload)
 }
 
 func (o *ListOpenstackNetworksOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/providers/openstack/networks][%d] listOpenstackNetworksOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/networks][%d] listOpenstackNetworksOK %s", 200, payload)
 }
 
 func (o *ListOpenstackNetworksOK) GetPayload() []*models.OpenstackNetwork {
@@ -120,11 +128,6 @@ type ListOpenstackNetworksDefault struct {
 	Payload *models.ErrorResponse
 }
 
-// Code gets the status code for the list openstack networks default response
-func (o *ListOpenstackNetworksDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this list openstack networks default response has a 2xx status code
 func (o *ListOpenstackNetworksDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -150,12 +153,19 @@ func (o *ListOpenstackNetworksDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the list openstack networks default response
+func (o *ListOpenstackNetworksDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *ListOpenstackNetworksDefault) Error() string {
-	return fmt.Sprintf("[GET /api/v1/providers/openstack/networks][%d] listOpenstackNetworks default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/networks][%d] listOpenstackNetworks default %s", o._statusCode, payload)
 }
 
 func (o *ListOpenstackNetworksDefault) String() string {
-	return fmt.Sprintf("[GET /api/v1/providers/openstack/networks][%d] listOpenstackNetworks default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/networks][%d] listOpenstackNetworks default %s", o._statusCode, payload)
 }
 
 func (o *ListOpenstackNetworksDefault) GetPayload() *models.ErrorResponse {

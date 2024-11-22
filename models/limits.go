@@ -72,6 +72,11 @@ func (m *Limits) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 func (m *Limits) contextValidateAbsolute(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Absolute != nil {
+
+		if swag.IsZero(m.Absolute) { // not required
+			return nil
+		}
+
 		if err := m.Absolute.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("absolute")

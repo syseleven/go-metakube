@@ -103,6 +103,11 @@ func (m *CNIPluginSettings) ContextValidate(ctx context.Context, formats strfmt.
 func (m *CNIPluginSettings) contextValidateCilium(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Cilium != nil {
+
+		if swag.IsZero(m.Cilium) { // not required
+			return nil
+		}
+
 		if err := m.Cilium.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cilium")
@@ -117,6 +122,10 @@ func (m *CNIPluginSettings) contextValidateCilium(ctx context.Context, formats s
 }
 
 func (m *CNIPluginSettings) contextValidateType(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.Type) { // not required
+		return nil
+	}
 
 	if err := m.Type.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {

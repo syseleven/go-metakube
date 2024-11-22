@@ -6,6 +6,7 @@ package project
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -91,12 +92,17 @@ func (o *DeleteMaintenanceCronJobOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the delete maintenance cron job o k response
+func (o *DeleteMaintenanceCronJobOK) Code() int {
+	return 200
+}
+
 func (o *DeleteMaintenanceCronJobOK) Error() string {
-	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] deleteMaintenanceCronJobOK ", 200)
+	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] deleteMaintenanceCronJobOK", 200)
 }
 
 func (o *DeleteMaintenanceCronJobOK) String() string {
-	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] deleteMaintenanceCronJobOK ", 200)
+	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] deleteMaintenanceCronJobOK", 200)
 }
 
 func (o *DeleteMaintenanceCronJobOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -142,12 +148,17 @@ func (o *DeleteMaintenanceCronJobUnauthorized) IsCode(code int) bool {
 	return code == 401
 }
 
+// Code gets the status code for the delete maintenance cron job unauthorized response
+func (o *DeleteMaintenanceCronJobUnauthorized) Code() int {
+	return 401
+}
+
 func (o *DeleteMaintenanceCronJobUnauthorized) Error() string {
-	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] deleteMaintenanceCronJobUnauthorized ", 401)
+	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] deleteMaintenanceCronJobUnauthorized", 401)
 }
 
 func (o *DeleteMaintenanceCronJobUnauthorized) String() string {
-	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] deleteMaintenanceCronJobUnauthorized ", 401)
+	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] deleteMaintenanceCronJobUnauthorized", 401)
 }
 
 func (o *DeleteMaintenanceCronJobUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -193,12 +204,17 @@ func (o *DeleteMaintenanceCronJobForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the delete maintenance cron job forbidden response
+func (o *DeleteMaintenanceCronJobForbidden) Code() int {
+	return 403
+}
+
 func (o *DeleteMaintenanceCronJobForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] deleteMaintenanceCronJobForbidden ", 403)
+	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] deleteMaintenanceCronJobForbidden", 403)
 }
 
 func (o *DeleteMaintenanceCronJobForbidden) String() string {
-	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] deleteMaintenanceCronJobForbidden ", 403)
+	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] deleteMaintenanceCronJobForbidden", 403)
 }
 
 func (o *DeleteMaintenanceCronJobForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -222,11 +238,6 @@ type DeleteMaintenanceCronJobDefault struct {
 	_statusCode int
 
 	Payload *models.ErrorResponse
-}
-
-// Code gets the status code for the delete maintenance cron job default response
-func (o *DeleteMaintenanceCronJobDefault) Code() int {
-	return o._statusCode
 }
 
 // IsSuccess returns true when this delete maintenance cron job default response has a 2xx status code
@@ -254,12 +265,19 @@ func (o *DeleteMaintenanceCronJobDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the delete maintenance cron job default response
+func (o *DeleteMaintenanceCronJobDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *DeleteMaintenanceCronJobDefault) Error() string {
-	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] deleteMaintenanceCronJob default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] deleteMaintenanceCronJob default %s", o._statusCode, payload)
 }
 
 func (o *DeleteMaintenanceCronJobDefault) String() string {
-	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] deleteMaintenanceCronJob default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] deleteMaintenanceCronJob default %s", o._statusCode, payload)
 }
 
 func (o *DeleteMaintenanceCronJobDefault) GetPayload() *models.ErrorResponse {

@@ -6,6 +6,7 @@ package openstack
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -80,12 +81,19 @@ func (o *ListOpenstackSecurityGroupsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list openstack security groups o k response
+func (o *ListOpenstackSecurityGroupsOK) Code() int {
+	return 200
+}
+
 func (o *ListOpenstackSecurityGroupsOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/providers/openstack/securitygroups][%d] listOpenstackSecurityGroupsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/securitygroups][%d] listOpenstackSecurityGroupsOK %s", 200, payload)
 }
 
 func (o *ListOpenstackSecurityGroupsOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/providers/openstack/securitygroups][%d] listOpenstackSecurityGroupsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/securitygroups][%d] listOpenstackSecurityGroupsOK %s", 200, payload)
 }
 
 func (o *ListOpenstackSecurityGroupsOK) GetPayload() []*models.OpenstackSecurityGroup {
@@ -120,11 +128,6 @@ type ListOpenstackSecurityGroupsDefault struct {
 	Payload *models.ErrorResponse
 }
 
-// Code gets the status code for the list openstack security groups default response
-func (o *ListOpenstackSecurityGroupsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this list openstack security groups default response has a 2xx status code
 func (o *ListOpenstackSecurityGroupsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -150,12 +153,19 @@ func (o *ListOpenstackSecurityGroupsDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the list openstack security groups default response
+func (o *ListOpenstackSecurityGroupsDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *ListOpenstackSecurityGroupsDefault) Error() string {
-	return fmt.Sprintf("[GET /api/v1/providers/openstack/securitygroups][%d] listOpenstackSecurityGroups default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/securitygroups][%d] listOpenstackSecurityGroups default %s", o._statusCode, payload)
 }
 
 func (o *ListOpenstackSecurityGroupsDefault) String() string {
-	return fmt.Sprintf("[GET /api/v1/providers/openstack/securitygroups][%d] listOpenstackSecurityGroups default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/securitygroups][%d] listOpenstackSecurityGroups default %s", o._statusCode, payload)
 }
 
 func (o *ListOpenstackSecurityGroupsDefault) GetPayload() *models.ErrorResponse {

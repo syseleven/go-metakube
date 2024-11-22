@@ -30,9 +30,6 @@ type SettingSpec struct {
 	// display terms of service
 	DisplayTermsOfService bool `json:"displayTermsOfService,omitempty"`
 
-	// enable dashboard
-	EnableDashboard bool `json:"enableDashboard,omitempty"`
-
 	// enable o ID c kubeconfig
 	EnableOIDCKubeconfig bool `json:"enableOIDCKubeconfig,omitempty"`
 
@@ -182,6 +179,11 @@ func (m *SettingSpec) ContextValidate(ctx context.Context, formats strfmt.Regist
 func (m *SettingSpec) contextValidateCleanupOptions(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.CleanupOptions != nil {
+
+		if swag.IsZero(m.CleanupOptions) { // not required
+			return nil
+		}
+
 		if err := m.CleanupOptions.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cleanupOptions")
@@ -196,6 +198,10 @@ func (m *SettingSpec) contextValidateCleanupOptions(ctx context.Context, formats
 }
 
 func (m *SettingSpec) contextValidateClusterTypeOptions(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ClusterTypeOptions) { // not required
+		return nil
+	}
 
 	if err := m.ClusterTypeOptions.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
@@ -226,6 +232,11 @@ func (m *SettingSpec) contextValidateCustomLinks(ctx context.Context, formats st
 func (m *SettingSpec) contextValidateMachineDeploymentVMResourceQuota(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.MachineDeploymentVMResourceQuota != nil {
+
+		if swag.IsZero(m.MachineDeploymentVMResourceQuota) { // not required
+			return nil
+		}
+
 		if err := m.MachineDeploymentVMResourceQuota.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("machineDeploymentVMResourceQuota")
