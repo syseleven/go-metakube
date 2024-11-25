@@ -6,6 +6,7 @@ package project
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -92,12 +93,19 @@ func (o *ListMaintenanceCronJobsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list maintenance cron jobs o k response
+func (o *ListMaintenanceCronJobsOK) Code() int {
+	return 200
+}
+
 func (o *ListMaintenanceCronJobsOK) Error() string {
-	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs][%d] listMaintenanceCronJobsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs][%d] listMaintenanceCronJobsOK %s", 200, payload)
 }
 
 func (o *ListMaintenanceCronJobsOK) String() string {
-	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs][%d] listMaintenanceCronJobsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs][%d] listMaintenanceCronJobsOK %s", 200, payload)
 }
 
 func (o *ListMaintenanceCronJobsOK) GetPayload() []*models.MaintenanceCronJob {
@@ -152,12 +160,17 @@ func (o *ListMaintenanceCronJobsUnauthorized) IsCode(code int) bool {
 	return code == 401
 }
 
+// Code gets the status code for the list maintenance cron jobs unauthorized response
+func (o *ListMaintenanceCronJobsUnauthorized) Code() int {
+	return 401
+}
+
 func (o *ListMaintenanceCronJobsUnauthorized) Error() string {
-	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs][%d] listMaintenanceCronJobsUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs][%d] listMaintenanceCronJobsUnauthorized", 401)
 }
 
 func (o *ListMaintenanceCronJobsUnauthorized) String() string {
-	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs][%d] listMaintenanceCronJobsUnauthorized ", 401)
+	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs][%d] listMaintenanceCronJobsUnauthorized", 401)
 }
 
 func (o *ListMaintenanceCronJobsUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -203,12 +216,17 @@ func (o *ListMaintenanceCronJobsForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the list maintenance cron jobs forbidden response
+func (o *ListMaintenanceCronJobsForbidden) Code() int {
+	return 403
+}
+
 func (o *ListMaintenanceCronJobsForbidden) Error() string {
-	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs][%d] listMaintenanceCronJobsForbidden ", 403)
+	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs][%d] listMaintenanceCronJobsForbidden", 403)
 }
 
 func (o *ListMaintenanceCronJobsForbidden) String() string {
-	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs][%d] listMaintenanceCronJobsForbidden ", 403)
+	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs][%d] listMaintenanceCronJobsForbidden", 403)
 }
 
 func (o *ListMaintenanceCronJobsForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -232,11 +250,6 @@ type ListMaintenanceCronJobsDefault struct {
 	_statusCode int
 
 	Payload *models.ErrorResponse
-}
-
-// Code gets the status code for the list maintenance cron jobs default response
-func (o *ListMaintenanceCronJobsDefault) Code() int {
-	return o._statusCode
 }
 
 // IsSuccess returns true when this list maintenance cron jobs default response has a 2xx status code
@@ -264,12 +277,19 @@ func (o *ListMaintenanceCronJobsDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the list maintenance cron jobs default response
+func (o *ListMaintenanceCronJobsDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *ListMaintenanceCronJobsDefault) Error() string {
-	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs][%d] listMaintenanceCronJobs default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs][%d] listMaintenanceCronJobs default %s", o._statusCode, payload)
 }
 
 func (o *ListMaintenanceCronJobsDefault) String() string {
-	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs][%d] listMaintenanceCronJobs default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs][%d] listMaintenanceCronJobs default %s", o._statusCode, payload)
 }
 
 func (o *ListMaintenanceCronJobsDefault) GetPayload() *models.ErrorResponse {

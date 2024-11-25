@@ -227,6 +227,11 @@ func (m *SeedSpec) contextValidateSeedDatacenters(ctx context.Context, formats s
 func (m *SeedSpec) contextValidateBackupRestore(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.BackupRestore != nil {
+
+		if swag.IsZero(m.BackupRestore) { // not required
+			return nil
+		}
+
 		if err := m.BackupRestore.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("backupRestore")
@@ -241,6 +246,10 @@ func (m *SeedSpec) contextValidateBackupRestore(ctx context.Context, formats str
 }
 
 func (m *SeedSpec) contextValidateExposeStrategy(ctx context.Context, formats strfmt.Registry) error {
+
+	if swag.IsZero(m.ExposeStrategy) { // not required
+		return nil
+	}
 
 	if err := m.ExposeStrategy.ContextValidate(ctx, formats); err != nil {
 		if ve, ok := err.(*errors.Validation); ok {
@@ -257,6 +266,11 @@ func (m *SeedSpec) contextValidateExposeStrategy(ctx context.Context, formats st
 func (m *SeedSpec) contextValidateKubeconfig(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Kubeconfig != nil {
+
+		if swag.IsZero(m.Kubeconfig) { // not required
+			return nil
+		}
+
 		if err := m.Kubeconfig.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("kubeconfig")
@@ -273,6 +287,11 @@ func (m *SeedSpec) contextValidateKubeconfig(ctx context.Context, formats strfmt
 func (m *SeedSpec) contextValidateProxySettings(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.ProxySettings != nil {
+
+		if swag.IsZero(m.ProxySettings) { // not required
+			return nil
+		}
+
 		if err := m.ProxySettings.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("proxy_settings")

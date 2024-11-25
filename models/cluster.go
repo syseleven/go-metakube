@@ -49,9 +49,6 @@ type Cluster struct {
 	// Name represents human readable name for the resource
 	Name string `json:"name,omitempty"`
 
-	// type
-	Type string `json:"type,omitempty"`
-
 	// spec
 	Spec *ClusterSpec `json:"spec,omitempty"`
 
@@ -168,6 +165,11 @@ func (m *Cluster) ContextValidate(ctx context.Context, formats strfmt.Registry) 
 func (m *Cluster) contextValidateSpec(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Spec != nil {
+
+		if swag.IsZero(m.Spec) { // not required
+			return nil
+		}
+
 		if err := m.Spec.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("spec")
@@ -184,6 +186,11 @@ func (m *Cluster) contextValidateSpec(ctx context.Context, formats strfmt.Regist
 func (m *Cluster) contextValidateStatus(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Status != nil {
+
+		if swag.IsZero(m.Status) { // not required
+			return nil
+		}
+
 		if err := m.Status.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("status")

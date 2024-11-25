@@ -46,6 +46,16 @@ func (m GlobalSettings) MarshalJSON() ([]byte, error) {
 
 // Validate validates this global settings
 func (m *GlobalSettings) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	// validation for a type composition with SettingSpec
+	if err := m.SettingSpec.Validate(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 

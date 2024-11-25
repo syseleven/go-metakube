@@ -78,6 +78,11 @@ func (m *Quotas) ContextValidate(ctx context.Context, formats strfmt.Registry) e
 func (m *Quotas) contextValidateLimits(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Limits != nil {
+
+		if swag.IsZero(m.Limits) { // not required
+			return nil
+		}
+
 		if err := m.Limits.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("limits")

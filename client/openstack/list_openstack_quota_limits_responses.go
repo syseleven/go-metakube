@@ -6,6 +6,7 @@ package openstack
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -80,12 +81,19 @@ func (o *ListOpenstackQuotaLimitsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list openstack quota limits o k response
+func (o *ListOpenstackQuotaLimitsOK) Code() int {
+	return 200
+}
+
 func (o *ListOpenstackQuotaLimitsOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/providers/openstack/quotalimits][%d] listOpenstackQuotaLimitsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/quotalimits][%d] listOpenstackQuotaLimitsOK %s", 200, payload)
 }
 
 func (o *ListOpenstackQuotaLimitsOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/providers/openstack/quotalimits][%d] listOpenstackQuotaLimitsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/quotalimits][%d] listOpenstackQuotaLimitsOK %s", 200, payload)
 }
 
 func (o *ListOpenstackQuotaLimitsOK) GetPayload() *models.Quotas {
@@ -122,11 +130,6 @@ type ListOpenstackQuotaLimitsDefault struct {
 	Payload *models.ErrorResponse
 }
 
-// Code gets the status code for the list openstack quota limits default response
-func (o *ListOpenstackQuotaLimitsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this list openstack quota limits default response has a 2xx status code
 func (o *ListOpenstackQuotaLimitsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -152,12 +155,19 @@ func (o *ListOpenstackQuotaLimitsDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the list openstack quota limits default response
+func (o *ListOpenstackQuotaLimitsDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *ListOpenstackQuotaLimitsDefault) Error() string {
-	return fmt.Sprintf("[GET /api/v1/providers/openstack/quotalimits][%d] listOpenstackQuotaLimits default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/quotalimits][%d] listOpenstackQuotaLimits default %s", o._statusCode, payload)
 }
 
 func (o *ListOpenstackQuotaLimitsDefault) String() string {
-	return fmt.Sprintf("[GET /api/v1/providers/openstack/quotalimits][%d] listOpenstackQuotaLimits default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/quotalimits][%d] listOpenstackQuotaLimits default %s", o._statusCode, payload)
 }
 
 func (o *ListOpenstackQuotaLimitsDefault) GetPayload() *models.ErrorResponse {

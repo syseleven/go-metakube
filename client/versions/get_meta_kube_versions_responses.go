@@ -6,6 +6,7 @@ package versions
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -80,12 +81,19 @@ func (o *GetMetaKubeVersionsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the get meta kube versions o k response
+func (o *GetMetaKubeVersionsOK) Code() int {
+	return 200
+}
+
 func (o *GetMetaKubeVersionsOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/version][%d] getMetaKubeVersionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/version][%d] getMetaKubeVersionsOK %s", 200, payload)
 }
 
 func (o *GetMetaKubeVersionsOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/version][%d] getMetaKubeVersionsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/version][%d] getMetaKubeVersionsOK %s", 200, payload)
 }
 
 func (o *GetMetaKubeVersionsOK) GetPayload() *models.KubermaticVersions {
@@ -122,11 +130,6 @@ type GetMetaKubeVersionsDefault struct {
 	Payload *models.ErrorResponse
 }
 
-// Code gets the status code for the get meta kube versions default response
-func (o *GetMetaKubeVersionsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this get meta kube versions default response has a 2xx status code
 func (o *GetMetaKubeVersionsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -152,12 +155,19 @@ func (o *GetMetaKubeVersionsDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the get meta kube versions default response
+func (o *GetMetaKubeVersionsDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *GetMetaKubeVersionsDefault) Error() string {
-	return fmt.Sprintf("[GET /api/v1/version][%d] getMetaKubeVersions default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/version][%d] getMetaKubeVersions default %s", o._statusCode, payload)
 }
 
 func (o *GetMetaKubeVersionsDefault) String() string {
-	return fmt.Sprintf("[GET /api/v1/version][%d] getMetaKubeVersions default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/version][%d] getMetaKubeVersions default %s", o._statusCode, payload)
 }
 
 func (o *GetMetaKubeVersionsDefault) GetPayload() *models.ErrorResponse {

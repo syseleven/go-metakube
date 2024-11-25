@@ -6,6 +6,7 @@ package admin
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -92,12 +93,19 @@ func (o *CreateUserCreated) IsCode(code int) bool {
 	return code == 201
 }
 
+// Code gets the status code for the create user created response
+func (o *CreateUserCreated) Code() int {
+	return 201
+}
+
 func (o *CreateUserCreated) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/users][%d] createUserCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/admin/users][%d] createUserCreated %s", 201, payload)
 }
 
 func (o *CreateUserCreated) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/users][%d] createUserCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/admin/users][%d] createUserCreated %s", 201, payload)
 }
 
 func (o *CreateUserCreated) GetPayload() *models.User {
@@ -154,12 +162,17 @@ func (o *CreateUserUnauthorized) IsCode(code int) bool {
 	return code == 401
 }
 
+// Code gets the status code for the create user unauthorized response
+func (o *CreateUserUnauthorized) Code() int {
+	return 401
+}
+
 func (o *CreateUserUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/users][%d] createUserUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/users][%d] createUserUnauthorized", 401)
 }
 
 func (o *CreateUserUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/users][%d] createUserUnauthorized ", 401)
+	return fmt.Sprintf("[POST /api/v1/admin/users][%d] createUserUnauthorized", 401)
 }
 
 func (o *CreateUserUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -205,12 +218,17 @@ func (o *CreateUserForbidden) IsCode(code int) bool {
 	return code == 403
 }
 
+// Code gets the status code for the create user forbidden response
+func (o *CreateUserForbidden) Code() int {
+	return 403
+}
+
 func (o *CreateUserForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/users][%d] createUserForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/admin/users][%d] createUserForbidden", 403)
 }
 
 func (o *CreateUserForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/users][%d] createUserForbidden ", 403)
+	return fmt.Sprintf("[POST /api/v1/admin/users][%d] createUserForbidden", 403)
 }
 
 func (o *CreateUserForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -234,11 +252,6 @@ type CreateUserDefault struct {
 	_statusCode int
 
 	Payload *models.ErrorResponse
-}
-
-// Code gets the status code for the create user default response
-func (o *CreateUserDefault) Code() int {
-	return o._statusCode
 }
 
 // IsSuccess returns true when this create user default response has a 2xx status code
@@ -266,12 +279,19 @@ func (o *CreateUserDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the create user default response
+func (o *CreateUserDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *CreateUserDefault) Error() string {
-	return fmt.Sprintf("[POST /api/v1/admin/users][%d] createUser default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/admin/users][%d] createUser default %s", o._statusCode, payload)
 }
 
 func (o *CreateUserDefault) String() string {
-	return fmt.Sprintf("[POST /api/v1/admin/users][%d] createUser default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/admin/users][%d] createUser default %s", o._statusCode, payload)
 }
 
 func (o *CreateUserDefault) GetPayload() *models.ErrorResponse {

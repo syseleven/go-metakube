@@ -6,6 +6,7 @@ package openstack
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -80,12 +81,19 @@ func (o *ListOpenstackAvailabilityZonesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list openstack availability zones o k response
+func (o *ListOpenstackAvailabilityZonesOK) Code() int {
+	return 200
+}
+
 func (o *ListOpenstackAvailabilityZonesOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/providers/openstack/availabilityzones][%d] listOpenstackAvailabilityZonesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/availabilityzones][%d] listOpenstackAvailabilityZonesOK %s", 200, payload)
 }
 
 func (o *ListOpenstackAvailabilityZonesOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/providers/openstack/availabilityzones][%d] listOpenstackAvailabilityZonesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/availabilityzones][%d] listOpenstackAvailabilityZonesOK %s", 200, payload)
 }
 
 func (o *ListOpenstackAvailabilityZonesOK) GetPayload() []*models.OpenstackAvailabilityZone {
@@ -120,11 +128,6 @@ type ListOpenstackAvailabilityZonesDefault struct {
 	Payload *models.ErrorResponse
 }
 
-// Code gets the status code for the list openstack availability zones default response
-func (o *ListOpenstackAvailabilityZonesDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this list openstack availability zones default response has a 2xx status code
 func (o *ListOpenstackAvailabilityZonesDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -150,12 +153,19 @@ func (o *ListOpenstackAvailabilityZonesDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the list openstack availability zones default response
+func (o *ListOpenstackAvailabilityZonesDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *ListOpenstackAvailabilityZonesDefault) Error() string {
-	return fmt.Sprintf("[GET /api/v1/providers/openstack/availabilityzones][%d] listOpenstackAvailabilityZones default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/availabilityzones][%d] listOpenstackAvailabilityZones default %s", o._statusCode, payload)
 }
 
 func (o *ListOpenstackAvailabilityZonesDefault) String() string {
-	return fmt.Sprintf("[GET /api/v1/providers/openstack/availabilityzones][%d] listOpenstackAvailabilityZones default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/availabilityzones][%d] listOpenstackAvailabilityZones default %s", o._statusCode, payload)
 }
 
 func (o *ListOpenstackAvailabilityZonesDefault) GetPayload() *models.ErrorResponse {
