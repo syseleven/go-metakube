@@ -218,6 +218,11 @@ func (m *DatacenterSpec) ContextValidate(ctx context.Context, formats strfmt.Reg
 func (m *DatacenterSpec) contextValidateAws(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Aws != nil {
+
+		if swag.IsZero(m.Aws) { // not required
+			return nil
+		}
+
 		if err := m.Aws.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("aws")
@@ -234,6 +239,11 @@ func (m *DatacenterSpec) contextValidateAws(ctx context.Context, formats strfmt.
 func (m *DatacenterSpec) contextValidateAzure(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Azure != nil {
+
+		if swag.IsZero(m.Azure) { // not required
+			return nil
+		}
+
 		if err := m.Azure.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("azure")
@@ -250,6 +260,11 @@ func (m *DatacenterSpec) contextValidateAzure(ctx context.Context, formats strfm
 func (m *DatacenterSpec) contextValidateFake(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Fake != nil {
+
+		if swag.IsZero(m.Fake) { // not required
+			return nil
+		}
+
 		if err := m.Fake.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("fake")
@@ -266,6 +281,11 @@ func (m *DatacenterSpec) contextValidateFake(ctx context.Context, formats strfmt
 func (m *DatacenterSpec) contextValidateNode(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Node != nil {
+
+		if swag.IsZero(m.Node) { // not required
+			return nil
+		}
+
 		if err := m.Node.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("node")
@@ -282,6 +302,11 @@ func (m *DatacenterSpec) contextValidateNode(ctx context.Context, formats strfmt
 func (m *DatacenterSpec) contextValidateOpenstack(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Openstack != nil {
+
+		if swag.IsZero(m.Openstack) { // not required
+			return nil
+		}
+
 		if err := m.Openstack.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("openstack")

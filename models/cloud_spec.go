@@ -165,6 +165,11 @@ func (m *CloudSpec) ContextValidate(ctx context.Context, formats strfmt.Registry
 func (m *CloudSpec) contextValidateAws(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Aws != nil {
+
+		if swag.IsZero(m.Aws) { // not required
+			return nil
+		}
+
 		if err := m.Aws.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("aws")
@@ -181,6 +186,11 @@ func (m *CloudSpec) contextValidateAws(ctx context.Context, formats strfmt.Regis
 func (m *CloudSpec) contextValidateAzure(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Azure != nil {
+
+		if swag.IsZero(m.Azure) { // not required
+			return nil
+		}
+
 		if err := m.Azure.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("azure")
@@ -197,6 +207,11 @@ func (m *CloudSpec) contextValidateAzure(ctx context.Context, formats strfmt.Reg
 func (m *CloudSpec) contextValidateFake(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Fake != nil {
+
+		if swag.IsZero(m.Fake) { // not required
+			return nil
+		}
+
 		if err := m.Fake.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("fake")
@@ -213,6 +228,11 @@ func (m *CloudSpec) contextValidateFake(ctx context.Context, formats strfmt.Regi
 func (m *CloudSpec) contextValidateOpenstack(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Openstack != nil {
+
+		if swag.IsZero(m.Openstack) { // not required
+			return nil
+		}
+
 		if err := m.Openstack.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("openstack")

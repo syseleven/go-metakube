@@ -6,6 +6,7 @@ package aws
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -80,12 +81,19 @@ func (o *ListAWSSizesOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list a w s sizes o k response
+func (o *ListAWSSizesOK) Code() int {
+	return 200
+}
+
 func (o *ListAWSSizesOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/providers/aws/sizes][%d] listAWSSizesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/aws/sizes][%d] listAWSSizesOK %s", 200, payload)
 }
 
 func (o *ListAWSSizesOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/providers/aws/sizes][%d] listAWSSizesOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/aws/sizes][%d] listAWSSizesOK %s", 200, payload)
 }
 
 func (o *ListAWSSizesOK) GetPayload() models.AWSSizeList {
@@ -120,11 +128,6 @@ type ListAWSSizesDefault struct {
 	Payload *models.ErrorResponse
 }
 
-// Code gets the status code for the list a w s sizes default response
-func (o *ListAWSSizesDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this list a w s sizes default response has a 2xx status code
 func (o *ListAWSSizesDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -150,12 +153,19 @@ func (o *ListAWSSizesDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the list a w s sizes default response
+func (o *ListAWSSizesDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *ListAWSSizesDefault) Error() string {
-	return fmt.Sprintf("[GET /api/v1/providers/aws/sizes][%d] listAWSSizes default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/aws/sizes][%d] listAWSSizes default %s", o._statusCode, payload)
 }
 
 func (o *ListAWSSizesDefault) String() string {
-	return fmt.Sprintf("[GET /api/v1/providers/aws/sizes][%d] listAWSSizes default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/aws/sizes][%d] listAWSSizes default %s", o._statusCode, payload)
 }
 
 func (o *ListAWSSizesDefault) GetPayload() *models.ErrorResponse {

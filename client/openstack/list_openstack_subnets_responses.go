@@ -6,6 +6,7 @@ package openstack
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -80,12 +81,19 @@ func (o *ListOpenstackSubnetsOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list openstack subnets o k response
+func (o *ListOpenstackSubnetsOK) Code() int {
+	return 200
+}
+
 func (o *ListOpenstackSubnetsOK) Error() string {
-	return fmt.Sprintf("[GET /api/v1/providers/openstack/subnets][%d] listOpenstackSubnetsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/subnets][%d] listOpenstackSubnetsOK %s", 200, payload)
 }
 
 func (o *ListOpenstackSubnetsOK) String() string {
-	return fmt.Sprintf("[GET /api/v1/providers/openstack/subnets][%d] listOpenstackSubnetsOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/subnets][%d] listOpenstackSubnetsOK %s", 200, payload)
 }
 
 func (o *ListOpenstackSubnetsOK) GetPayload() []*models.OpenstackSubnet {
@@ -120,11 +128,6 @@ type ListOpenstackSubnetsDefault struct {
 	Payload *models.ErrorResponse
 }
 
-// Code gets the status code for the list openstack subnets default response
-func (o *ListOpenstackSubnetsDefault) Code() int {
-	return o._statusCode
-}
-
 // IsSuccess returns true when this list openstack subnets default response has a 2xx status code
 func (o *ListOpenstackSubnetsDefault) IsSuccess() bool {
 	return o._statusCode/100 == 2
@@ -150,12 +153,19 @@ func (o *ListOpenstackSubnetsDefault) IsCode(code int) bool {
 	return o._statusCode == code
 }
 
+// Code gets the status code for the list openstack subnets default response
+func (o *ListOpenstackSubnetsDefault) Code() int {
+	return o._statusCode
+}
+
 func (o *ListOpenstackSubnetsDefault) Error() string {
-	return fmt.Sprintf("[GET /api/v1/providers/openstack/subnets][%d] listOpenstackSubnets default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/subnets][%d] listOpenstackSubnets default %s", o._statusCode, payload)
 }
 
 func (o *ListOpenstackSubnetsDefault) String() string {
-	return fmt.Sprintf("[GET /api/v1/providers/openstack/subnets][%d] listOpenstackSubnets default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/providers/openstack/subnets][%d] listOpenstackSubnets default %s", o._statusCode, payload)
 }
 
 func (o *ListOpenstackSubnetsDefault) GetPayload() *models.ErrorResponse {

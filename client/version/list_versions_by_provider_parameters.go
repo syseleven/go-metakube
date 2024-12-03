@@ -64,9 +64,6 @@ type ListVersionsByProviderParams struct {
 	// ProviderName.
 	ProviderName string
 
-	// Type.
-	Type *string
-
 	timeout    time.Duration
 	Context    context.Context
 	HTTPClient *http.Client
@@ -131,17 +128,6 @@ func (o *ListVersionsByProviderParams) SetProviderName(providerName string) {
 	o.ProviderName = providerName
 }
 
-// WithType adds the typeVar to the list versions by provider params
-func (o *ListVersionsByProviderParams) WithType(typeVar *string) *ListVersionsByProviderParams {
-	o.SetType(typeVar)
-	return o
-}
-
-// SetType adds the type to the list versions by provider params
-func (o *ListVersionsByProviderParams) SetType(typeVar *string) {
-	o.Type = typeVar
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *ListVersionsByProviderParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -153,23 +139,6 @@ func (o *ListVersionsByProviderParams) WriteToRequest(r runtime.ClientRequest, r
 	// path param provider_name
 	if err := r.SetPathParam("provider_name", o.ProviderName); err != nil {
 		return err
-	}
-
-	if o.Type != nil {
-
-		// query param type
-		var qrType string
-
-		if o.Type != nil {
-			qrType = *o.Type
-		}
-		qType := qrType
-		if qType != "" {
-
-			if err := r.SetQueryParam("type", qType); err != nil {
-				return err
-			}
-		}
 	}
 
 	if len(res) > 0 {

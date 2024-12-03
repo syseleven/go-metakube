@@ -18,14 +18,8 @@ import (
 // swagger:model OperatingSystemSpec
 type OperatingSystemSpec struct {
 
-	// centos
-	Centos *CentOSSpec `json:"centos,omitempty"`
-
 	// flatcar
 	Flatcar *FlatcarSpec `json:"flatcar,omitempty"`
-
-	// rhel
-	Rhel *RHELSpec `json:"rhel,omitempty"`
 
 	// ubuntu
 	Ubuntu *UbuntuSpec `json:"ubuntu,omitempty"`
@@ -35,15 +29,7 @@ type OperatingSystemSpec struct {
 func (m *OperatingSystemSpec) Validate(formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.validateCentos(formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.validateFlatcar(formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.validateRhel(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -54,25 +40,6 @@ func (m *OperatingSystemSpec) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
-	return nil
-}
-
-func (m *OperatingSystemSpec) validateCentos(formats strfmt.Registry) error {
-	if swag.IsZero(m.Centos) { // not required
-		return nil
-	}
-
-	if m.Centos != nil {
-		if err := m.Centos.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("centos")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("centos")
-			}
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -87,25 +54,6 @@ func (m *OperatingSystemSpec) validateFlatcar(formats strfmt.Registry) error {
 				return ve.ValidateName("flatcar")
 			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("flatcar")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
-func (m *OperatingSystemSpec) validateRhel(formats strfmt.Registry) error {
-	if swag.IsZero(m.Rhel) { // not required
-		return nil
-	}
-
-	if m.Rhel != nil {
-		if err := m.Rhel.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("rhel")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("rhel")
 			}
 			return err
 		}
@@ -137,15 +85,7 @@ func (m *OperatingSystemSpec) validateUbuntu(formats strfmt.Registry) error {
 func (m *OperatingSystemSpec) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
-	if err := m.contextValidateCentos(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
 	if err := m.contextValidateFlatcar(ctx, formats); err != nil {
-		res = append(res, err)
-	}
-
-	if err := m.contextValidateRhel(ctx, formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -159,25 +99,14 @@ func (m *OperatingSystemSpec) ContextValidate(ctx context.Context, formats strfm
 	return nil
 }
 
-func (m *OperatingSystemSpec) contextValidateCentos(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Centos != nil {
-		if err := m.Centos.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("centos")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("centos")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *OperatingSystemSpec) contextValidateFlatcar(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Flatcar != nil {
+
+		if swag.IsZero(m.Flatcar) { // not required
+			return nil
+		}
+
 		if err := m.Flatcar.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("flatcar")
@@ -191,25 +120,14 @@ func (m *OperatingSystemSpec) contextValidateFlatcar(ctx context.Context, format
 	return nil
 }
 
-func (m *OperatingSystemSpec) contextValidateRhel(ctx context.Context, formats strfmt.Registry) error {
-
-	if m.Rhel != nil {
-		if err := m.Rhel.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
-				return ve.ValidateName("rhel")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
-				return ce.ValidateName("rhel")
-			}
-			return err
-		}
-	}
-
-	return nil
-}
-
 func (m *OperatingSystemSpec) contextValidateUbuntu(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Ubuntu != nil {
+
+		if swag.IsZero(m.Ubuntu) { // not required
+			return nil
+		}
+
 		if err := m.Ubuntu.ContextValidate(ctx, formats); err != nil {
 			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ubuntu")
