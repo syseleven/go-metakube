@@ -37,7 +37,7 @@ type OpenstackCloudSpec struct {
 	FloatingIPPool string `json:"floatingIPPool,omitempty"`
 
 	// Network holds the name of the internal network
-	// When specified, all worker nodes will be attached to this network. If not specified, a network, subnet & router will be created
+	// When specified, all worker nodes will be attached to this network. If not specified, a network, subnet and router will be created
 	//
 	// Note that the network is internal if the "External" field is set to false
 	Network string `json:"network,omitempty"`
