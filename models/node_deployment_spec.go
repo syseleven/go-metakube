@@ -23,7 +23,7 @@ type NodeDeploymentSpec struct {
 	DynamicConfig bool `json:"dynamicConfig,omitempty"`
 
 	// max replicas
-	MaxReplicas *int32 `json:"maxReplicas"`
+	MaxReplicas *int32 `json:"maxReplicas,omitempty"`
 
 	// min replicas
 	MinReplicas *int32 `json:"minReplicas"`
