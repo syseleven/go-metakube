@@ -27,6 +27,10 @@ type ClusterSpec struct {
 	// ContainerRuntime to use, i.e. Docker or containerd. By default containerd will be used.
 	ContainerRuntime string `json:"containerRuntime,omitempty"`
 
+	// CreatePodSubnetV6 indicates when creating an IPv6 cluster without an existing pod subnet to tell;
+	// whether to create a pod subnet or just use an internal pod CIDR.
+	CreatePodSubnetV6 bool `json:"createPodSubnetV6,omitempty"`
+
 	// EnableUserSSHKeyAgent control whether the UserSSHKeyAgent will be deployed in the user cluster or not.
 	// If it was enabled, the agent will be deployed and used to sync the user ssh keys, that the user attach
 	// to the created cluster. If the agent was disabled, it won't be deployed in the user cluster, thus after

@@ -1961,7 +1961,7 @@ func (a *Client) RestartMachineDeployment(params *RestartMachineDeploymentParams
 	op := &runtime.ClientOperation{
 		ID:                 "restartMachineDeployment",
 		Method:             "POST",
-		PathPattern:        "/api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments/{machinedeployment_id}",
+		PathPattern:        "/api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments/{machinedeployment_id}/restart",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},

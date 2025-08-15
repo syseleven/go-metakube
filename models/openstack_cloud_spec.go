@@ -68,6 +68,12 @@ type OpenstackCloudSpec struct {
 	// subnet ID
 	SubnetID string `json:"subnetID,omitempty"`
 
+	// +optional
+	SubnetV6CIDR string `json:"subnetV6CIDR,omitempty"`
+
+	// +optional
+	SubnetV6ID string `json:"subnetV6ID,omitempty"`
+
 	// Used internally during cluster creation
 	// +optional
 	Token string `json:"token,omitempty"`
