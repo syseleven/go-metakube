@@ -17,8 +17,13 @@ import (
 // swagger:model NetworkRanges
 type NetworkRanges struct {
 
-	// c ID r blocks
+	// CIDRBlocks indicates CIDR of the public subnet or internal CIDR
 	CIDRBlocks []string `json:"cidrBlocks"`
+
+	// SubnetID indicates either the client-provided one, or one we created ourselves.
+	// if this is set, it means use this (public) subnet for the pods.
+	// otherwise use an internal CIDR (as we do now).
+	SubnetID string `json:"subnetID,omitempty"`
 }
 
 // Validate validates this network ranges

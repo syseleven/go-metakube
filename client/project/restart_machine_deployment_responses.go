@@ -100,12 +100,12 @@ func (o *RestartMachineDeploymentOK) Code() int {
 
 func (o *RestartMachineDeploymentOK) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments/{machinedeployment_id}][%d] restartMachineDeploymentOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments/{machinedeployment_id}/restart][%d] restartMachineDeploymentOK %s", 200, payload)
 }
 
 func (o *RestartMachineDeploymentOK) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments/{machinedeployment_id}][%d] restartMachineDeploymentOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments/{machinedeployment_id}/restart][%d] restartMachineDeploymentOK %s", 200, payload)
 }
 
 func (o *RestartMachineDeploymentOK) GetPayload() *models.NodeDeployment {
@@ -168,11 +168,11 @@ func (o *RestartMachineDeploymentUnauthorized) Code() int {
 }
 
 func (o *RestartMachineDeploymentUnauthorized) Error() string {
-	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments/{machinedeployment_id}][%d] restartMachineDeploymentUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments/{machinedeployment_id}/restart][%d] restartMachineDeploymentUnauthorized", 401)
 }
 
 func (o *RestartMachineDeploymentUnauthorized) String() string {
-	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments/{machinedeployment_id}][%d] restartMachineDeploymentUnauthorized", 401)
+	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments/{machinedeployment_id}/restart][%d] restartMachineDeploymentUnauthorized", 401)
 }
 
 func (o *RestartMachineDeploymentUnauthorized) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -224,11 +224,11 @@ func (o *RestartMachineDeploymentForbidden) Code() int {
 }
 
 func (o *RestartMachineDeploymentForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments/{machinedeployment_id}][%d] restartMachineDeploymentForbidden", 403)
+	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments/{machinedeployment_id}/restart][%d] restartMachineDeploymentForbidden", 403)
 }
 
 func (o *RestartMachineDeploymentForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments/{machinedeployment_id}][%d] restartMachineDeploymentForbidden", 403)
+	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments/{machinedeployment_id}/restart][%d] restartMachineDeploymentForbidden", 403)
 }
 
 func (o *RestartMachineDeploymentForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -286,12 +286,12 @@ func (o *RestartMachineDeploymentDefault) Code() int {
 
 func (o *RestartMachineDeploymentDefault) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments/{machinedeployment_id}][%d] restartMachineDeployment default %s", o._statusCode, payload)
+	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments/{machinedeployment_id}/restart][%d] restartMachineDeployment default %s", o._statusCode, payload)
 }
 
 func (o *RestartMachineDeploymentDefault) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments/{machinedeployment_id}][%d] restartMachineDeployment default %s", o._statusCode, payload)
+	return fmt.Sprintf("[POST /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments/{machinedeployment_id}/restart][%d] restartMachineDeployment default %s", o._statusCode, payload)
 }
 
 func (o *RestartMachineDeploymentDefault) GetPayload() *models.ErrorResponse {
