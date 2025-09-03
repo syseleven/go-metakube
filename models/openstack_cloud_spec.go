@@ -45,6 +45,11 @@ type OpenstackCloudSpec struct {
 	// +optional
 	Password string `json:"password,omitempty"`
 
+	// PodSubnetV6ID indicates either the client-provided one, or one we created ourselves.
+	// If this is set in the cluster create request, it means use this (public) subnet for the pods.
+	// Otherwise use an internal CIDR (as we do now).
+	PodSubnetV6ID string `json:"podSubnetV6ID,omitempty"`
+
 	// +optional
 	Project string `json:"project,omitempty"`
 
@@ -67,6 +72,12 @@ type OpenstackCloudSpec struct {
 
 	// subnet ID
 	SubnetID string `json:"subnetID,omitempty"`
+
+	// +optional
+	SubnetV6CIDR string `json:"subnetV6CIDR,omitempty"`
+
+	// +optional
+	SubnetV6ID string `json:"subnetV6ID,omitempty"`
 
 	// Used internally during cluster creation
 	// +optional

@@ -17,7 +17,7 @@ import (
 // swagger:model NetworkRanges
 type NetworkRanges struct {
 
-	// c ID r blocks
+	// CIDRBlocks indicates CIDR of the public subnet or internal CIDR
 	CIDRBlocks []string `json:"cidrBlocks"`
 }
 
