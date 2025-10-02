@@ -17,6 +17,9 @@ import (
 // swagger:model PublicOpenstackCloudSpec
 type PublicOpenstackCloudSpec struct {
 
+	// create pod subnet v6
+	CreatePodSubnetV6 bool `json:"createPodSubnetV6,omitempty"`
+
 	// domain
 	Domain string `json:"domain,omitempty"`
 

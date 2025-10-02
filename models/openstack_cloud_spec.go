@@ -25,6 +25,11 @@ type OpenstackCloudSpec struct {
 	ApplicationCredentialSecret string `json:"applicationCredentialSecret,omitempty"`
 
 	// +optional
+	// CreatePodSubnetV6 indicates if podSubnetV6ID not set in OpenstackCloudSpec;
+	// tell whether to create a public subnet for the pods with unique local addresses or use a private (internal) CIDR
+	CreatePodSubnetV6 bool `json:"createPodSubnetV6,omitempty"`
+
+	// +optional
 	Domain string `json:"domain,omitempty"`
 
 	// FloatingIPPool holds the name or ID of the public network
@@ -45,9 +50,10 @@ type OpenstackCloudSpec struct {
 	// +optional
 	Password string `json:"password,omitempty"`
 
+	// +optional
 	// PodSubnetV6ID indicates either the client-provided one, or one we created ourselves.
 	// If this is set in the cluster create request, it means use this (public) subnet for the pods.
-	// Otherwise use an internal CIDR (as we do now).
+	// Otherwise, use an internal CIDR (as we do now).
 	PodSubnetV6ID string `json:"podSubnetV6ID,omitempty"`
 
 	// +optional

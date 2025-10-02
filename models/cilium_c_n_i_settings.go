@@ -17,6 +17,9 @@ import (
 // swagger:model CiliumCNISettings
 type CiliumCNISettings struct {
 
+	// cni exclusive
+	CniExclusive bool `json:"cniExclusive,omitempty"`
+
 	// enable hubble
 	EnableHubble bool `json:"enableHubble,omitempty"`
 
