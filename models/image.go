@@ -25,7 +25,7 @@ type Image struct {
 
 	// Metadata provides free-form key/value pairs that further describe the
 	// image.
-	Metadata map[string]interface{} `json:"Metadata,omitempty"`
+	Metadata map[string]any `json:"Metadata,omitempty"`
 
 	// MinDisk is the minimum amount of disk a flavor must have to be able
 	// to create a server based on the image, measured in GB.

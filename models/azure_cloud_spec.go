@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -89,11 +90,15 @@ func (m *AzureCloudSpec) validateCredentialsReference(formats strfmt.Registry) e
 
 	if m.CredentialsReference != nil {
 		if err := m.CredentialsReference.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("credentialsReference")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("credentialsReference")
 			}
+
 			return err
 		}
 	}
@@ -107,11 +112,15 @@ func (m *AzureCloudSpec) validateLoadBalancerSKU(formats strfmt.Registry) error 
 	}
 
 	if err := m.LoadBalancerSKU.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("loadBalancerSKU")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("loadBalancerSKU")
 		}
+
 		return err
 	}
 
@@ -145,11 +154,15 @@ func (m *AzureCloudSpec) contextValidateCredentialsReference(ctx context.Context
 		}
 
 		if err := m.CredentialsReference.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("credentialsReference")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("credentialsReference")
 			}
+
 			return err
 		}
 	}
@@ -164,11 +177,15 @@ func (m *AzureCloudSpec) contextValidateLoadBalancerSKU(ctx context.Context, for
 	}
 
 	if err := m.LoadBalancerSKU.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("loadBalancerSKU")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("loadBalancerSKU")
 		}
+
 		return err
 	}
 

@@ -93,7 +93,7 @@ type ClientService interface {
 ListOpenstackAvailabilityZones Lists availability zones from openstack
 */
 func (a *Client) ListOpenstackAvailabilityZones(params *ListOpenstackAvailabilityZonesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackAvailabilityZonesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListOpenstackAvailabilityZonesParams()
 	}
@@ -113,17 +113,22 @@ func (a *Client) ListOpenstackAvailabilityZones(params *ListOpenstackAvailabilit
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListOpenstackAvailabilityZonesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*ListOpenstackAvailabilityZonesDefault)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -131,7 +136,7 @@ func (a *Client) ListOpenstackAvailabilityZones(params *ListOpenstackAvailabilit
 ListOpenstackAvailabilityZonesNoCredentialsV2 Lists availability zones from openstack
 */
 func (a *Client) ListOpenstackAvailabilityZonesNoCredentialsV2(params *ListOpenstackAvailabilityZonesNoCredentialsV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackAvailabilityZonesNoCredentialsV2OK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListOpenstackAvailabilityZonesNoCredentialsV2Params()
 	}
@@ -151,17 +156,22 @@ func (a *Client) ListOpenstackAvailabilityZonesNoCredentialsV2(params *ListOpens
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListOpenstackAvailabilityZonesNoCredentialsV2OK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*ListOpenstackAvailabilityZonesNoCredentialsV2Default)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -169,7 +179,7 @@ func (a *Client) ListOpenstackAvailabilityZonesNoCredentialsV2(params *ListOpens
 ListOpenstackImages Lists images from openstack
 */
 func (a *Client) ListOpenstackImages(params *ListOpenstackImagesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackImagesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListOpenstackImagesParams()
 	}
@@ -189,17 +199,22 @@ func (a *Client) ListOpenstackImages(params *ListOpenstackImagesParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListOpenstackImagesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*ListOpenstackImagesDefault)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -207,7 +222,7 @@ func (a *Client) ListOpenstackImages(params *ListOpenstackImagesParams, authInfo
 ListOpenstackImagesNoCredentialsV2 Lists images from openstack
 */
 func (a *Client) ListOpenstackImagesNoCredentialsV2(params *ListOpenstackImagesNoCredentialsV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackImagesNoCredentialsV2OK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListOpenstackImagesNoCredentialsV2Params()
 	}
@@ -227,17 +242,22 @@ func (a *Client) ListOpenstackImagesNoCredentialsV2(params *ListOpenstackImagesN
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListOpenstackImagesNoCredentialsV2OK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*ListOpenstackImagesNoCredentialsV2Default)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -245,7 +265,7 @@ func (a *Client) ListOpenstackImagesNoCredentialsV2(params *ListOpenstackImagesN
 ListOpenstackNetworks Lists networks from openstack
 */
 func (a *Client) ListOpenstackNetworks(params *ListOpenstackNetworksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackNetworksOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListOpenstackNetworksParams()
 	}
@@ -265,17 +285,22 @@ func (a *Client) ListOpenstackNetworks(params *ListOpenstackNetworksParams, auth
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListOpenstackNetworksOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*ListOpenstackNetworksDefault)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -283,7 +308,7 @@ func (a *Client) ListOpenstackNetworks(params *ListOpenstackNetworksParams, auth
 ListOpenstackNetworksNoCredentialsV2 Lists networks from openstack
 */
 func (a *Client) ListOpenstackNetworksNoCredentialsV2(params *ListOpenstackNetworksNoCredentialsV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackNetworksNoCredentialsV2OK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListOpenstackNetworksNoCredentialsV2Params()
 	}
@@ -303,17 +328,22 @@ func (a *Client) ListOpenstackNetworksNoCredentialsV2(params *ListOpenstackNetwo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListOpenstackNetworksNoCredentialsV2OK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*ListOpenstackNetworksNoCredentialsV2Default)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -321,7 +351,7 @@ func (a *Client) ListOpenstackNetworksNoCredentialsV2(params *ListOpenstackNetwo
 ListOpenstackQuotaLimits Lists quotalimits for tenant from openstack
 */
 func (a *Client) ListOpenstackQuotaLimits(params *ListOpenstackQuotaLimitsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackQuotaLimitsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListOpenstackQuotaLimitsParams()
 	}
@@ -341,17 +371,22 @@ func (a *Client) ListOpenstackQuotaLimits(params *ListOpenstackQuotaLimitsParams
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListOpenstackQuotaLimitsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*ListOpenstackQuotaLimitsDefault)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -359,7 +394,7 @@ func (a *Client) ListOpenstackQuotaLimits(params *ListOpenstackQuotaLimitsParams
 ListOpenstackQuotaLimitsNoCredentialsV2 Lists quotalimits for tenant from openstack
 */
 func (a *Client) ListOpenstackQuotaLimitsNoCredentialsV2(params *ListOpenstackQuotaLimitsNoCredentialsV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackQuotaLimitsNoCredentialsV2OK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListOpenstackQuotaLimitsNoCredentialsV2Params()
 	}
@@ -379,17 +414,22 @@ func (a *Client) ListOpenstackQuotaLimitsNoCredentialsV2(params *ListOpenstackQu
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListOpenstackQuotaLimitsNoCredentialsV2OK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*ListOpenstackQuotaLimitsNoCredentialsV2Default)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -397,7 +437,7 @@ func (a *Client) ListOpenstackQuotaLimitsNoCredentialsV2(params *ListOpenstackQu
 ListOpenstackSecurityGroups Lists security groups from openstack
 */
 func (a *Client) ListOpenstackSecurityGroups(params *ListOpenstackSecurityGroupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackSecurityGroupsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListOpenstackSecurityGroupsParams()
 	}
@@ -417,17 +457,22 @@ func (a *Client) ListOpenstackSecurityGroups(params *ListOpenstackSecurityGroups
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListOpenstackSecurityGroupsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*ListOpenstackSecurityGroupsDefault)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -435,7 +480,7 @@ func (a *Client) ListOpenstackSecurityGroups(params *ListOpenstackSecurityGroups
 ListOpenstackSecurityGroupsNoCredentialsV2 Lists security groups from openstack
 */
 func (a *Client) ListOpenstackSecurityGroupsNoCredentialsV2(params *ListOpenstackSecurityGroupsNoCredentialsV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackSecurityGroupsNoCredentialsV2OK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListOpenstackSecurityGroupsNoCredentialsV2Params()
 	}
@@ -455,17 +500,22 @@ func (a *Client) ListOpenstackSecurityGroupsNoCredentialsV2(params *ListOpenstac
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListOpenstackSecurityGroupsNoCredentialsV2OK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*ListOpenstackSecurityGroupsNoCredentialsV2Default)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -473,7 +523,7 @@ func (a *Client) ListOpenstackSecurityGroupsNoCredentialsV2(params *ListOpenstac
 ListOpenstackSizes Lists sizes from openstack
 */
 func (a *Client) ListOpenstackSizes(params *ListOpenstackSizesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackSizesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListOpenstackSizesParams()
 	}
@@ -493,17 +543,22 @@ func (a *Client) ListOpenstackSizes(params *ListOpenstackSizesParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListOpenstackSizesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*ListOpenstackSizesDefault)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -511,7 +566,7 @@ func (a *Client) ListOpenstackSizes(params *ListOpenstackSizesParams, authInfo r
 ListOpenstackSizesNoCredentialsV2 Lists sizes from openstack
 */
 func (a *Client) ListOpenstackSizesNoCredentialsV2(params *ListOpenstackSizesNoCredentialsV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackSizesNoCredentialsV2OK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListOpenstackSizesNoCredentialsV2Params()
 	}
@@ -531,17 +586,22 @@ func (a *Client) ListOpenstackSizesNoCredentialsV2(params *ListOpenstackSizesNoC
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListOpenstackSizesNoCredentialsV2OK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*ListOpenstackSizesNoCredentialsV2Default)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -549,7 +609,7 @@ func (a *Client) ListOpenstackSizesNoCredentialsV2(params *ListOpenstackSizesNoC
 ListOpenstackSubnets Lists subnets from openstack
 */
 func (a *Client) ListOpenstackSubnets(params *ListOpenstackSubnetsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackSubnetsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListOpenstackSubnetsParams()
 	}
@@ -569,17 +629,22 @@ func (a *Client) ListOpenstackSubnets(params *ListOpenstackSubnetsParams, authIn
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListOpenstackSubnetsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*ListOpenstackSubnetsDefault)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -587,7 +652,7 @@ func (a *Client) ListOpenstackSubnets(params *ListOpenstackSubnetsParams, authIn
 ListOpenstackSubnetsNoCredentialsV2 Lists subnets from openstack
 */
 func (a *Client) ListOpenstackSubnetsNoCredentialsV2(params *ListOpenstackSubnetsNoCredentialsV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackSubnetsNoCredentialsV2OK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListOpenstackSubnetsNoCredentialsV2Params()
 	}
@@ -607,17 +672,22 @@ func (a *Client) ListOpenstackSubnetsNoCredentialsV2(params *ListOpenstackSubnet
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListOpenstackSubnetsNoCredentialsV2OK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*ListOpenstackSubnetsNoCredentialsV2Default)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -625,7 +695,7 @@ func (a *Client) ListOpenstackSubnetsNoCredentialsV2(params *ListOpenstackSubnet
 ListOpenstackTenants Lists tenants from openstack
 */
 func (a *Client) ListOpenstackTenants(params *ListOpenstackTenantsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackTenantsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListOpenstackTenantsParams()
 	}
@@ -645,17 +715,22 @@ func (a *Client) ListOpenstackTenants(params *ListOpenstackTenantsParams, authIn
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListOpenstackTenantsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*ListOpenstackTenantsDefault)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -663,7 +738,7 @@ func (a *Client) ListOpenstackTenants(params *ListOpenstackTenantsParams, authIn
 ListOpenstackTenantsNoCredentialsV2 Lists tenants from openstack
 */
 func (a *Client) ListOpenstackTenantsNoCredentialsV2(params *ListOpenstackTenantsNoCredentialsV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackTenantsNoCredentialsV2OK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListOpenstackTenantsNoCredentialsV2Params()
 	}
@@ -683,17 +758,22 @@ func (a *Client) ListOpenstackTenantsNoCredentialsV2(params *ListOpenstackTenant
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListOpenstackTenantsNoCredentialsV2OK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*ListOpenstackTenantsNoCredentialsV2Default)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

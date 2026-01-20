@@ -7,6 +7,7 @@ package aws
 
 import (
 	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -22,7 +23,7 @@ type ListAWSSecurityGroupsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *ListAWSSecurityGroupsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *ListAWSSecurityGroupsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewListAWSSecurityGroupsOK()
@@ -105,7 +106,7 @@ func (o *ListAWSSecurityGroupsOK) readResponse(response runtime.ClientResponse, 
 	o.Payload = new(models.AWSSecurityGroupList)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -179,7 +180,7 @@ func (o *ListAWSSecurityGroupsDefault) readResponse(response runtime.ClientRespo
 	o.Payload = new(models.ErrorResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

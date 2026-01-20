@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -91,11 +92,15 @@ func (m *SeedSpec) validateSeedDatacenters(formats strfmt.Registry) error {
 		}
 		if val, ok := m.SeedDatacenters[k]; ok {
 			if err := val.Validate(formats); err != nil {
-				if ve, ok := err.(*errors.Validation); ok {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
 					return ve.ValidateName("datacenters" + "." + k)
-				} else if ce, ok := err.(*errors.CompositeError); ok {
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
 					return ce.ValidateName("datacenters" + "." + k)
 				}
+
 				return err
 			}
 		}
@@ -112,11 +117,15 @@ func (m *SeedSpec) validateBackupRestore(formats strfmt.Registry) error {
 
 	if m.BackupRestore != nil {
 		if err := m.BackupRestore.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("backupRestore")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("backupRestore")
 			}
+
 			return err
 		}
 	}
@@ -130,11 +139,15 @@ func (m *SeedSpec) validateExposeStrategy(formats strfmt.Registry) error {
 	}
 
 	if err := m.ExposeStrategy.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("expose_strategy")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("expose_strategy")
 		}
+
 		return err
 	}
 
@@ -148,11 +161,15 @@ func (m *SeedSpec) validateKubeconfig(formats strfmt.Registry) error {
 
 	if m.Kubeconfig != nil {
 		if err := m.Kubeconfig.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("kubeconfig")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("kubeconfig")
 			}
+
 			return err
 		}
 	}
@@ -167,11 +184,15 @@ func (m *SeedSpec) validateProxySettings(formats strfmt.Registry) error {
 
 	if m.ProxySettings != nil {
 		if err := m.ProxySettings.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("proxy_settings")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("proxy_settings")
 			}
+
 			return err
 		}
 	}
@@ -233,11 +254,15 @@ func (m *SeedSpec) contextValidateBackupRestore(ctx context.Context, formats str
 		}
 
 		if err := m.BackupRestore.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("backupRestore")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("backupRestore")
 			}
+
 			return err
 		}
 	}
@@ -252,11 +277,15 @@ func (m *SeedSpec) contextValidateExposeStrategy(ctx context.Context, formats st
 	}
 
 	if err := m.ExposeStrategy.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("expose_strategy")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("expose_strategy")
 		}
+
 		return err
 	}
 
@@ -272,11 +301,15 @@ func (m *SeedSpec) contextValidateKubeconfig(ctx context.Context, formats strfmt
 		}
 
 		if err := m.Kubeconfig.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("kubeconfig")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("kubeconfig")
 			}
+
 			return err
 		}
 	}
@@ -293,11 +326,15 @@ func (m *SeedSpec) contextValidateProxySettings(ctx context.Context, formats str
 		}
 
 		if err := m.ProxySettings.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("proxy_settings")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("proxy_settings")
 			}
+
 			return err
 		}
 	}

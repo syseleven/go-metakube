@@ -63,7 +63,7 @@ type ClientService interface {
 CreateOrUpdateBackupCredentials Creates or updates backup credentials for a given seed
 */
 func (a *Client) CreateOrUpdateBackupCredentials(params *CreateOrUpdateBackupCredentialsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateOrUpdateBackupCredentialsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateOrUpdateBackupCredentialsParams()
 	}
@@ -83,17 +83,22 @@ func (a *Client) CreateOrUpdateBackupCredentials(params *CreateOrUpdateBackupCre
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateOrUpdateBackupCredentialsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*CreateOrUpdateBackupCredentialsDefault)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

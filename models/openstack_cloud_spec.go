@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -23,6 +24,11 @@ type OpenstackCloudSpec struct {
 
 	// +optional
 	ApplicationCredentialSecret string `json:"applicationCredentialSecret,omitempty"`
+
+	// +optional
+	// CreatePodSubnetV6 indicates if podSubnetV6ID not set in OpenstackCloudSpec;
+	// tell whether to create a public subnet for the pods with unique local addresses or use a private (internal) CIDR
+	CreatePodSubnetV6 bool `json:"createPodSubnetV6,omitempty"`
 
 	// +optional
 	Domain string `json:"domain,omitempty"`
@@ -45,9 +51,10 @@ type OpenstackCloudSpec struct {
 	// +optional
 	Password string `json:"password,omitempty"`
 
+	// +optional
 	// PodSubnetV6ID indicates either the client-provided one, or one we created ourselves.
 	// If this is set in the cluster create request, it means use this (public) subnet for the pods.
-	// Otherwise use an internal CIDR (as we do now).
+	// Otherwise, use an internal CIDR (as we do now).
 	PodSubnetV6ID string `json:"podSubnetV6ID,omitempty"`
 
 	// +optional
@@ -124,11 +131,15 @@ func (m *OpenstackCloudSpec) validateCredentialsReference(formats strfmt.Registr
 
 	if m.CredentialsReference != nil {
 		if err := m.CredentialsReference.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("credentialsReference")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("credentialsReference")
 			}
+
 			return err
 		}
 	}
@@ -159,11 +170,15 @@ func (m *OpenstackCloudSpec) contextValidateCredentialsReference(ctx context.Con
 		}
 
 		if err := m.CredentialsReference.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("credentialsReference")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("credentialsReference")
 			}
+
 			return err
 		}
 	}

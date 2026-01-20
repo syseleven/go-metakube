@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -79,11 +80,15 @@ func (m *BackupStatus) validateBackupPhase(formats strfmt.Registry) error {
 	}
 
 	if err := m.BackupPhase.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("backupPhase")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("backupPhase")
 		}
+
 		return err
 	}
 
@@ -96,11 +101,15 @@ func (m *BackupStatus) validateDeletePhase(formats strfmt.Registry) error {
 	}
 
 	if err := m.DeletePhase.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("deletePhase")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("deletePhase")
 		}
+
 		return err
 	}
 
@@ -132,11 +141,15 @@ func (m *BackupStatus) contextValidateBackupPhase(ctx context.Context, formats s
 	}
 
 	if err := m.BackupPhase.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("backupPhase")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("backupPhase")
 		}
+
 		return err
 	}
 
@@ -150,11 +163,15 @@ func (m *BackupStatus) contextValidateDeletePhase(ctx context.Context, formats s
 	}
 
 	if err := m.DeletePhase.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("deletePhase")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("deletePhase")
 		}
+
 		return err
 	}
 

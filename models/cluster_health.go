@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -84,11 +85,15 @@ func (m *ClusterHealth) validateApiserver(formats strfmt.Registry) error {
 	}
 
 	if err := m.Apiserver.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("apiserver")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("apiserver")
 		}
+
 		return err
 	}
 
@@ -101,11 +106,15 @@ func (m *ClusterHealth) validateCloudProviderInfrastructure(formats strfmt.Regis
 	}
 
 	if err := m.CloudProviderInfrastructure.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("cloudProviderInfrastructure")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("cloudProviderInfrastructure")
 		}
+
 		return err
 	}
 
@@ -118,11 +127,15 @@ func (m *ClusterHealth) validateController(formats strfmt.Registry) error {
 	}
 
 	if err := m.Controller.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("controller")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("controller")
 		}
+
 		return err
 	}
 
@@ -135,11 +148,15 @@ func (m *ClusterHealth) validateEtcd(formats strfmt.Registry) error {
 	}
 
 	if err := m.Etcd.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("etcd")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("etcd")
 		}
+
 		return err
 	}
 
@@ -152,11 +169,15 @@ func (m *ClusterHealth) validateMachineController(formats strfmt.Registry) error
 	}
 
 	if err := m.MachineController.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("machineController")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("machineController")
 		}
+
 		return err
 	}
 
@@ -169,11 +190,15 @@ func (m *ClusterHealth) validateScheduler(formats strfmt.Registry) error {
 	}
 
 	if err := m.Scheduler.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("scheduler")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("scheduler")
 		}
+
 		return err
 	}
 
@@ -186,11 +211,15 @@ func (m *ClusterHealth) validateUserClusterControllerManager(formats strfmt.Regi
 	}
 
 	if err := m.UserClusterControllerManager.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("userClusterControllerManager")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("userClusterControllerManager")
 		}
+
 		return err
 	}
 
@@ -242,11 +271,15 @@ func (m *ClusterHealth) contextValidateApiserver(ctx context.Context, formats st
 	}
 
 	if err := m.Apiserver.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("apiserver")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("apiserver")
 		}
+
 		return err
 	}
 
@@ -260,11 +293,15 @@ func (m *ClusterHealth) contextValidateCloudProviderInfrastructure(ctx context.C
 	}
 
 	if err := m.CloudProviderInfrastructure.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("cloudProviderInfrastructure")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("cloudProviderInfrastructure")
 		}
+
 		return err
 	}
 
@@ -278,11 +315,15 @@ func (m *ClusterHealth) contextValidateController(ctx context.Context, formats s
 	}
 
 	if err := m.Controller.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("controller")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("controller")
 		}
+
 		return err
 	}
 
@@ -296,11 +337,15 @@ func (m *ClusterHealth) contextValidateEtcd(ctx context.Context, formats strfmt.
 	}
 
 	if err := m.Etcd.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("etcd")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("etcd")
 		}
+
 		return err
 	}
 
@@ -314,11 +359,15 @@ func (m *ClusterHealth) contextValidateMachineController(ctx context.Context, fo
 	}
 
 	if err := m.MachineController.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("machineController")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("machineController")
 		}
+
 		return err
 	}
 
@@ -332,11 +381,15 @@ func (m *ClusterHealth) contextValidateScheduler(ctx context.Context, formats st
 	}
 
 	if err := m.Scheduler.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("scheduler")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("scheduler")
 		}
+
 		return err
 	}
 
@@ -350,11 +403,15 @@ func (m *ClusterHealth) contextValidateUserClusterControllerManager(ctx context.
 	}
 
 	if err := m.UserClusterControllerManager.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("userClusterControllerManager")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("userClusterControllerManager")
 		}
+
 		return err
 	}
 

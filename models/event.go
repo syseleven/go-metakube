@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -122,11 +123,15 @@ func (m *Event) validateInvolvedObject(formats strfmt.Registry) error {
 
 	if m.InvolvedObject != nil {
 		if err := m.InvolvedObject.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("involvedObject")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("involvedObject")
 			}
+
 			return err
 		}
 	}
@@ -157,11 +162,15 @@ func (m *Event) contextValidateInvolvedObject(ctx context.Context, formats strfm
 		}
 
 		if err := m.InvolvedObject.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("involvedObject")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("involvedObject")
 			}
+
 			return err
 		}
 	}

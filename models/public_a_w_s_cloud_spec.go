@@ -8,4 +8,4 @@ package models
 // PublicAWSCloudSpec PublicAWSCloudSpec is a public counterpart of apiv1.AWSCloudSpec.
 //
 // swagger:model PublicAWSCloudSpec
-type PublicAWSCloudSpec interface{}
+type PublicAWSCloudSpec any

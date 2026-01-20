@@ -71,7 +71,7 @@ type ClientService interface {
 CreateEtcdRestore Creates a etcd backup restore for a given cluster
 */
 func (a *Client) CreateEtcdRestore(params *CreateEtcdRestoreParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*CreateEtcdRestoreCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewCreateEtcdRestoreParams()
 	}
@@ -91,17 +91,22 @@ func (a *Client) CreateEtcdRestore(params *CreateEtcdRestoreParams, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*CreateEtcdRestoreCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*CreateEtcdRestoreDefault)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -109,7 +114,7 @@ func (a *Client) CreateEtcdRestore(params *CreateEtcdRestoreParams, authInfo run
 DeleteEtcdRestore Deletes a etcd restore config for a given cluster based on its name
 */
 func (a *Client) DeleteEtcdRestore(params *DeleteEtcdRestoreParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteEtcdRestoreOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteEtcdRestoreParams()
 	}
@@ -129,17 +134,22 @@ func (a *Client) DeleteEtcdRestore(params *DeleteEtcdRestoreParams, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteEtcdRestoreOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*DeleteEtcdRestoreDefault)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -147,7 +157,7 @@ func (a *Client) DeleteEtcdRestore(params *DeleteEtcdRestoreParams, authInfo run
 GetEtcdRestore Gets a etcd backup restore for a given cluster based on its name
 */
 func (a *Client) GetEtcdRestore(params *GetEtcdRestoreParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetEtcdRestoreOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetEtcdRestoreParams()
 	}
@@ -167,17 +177,22 @@ func (a *Client) GetEtcdRestore(params *GetEtcdRestoreParams, authInfo runtime.C
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetEtcdRestoreOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*GetEtcdRestoreDefault)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -185,7 +200,7 @@ func (a *Client) GetEtcdRestore(params *GetEtcdRestoreParams, authInfo runtime.C
 ListEtcdRestore List etcd backup restores for a given cluster
 */
 func (a *Client) ListEtcdRestore(params *ListEtcdRestoreParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListEtcdRestoreOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListEtcdRestoreParams()
 	}
@@ -205,17 +220,22 @@ func (a *Client) ListEtcdRestore(params *ListEtcdRestoreParams, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListEtcdRestoreOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*ListEtcdRestoreDefault)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -223,7 +243,7 @@ func (a *Client) ListEtcdRestore(params *ListEtcdRestoreParams, authInfo runtime
 ListProjectEtcdRestore List etcd backup restores for a given project
 */
 func (a *Client) ListProjectEtcdRestore(params *ListProjectEtcdRestoreParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListProjectEtcdRestoreOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListProjectEtcdRestoreParams()
 	}
@@ -243,17 +263,22 @@ func (a *Client) ListProjectEtcdRestore(params *ListProjectEtcdRestoreParams, au
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListProjectEtcdRestoreOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*ListProjectEtcdRestoreDefault)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

@@ -67,7 +67,7 @@ type ClientService interface {
 GetMasterVersions Lists all versions which don't result in automatic updates
 */
 func (a *Client) GetMasterVersions(params *GetMasterVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMasterVersionsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetMasterVersionsParams()
 	}
@@ -87,17 +87,22 @@ func (a *Client) GetMasterVersions(params *GetMasterVersionsParams, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetMasterVersionsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*GetMasterVersionsDefault)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -105,7 +110,7 @@ func (a *Client) GetMasterVersions(params *GetMasterVersionsParams, authInfo run
 GetMetaKubeVersions gets versions of running meta kube components
 */
 func (a *Client) GetMetaKubeVersions(params *GetMetaKubeVersionsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetMetaKubeVersionsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetMetaKubeVersionsParams()
 	}
@@ -125,17 +130,22 @@ func (a *Client) GetMetaKubeVersions(params *GetMetaKubeVersionsParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetMetaKubeVersionsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*GetMetaKubeVersionsDefault)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -143,7 +153,7 @@ func (a *Client) GetMetaKubeVersions(params *GetMetaKubeVersionsParams, authInfo
 GetNodeUpgrades Gets possible node upgrades for a specific control plane version
 */
 func (a *Client) GetNodeUpgrades(params *GetNodeUpgradesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetNodeUpgradesOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetNodeUpgradesParams()
 	}
@@ -163,17 +173,22 @@ func (a *Client) GetNodeUpgrades(params *GetNodeUpgradesParams, authInfo runtime
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*GetNodeUpgradesOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*GetNodeUpgradesDefault)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

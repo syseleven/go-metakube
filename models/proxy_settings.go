@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -50,11 +51,15 @@ func (m *ProxySettings) validateHTTPProxy(formats strfmt.Registry) error {
 	}
 
 	if err := m.HTTPProxy.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("httpProxy")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("httpProxy")
 		}
+
 		return err
 	}
 
@@ -67,11 +72,15 @@ func (m *ProxySettings) validateNoProxy(formats strfmt.Registry) error {
 	}
 
 	if err := m.NoProxy.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("noProxy")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("noProxy")
 		}
+
 		return err
 	}
 
@@ -103,11 +112,15 @@ func (m *ProxySettings) contextValidateHTTPProxy(ctx context.Context, formats st
 	}
 
 	if err := m.HTTPProxy.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("httpProxy")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("httpProxy")
 		}
+
 		return err
 	}
 
@@ -121,11 +134,15 @@ func (m *ProxySettings) contextValidateNoProxy(ctx context.Context, formats strf
 	}
 
 	if err := m.NoProxy.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("noProxy")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("noProxy")
 		}
+
 		return err
 	}
 

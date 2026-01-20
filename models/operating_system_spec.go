@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -50,11 +51,15 @@ func (m *OperatingSystemSpec) validateFlatcar(formats strfmt.Registry) error {
 
 	if m.Flatcar != nil {
 		if err := m.Flatcar.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("flatcar")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("flatcar")
 			}
+
 			return err
 		}
 	}
@@ -69,11 +74,15 @@ func (m *OperatingSystemSpec) validateUbuntu(formats strfmt.Registry) error {
 
 	if m.Ubuntu != nil {
 		if err := m.Ubuntu.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("ubuntu")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("ubuntu")
 			}
+
 			return err
 		}
 	}
@@ -108,11 +117,15 @@ func (m *OperatingSystemSpec) contextValidateFlatcar(ctx context.Context, format
 		}
 
 		if err := m.Flatcar.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("flatcar")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("flatcar")
 			}
+
 			return err
 		}
 	}
@@ -129,11 +142,15 @@ func (m *OperatingSystemSpec) contextValidateUbuntu(ctx context.Context, formats
 		}
 
 		if err := m.Ubuntu.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("ubuntu")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("ubuntu")
 			}
+
 			return err
 		}
 	}
