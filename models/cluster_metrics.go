@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -53,11 +54,15 @@ func (m *ClusterMetrics) validateControlPlane(formats strfmt.Registry) error {
 
 	if m.ControlPlane != nil {
 		if err := m.ControlPlane.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("controlPlane")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("controlPlane")
 			}
+
 			return err
 		}
 	}
@@ -72,11 +77,15 @@ func (m *ClusterMetrics) validateNodes(formats strfmt.Registry) error {
 
 	if m.Nodes != nil {
 		if err := m.Nodes.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("nodes")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("nodes")
 			}
+
 			return err
 		}
 	}
@@ -111,11 +120,15 @@ func (m *ClusterMetrics) contextValidateControlPlane(ctx context.Context, format
 		}
 
 		if err := m.ControlPlane.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("controlPlane")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("controlPlane")
 			}
+
 			return err
 		}
 	}
@@ -132,11 +145,15 @@ func (m *ClusterMetrics) contextValidateNodes(ctx context.Context, formats strfm
 		}
 
 		if err := m.Nodes.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("nodes")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("nodes")
 			}
+
 			return err
 		}
 	}

@@ -69,7 +69,7 @@ type ClientService interface {
 AddServiceAccountToProject Adds the given service account to the given project
 */
 func (a *Client) AddServiceAccountToProject(params *AddServiceAccountToProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddServiceAccountToProjectCreated, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewAddServiceAccountToProjectParams()
 	}
@@ -89,17 +89,22 @@ func (a *Client) AddServiceAccountToProject(params *AddServiceAccountToProjectPa
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*AddServiceAccountToProjectCreated)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*AddServiceAccountToProjectDefault)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -107,7 +112,7 @@ func (a *Client) AddServiceAccountToProject(params *AddServiceAccountToProjectPa
 DeleteServiceAccount Deletes service account for the given project
 */
 func (a *Client) DeleteServiceAccount(params *DeleteServiceAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteServiceAccountOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewDeleteServiceAccountParams()
 	}
@@ -127,17 +132,22 @@ func (a *Client) DeleteServiceAccount(params *DeleteServiceAccountParams, authIn
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*DeleteServiceAccountOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*DeleteServiceAccountDefault)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -145,7 +155,7 @@ func (a *Client) DeleteServiceAccount(params *DeleteServiceAccountParams, authIn
 ListServiceAccounts List Service Accounts for the given project
 */
 func (a *Client) ListServiceAccounts(params *ListServiceAccountsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListServiceAccountsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListServiceAccountsParams()
 	}
@@ -165,17 +175,22 @@ func (a *Client) ListServiceAccounts(params *ListServiceAccountsParams, authInfo
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListServiceAccountsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*ListServiceAccountsDefault)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -183,7 +198,7 @@ func (a *Client) ListServiceAccounts(params *ListServiceAccountsParams, authInfo
 UpdateServiceAccount Updates service account for the given project
 */
 func (a *Client) UpdateServiceAccount(params *UpdateServiceAccountParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*UpdateServiceAccountOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewUpdateServiceAccountParams()
 	}
@@ -203,17 +218,22 @@ func (a *Client) UpdateServiceAccount(params *UpdateServiceAccountParams, authIn
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*UpdateServiceAccountOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*UpdateServiceAccountDefault)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

@@ -7,6 +7,7 @@ package openstack
 
 import (
 	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -22,7 +23,7 @@ type ListOpenstackQuotaLimitsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *ListOpenstackQuotaLimitsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *ListOpenstackQuotaLimitsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewListOpenstackQuotaLimitsOK()
@@ -105,7 +106,7 @@ func (o *ListOpenstackQuotaLimitsOK) readResponse(response runtime.ClientRespons
 	o.Payload = new(models.Quotas)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -179,7 +180,7 @@ func (o *ListOpenstackQuotaLimitsDefault) readResponse(response runtime.ClientRe
 	o.Payload = new(models.ErrorResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

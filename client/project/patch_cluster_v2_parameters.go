@@ -62,7 +62,7 @@ PatchClusterV2Params contains all the parameters to send to the API endpoint
 type PatchClusterV2Params struct {
 
 	// Patch.
-	Patch interface{}
+	Patch any
 
 	// ClusterID.
 	ClusterID string
@@ -124,13 +124,13 @@ func (o *PatchClusterV2Params) SetHTTPClient(client *http.Client) {
 }
 
 // WithPatch adds the patch to the patch cluster v2 params
-func (o *PatchClusterV2Params) WithPatch(patch interface{}) *PatchClusterV2Params {
+func (o *PatchClusterV2Params) WithPatch(patch any) *PatchClusterV2Params {
 	o.SetPatch(patch)
 	return o
 }
 
 // SetPatch adds the patch to the patch cluster v2 params
-func (o *PatchClusterV2Params) SetPatch(patch interface{}) {
+func (o *PatchClusterV2Params) SetPatch(patch any) {
 	o.Patch = patch
 }
 

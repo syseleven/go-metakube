@@ -7,6 +7,7 @@ package project
 
 import (
 	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -22,7 +23,7 @@ type GetMachineDeploymentReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetMachineDeploymentReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetMachineDeploymentReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetMachineDeploymentOK()
@@ -117,7 +118,7 @@ func (o *GetMachineDeploymentOK) readResponse(response runtime.ClientResponse, c
 	o.Payload = new(models.NodeDeployment)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -303,7 +304,7 @@ func (o *GetMachineDeploymentDefault) readResponse(response runtime.ClientRespon
 	o.Payload = new(models.ErrorResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 

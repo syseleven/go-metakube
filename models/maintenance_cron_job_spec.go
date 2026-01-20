@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -46,11 +47,15 @@ func (m *MaintenanceCronJobSpec) validateMaintenanceJobTemplate(formats strfmt.R
 
 	if m.MaintenanceJobTemplate != nil {
 		if err := m.MaintenanceJobTemplate.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("maintenanceJobTemplate")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("maintenanceJobTemplate")
 			}
+
 			return err
 		}
 	}
@@ -81,11 +86,15 @@ func (m *MaintenanceCronJobSpec) contextValidateMaintenanceJobTemplate(ctx conte
 		}
 
 		if err := m.MaintenanceJobTemplate.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("maintenanceJobTemplate")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("maintenanceJobTemplate")
 			}
+
 			return err
 		}
 	}

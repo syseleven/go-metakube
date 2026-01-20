@@ -63,7 +63,7 @@ type ClientService interface {
 ListMachineDeploymentMetrics lists metrics that belong to the given machine deployment
 */
 func (a *Client) ListMachineDeploymentMetrics(params *ListMachineDeploymentMetricsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListMachineDeploymentMetricsOK, error) {
-	// TODO: Validate the params before sending
+	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewListMachineDeploymentMetricsParams()
 	}
@@ -83,17 +83,22 @@ func (a *Client) ListMachineDeploymentMetrics(params *ListMachineDeploymentMetri
 	for _, opt := range opts {
 		opt(op)
 	}
-
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
+
+	// only one success response has to be checked
 	success, ok := result.(*ListMachineDeploymentMetricsOK)
 	if ok {
 		return success, nil
 	}
-	// unexpected success response
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*ListMachineDeploymentMetricsDefault)
+
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

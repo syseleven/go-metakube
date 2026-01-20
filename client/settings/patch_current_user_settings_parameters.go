@@ -62,7 +62,7 @@ PatchCurrentUserSettingsParams contains all the parameters to send to the API en
 type PatchCurrentUserSettingsParams struct {
 
 	// Patch.
-	Patch interface{}
+	Patch any
 
 	timeout    time.Duration
 	Context    context.Context
@@ -118,13 +118,13 @@ func (o *PatchCurrentUserSettingsParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithPatch adds the patch to the patch current user settings params
-func (o *PatchCurrentUserSettingsParams) WithPatch(patch interface{}) *PatchCurrentUserSettingsParams {
+func (o *PatchCurrentUserSettingsParams) WithPatch(patch any) *PatchCurrentUserSettingsParams {
 	o.SetPatch(patch)
 	return o
 }
 
 // SetPatch adds the patch to the patch current user settings params
-func (o *PatchCurrentUserSettingsParams) SetPatch(patch interface{}) {
+func (o *PatchCurrentUserSettingsParams) SetPatch(patch any) {
 	o.Patch = patch
 }
 

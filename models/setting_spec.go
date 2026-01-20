@@ -7,6 +7,7 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -85,11 +86,15 @@ func (m *SettingSpec) validateCleanupOptions(formats strfmt.Registry) error {
 
 	if m.CleanupOptions != nil {
 		if err := m.CleanupOptions.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cleanupOptions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cleanupOptions")
 			}
+
 			return err
 		}
 	}
@@ -103,11 +108,15 @@ func (m *SettingSpec) validateClusterTypeOptions(formats strfmt.Registry) error 
 	}
 
 	if err := m.ClusterTypeOptions.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("clusterTypeOptions")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("clusterTypeOptions")
 		}
+
 		return err
 	}
 
@@ -120,11 +129,15 @@ func (m *SettingSpec) validateCustomLinks(formats strfmt.Registry) error {
 	}
 
 	if err := m.CustomLinks.Validate(formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("customLinks")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("customLinks")
 		}
+
 		return err
 	}
 
@@ -138,11 +151,15 @@ func (m *SettingSpec) validateMachineDeploymentVMResourceQuota(formats strfmt.Re
 
 	if m.MachineDeploymentVMResourceQuota != nil {
 		if err := m.MachineDeploymentVMResourceQuota.Validate(formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("machineDeploymentVMResourceQuota")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("machineDeploymentVMResourceQuota")
 			}
+
 			return err
 		}
 	}
@@ -185,11 +202,15 @@ func (m *SettingSpec) contextValidateCleanupOptions(ctx context.Context, formats
 		}
 
 		if err := m.CleanupOptions.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("cleanupOptions")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("cleanupOptions")
 			}
+
 			return err
 		}
 	}
@@ -204,11 +225,15 @@ func (m *SettingSpec) contextValidateClusterTypeOptions(ctx context.Context, for
 	}
 
 	if err := m.ClusterTypeOptions.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("clusterTypeOptions")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("clusterTypeOptions")
 		}
+
 		return err
 	}
 
@@ -218,11 +243,15 @@ func (m *SettingSpec) contextValidateClusterTypeOptions(ctx context.Context, for
 func (m *SettingSpec) contextValidateCustomLinks(ctx context.Context, formats strfmt.Registry) error {
 
 	if err := m.CustomLinks.ContextValidate(ctx, formats); err != nil {
-		if ve, ok := err.(*errors.Validation); ok {
+		ve := new(errors.Validation)
+		if stderrors.As(err, &ve) {
 			return ve.ValidateName("customLinks")
-		} else if ce, ok := err.(*errors.CompositeError); ok {
+		}
+		ce := new(errors.CompositeError)
+		if stderrors.As(err, &ce) {
 			return ce.ValidateName("customLinks")
 		}
+
 		return err
 	}
 
@@ -238,11 +267,15 @@ func (m *SettingSpec) contextValidateMachineDeploymentVMResourceQuota(ctx contex
 		}
 
 		if err := m.MachineDeploymentVMResourceQuota.ContextValidate(ctx, formats); err != nil {
-			if ve, ok := err.(*errors.Validation); ok {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
 				return ve.ValidateName("machineDeploymentVMResourceQuota")
-			} else if ce, ok := err.(*errors.CompositeError); ok {
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
 				return ce.ValidateName("machineDeploymentVMResourceQuota")
 			}
+
 			return err
 		}
 	}

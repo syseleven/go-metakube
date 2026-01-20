@@ -62,7 +62,7 @@ PatchMaintenanceCronJobParams contains all the parameters to send to the API end
 type PatchMaintenanceCronJobParams struct {
 
 	// Patch.
-	Patch interface{}
+	Patch any
 
 	// ClusterID.
 	ClusterID string
@@ -127,13 +127,13 @@ func (o *PatchMaintenanceCronJobParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithPatch adds the patch to the patch maintenance cron job params
-func (o *PatchMaintenanceCronJobParams) WithPatch(patch interface{}) *PatchMaintenanceCronJobParams {
+func (o *PatchMaintenanceCronJobParams) WithPatch(patch any) *PatchMaintenanceCronJobParams {
 	o.SetPatch(patch)
 	return o
 }
 
 // SetPatch adds the patch to the patch maintenance cron job params
-func (o *PatchMaintenanceCronJobParams) SetPatch(patch interface{}) {
+func (o *PatchMaintenanceCronJobParams) SetPatch(patch any) {
 	o.Patch = patch
 }
 

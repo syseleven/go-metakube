@@ -8,4 +8,4 @@ package models
 // PublicFakeCloudSpec PublicFakeCloudSpec is a public counterpart of apiv1.FakeCloudSpec.
 //
 // swagger:model PublicFakeCloudSpec
-type PublicFakeCloudSpec interface{}
+type PublicFakeCloudSpec any

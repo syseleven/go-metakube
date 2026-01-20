@@ -7,6 +7,7 @@ package project
 
 import (
 	"encoding/json"
+	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -22,7 +23,7 @@ type GetMaintenanceCronJobReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetMaintenanceCronJobReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
+func (o *GetMaintenanceCronJobReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetMaintenanceCronJobOK()
@@ -117,7 +118,7 @@ func (o *GetMaintenanceCronJobOK) readResponse(response runtime.ClientResponse, 
 	o.Payload = new(models.MaintenanceCronJob)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
@@ -303,7 +304,7 @@ func (o *GetMaintenanceCronJobDefault) readResponse(response runtime.ClientRespo
 	o.Payload = new(models.ErrorResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
 		return err
 	}
 
