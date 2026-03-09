@@ -7,7 +7,9 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -22,15 +24,84 @@ type CiliumCNISettings struct {
 
 	// enable l7 proxy
 	EnableL7Proxy bool `json:"enableL7Proxy,omitempty"`
+
+	// clustermesh
+	Clustermesh *CiliumClustermesh `json:"clustermesh,omitempty"`
 }
 
 // Validate validates this cilium c n i settings
 func (m *CiliumCNISettings) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateClustermesh(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this cilium c n i settings based on context it is used
+func (m *CiliumCNISettings) validateClustermesh(formats strfmt.Registry) error {
+	if swag.IsZero(m.Clustermesh) { // not required
+		return nil
+	}
+
+	if m.Clustermesh != nil {
+		if err := m.Clustermesh.Validate(formats); err != nil {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
+				return ve.ValidateName("clustermesh")
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
+				return ce.ValidateName("clustermesh")
+			}
+
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this cilium c n i settings based on the context it is used
 func (m *CiliumCNISettings) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateClustermesh(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *CiliumCNISettings) contextValidateClustermesh(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Clustermesh != nil {
+
+		if swag.IsZero(m.Clustermesh) { // not required
+			return nil
+		}
+
+		if err := m.Clustermesh.ContextValidate(ctx, formats); err != nil {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
+				return ve.ValidateName("clustermesh")
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
+				return ce.ValidateName("clustermesh")
+			}
+
+			return err
+		}
+	}
+
 	return nil
 }
 
