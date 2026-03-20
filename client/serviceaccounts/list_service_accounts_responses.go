@@ -7,7 +7,6 @@ package serviceaccounts
 
 import (
 	"encoding/json"
-	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -23,7 +22,7 @@ type ListServiceAccountsReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *ListServiceAccountsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
+func (o *ListServiceAccountsReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 	case 200:
 		result := NewListServiceAccountsOK()
@@ -116,7 +115,7 @@ func (o *ListServiceAccountsOK) GetPayload() []*models.ServiceAccount {
 func (o *ListServiceAccountsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
@@ -302,7 +301,7 @@ func (o *ListServiceAccountsDefault) readResponse(response runtime.ClientRespons
 	o.Payload = new(models.ErrorResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

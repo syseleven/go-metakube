@@ -7,7 +7,6 @@ package models
 
 import (
 	"context"
-	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -80,15 +79,11 @@ func (m *NodeStatus) validateAddresses(formats strfmt.Registry) error {
 
 		if m.Addresses[i] != nil {
 			if err := m.Addresses[i].Validate(formats); err != nil {
-				ve := new(errors.Validation)
-				if stderrors.As(err, &ve) {
+				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("addresses" + "." + strconv.Itoa(i))
-				}
-				ce := new(errors.CompositeError)
-				if stderrors.As(err, &ce) {
+				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("addresses" + "." + strconv.Itoa(i))
 				}
-
 				return err
 			}
 		}
@@ -105,15 +100,11 @@ func (m *NodeStatus) validateAllocatable(formats strfmt.Registry) error {
 
 	if m.Allocatable != nil {
 		if err := m.Allocatable.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("allocatable")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("allocatable")
 			}
-
 			return err
 		}
 	}
@@ -128,15 +119,11 @@ func (m *NodeStatus) validateCapacity(formats strfmt.Registry) error {
 
 	if m.Capacity != nil {
 		if err := m.Capacity.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("capacity")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("capacity")
 			}
-
 			return err
 		}
 	}
@@ -151,15 +138,11 @@ func (m *NodeStatus) validateNodeInfo(formats strfmt.Registry) error {
 
 	if m.NodeInfo != nil {
 		if err := m.NodeInfo.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("nodeInfo")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("nodeInfo")
 			}
-
 			return err
 		}
 	}
@@ -204,15 +187,11 @@ func (m *NodeStatus) contextValidateAddresses(ctx context.Context, formats strfm
 			}
 
 			if err := m.Addresses[i].ContextValidate(ctx, formats); err != nil {
-				ve := new(errors.Validation)
-				if stderrors.As(err, &ve) {
+				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("addresses" + "." + strconv.Itoa(i))
-				}
-				ce := new(errors.CompositeError)
-				if stderrors.As(err, &ce) {
+				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("addresses" + "." + strconv.Itoa(i))
 				}
-
 				return err
 			}
 		}
@@ -231,15 +210,11 @@ func (m *NodeStatus) contextValidateAllocatable(ctx context.Context, formats str
 		}
 
 		if err := m.Allocatable.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("allocatable")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("allocatable")
 			}
-
 			return err
 		}
 	}
@@ -256,15 +231,11 @@ func (m *NodeStatus) contextValidateCapacity(ctx context.Context, formats strfmt
 		}
 
 		if err := m.Capacity.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("capacity")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("capacity")
 			}
-
 			return err
 		}
 	}
@@ -281,15 +252,11 @@ func (m *NodeStatus) contextValidateNodeInfo(ctx context.Context, formats strfmt
 		}
 
 		if err := m.NodeInfo.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("nodeInfo")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("nodeInfo")
 			}
-
 			return err
 		}
 	}

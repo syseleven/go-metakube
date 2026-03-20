@@ -7,7 +7,6 @@ package project
 
 import (
 	"encoding/json"
-	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -23,7 +22,7 @@ type GetProjectReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *GetProjectReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
+func (o *GetProjectReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 	case 200:
 		result := NewGetProjectOK()
@@ -118,7 +117,7 @@ func (o *GetProjectOK) readResponse(response runtime.ClientResponse, consumer ru
 	o.Payload = new(models.Project)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
@@ -304,7 +303,7 @@ func (o *GetProjectDefault) readResponse(response runtime.ClientResponse, consum
 	o.Payload = new(models.ErrorResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

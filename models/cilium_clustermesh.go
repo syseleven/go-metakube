@@ -17,8 +17,14 @@ import (
 // swagger:model CiliumClustermesh
 type CiliumClustermesh struct {
 
+	// Set unique cilium cluster-id
+	ClusterID int64 `json:"clusterID,omitempty"`
+
 	// Enable clustermesh resource reconciliation
 	Enable *bool `json:"enable,omitempty"`
+
+	// Set ipv4-native-routing-cidr
+	IPV4NativeRoutingCIDR string `json:"ipv4NativeRoutingCIDR,omitempty"`
 }
 
 // Validate validates this cilium clustermesh

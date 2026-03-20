@@ -7,7 +7,6 @@ package models
 
 import (
 	"context"
-	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -48,15 +47,11 @@ func (m *DatacenterSpecAWS) validateImages(formats strfmt.Registry) error {
 
 	if m.Images != nil {
 		if err := m.Images.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("images")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("images")
 			}
-
 			return err
 		}
 	}
@@ -85,15 +80,11 @@ func (m *DatacenterSpecAWS) contextValidateImages(ctx context.Context, formats s
 	}
 
 	if err := m.Images.ContextValidate(ctx, formats); err != nil {
-		ve := new(errors.Validation)
-		if stderrors.As(err, &ve) {
+		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("images")
-		}
-		ce := new(errors.CompositeError)
-		if stderrors.As(err, &ce) {
+		} else if ce, ok := err.(*errors.CompositeError); ok {
 			return ce.ValidateName("images")
 		}
-
 		return err
 	}
 

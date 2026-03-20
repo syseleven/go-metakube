@@ -63,7 +63,7 @@ type ClientService interface {
 ListDatacentersV2 Lists datacenters
 */
 func (a *Client) ListDatacentersV2(params *ListDatacentersV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListDatacentersV2OK, error) {
-	// NOTE: parameters are not validated before sending
+	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListDatacentersV2Params()
 	}
@@ -83,22 +83,17 @@ func (a *Client) ListDatacentersV2(params *ListDatacentersV2Params, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
+
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
-
-	// only one success response has to be checked
 	success, ok := result.(*ListDatacentersV2OK)
 	if ok {
 		return success, nil
 	}
-
-	// unexpected success response.
-	//
-	// a default response is provided: fill this and return an error
+	// unexpected success response
 	unexpectedSuccess := result.(*ListDatacentersV2Default)
-
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

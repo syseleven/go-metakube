@@ -7,7 +7,6 @@ package models
 
 import (
 	"context"
-	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -98,15 +97,11 @@ func (m *DatacenterSpec) validateAws(formats strfmt.Registry) error {
 
 	if m.Aws != nil {
 		if err := m.Aws.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("aws")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("aws")
 			}
-
 			return err
 		}
 	}
@@ -121,15 +116,11 @@ func (m *DatacenterSpec) validateAzure(formats strfmt.Registry) error {
 
 	if m.Azure != nil {
 		if err := m.Azure.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("azure")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("azure")
 			}
-
 			return err
 		}
 	}
@@ -144,15 +135,11 @@ func (m *DatacenterSpec) validateFake(formats strfmt.Registry) error {
 
 	if m.Fake != nil {
 		if err := m.Fake.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("fake")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("fake")
 			}
-
 			return err
 		}
 	}
@@ -167,15 +154,11 @@ func (m *DatacenterSpec) validateNode(formats strfmt.Registry) error {
 
 	if m.Node != nil {
 		if err := m.Node.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("node")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("node")
 			}
-
 			return err
 		}
 	}
@@ -190,15 +173,11 @@ func (m *DatacenterSpec) validateOpenstack(formats strfmt.Registry) error {
 
 	if m.Openstack != nil {
 		if err := m.Openstack.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("openstack")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("openstack")
 			}
-
 			return err
 		}
 	}
@@ -245,15 +224,11 @@ func (m *DatacenterSpec) contextValidateAws(ctx context.Context, formats strfmt.
 		}
 
 		if err := m.Aws.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("aws")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("aws")
 			}
-
 			return err
 		}
 	}
@@ -270,15 +245,11 @@ func (m *DatacenterSpec) contextValidateAzure(ctx context.Context, formats strfm
 		}
 
 		if err := m.Azure.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("azure")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("azure")
 			}
-
 			return err
 		}
 	}
@@ -295,15 +266,11 @@ func (m *DatacenterSpec) contextValidateFake(ctx context.Context, formats strfmt
 		}
 
 		if err := m.Fake.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("fake")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("fake")
 			}
-
 			return err
 		}
 	}
@@ -320,15 +287,11 @@ func (m *DatacenterSpec) contextValidateNode(ctx context.Context, formats strfmt
 		}
 
 		if err := m.Node.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("node")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("node")
 			}
-
 			return err
 		}
 	}
@@ -345,15 +308,11 @@ func (m *DatacenterSpec) contextValidateOpenstack(ctx context.Context, formats s
 		}
 
 		if err := m.Openstack.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("openstack")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("openstack")
 			}
-
 			return err
 		}
 	}

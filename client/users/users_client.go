@@ -73,7 +73,7 @@ type ClientService interface {
 AddUserToProject Adds the given user to the given project
 */
 func (a *Client) AddUserToProject(params *AddUserToProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*AddUserToProjectCreated, error) {
-	// NOTE: parameters are not validated before sending
+	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewAddUserToProjectParams()
 	}
@@ -93,22 +93,17 @@ func (a *Client) AddUserToProject(params *AddUserToProjectParams, authInfo runti
 	for _, opt := range opts {
 		opt(op)
 	}
+
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
-
-	// only one success response has to be checked
 	success, ok := result.(*AddUserToProjectCreated)
 	if ok {
 		return success, nil
 	}
-
-	// unexpected success response.
-	//
-	// a default response is provided: fill this and return an error
+	// unexpected success response
 	unexpectedSuccess := result.(*AddUserToProjectDefault)
-
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -116,7 +111,7 @@ func (a *Client) AddUserToProject(params *AddUserToProjectParams, authInfo runti
 DeleteUserFromProject Removes the given member from the project
 */
 func (a *Client) DeleteUserFromProject(params *DeleteUserFromProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteUserFromProjectOK, error) {
-	// NOTE: parameters are not validated before sending
+	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewDeleteUserFromProjectParams()
 	}
@@ -136,22 +131,17 @@ func (a *Client) DeleteUserFromProject(params *DeleteUserFromProjectParams, auth
 	for _, opt := range opts {
 		opt(op)
 	}
+
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
-
-	// only one success response has to be checked
 	success, ok := result.(*DeleteUserFromProjectOK)
 	if ok {
 		return success, nil
 	}
-
-	// unexpected success response.
-	//
-	// a default response is provided: fill this and return an error
+	// unexpected success response
 	unexpectedSuccess := result.(*DeleteUserFromProjectDefault)
-
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -159,7 +149,7 @@ func (a *Client) DeleteUserFromProject(params *DeleteUserFromProjectParams, auth
 EditUserInProject Changes membership of the given user for the given project
 */
 func (a *Client) EditUserInProject(params *EditUserInProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*EditUserInProjectOK, error) {
-	// NOTE: parameters are not validated before sending
+	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewEditUserInProjectParams()
 	}
@@ -179,22 +169,17 @@ func (a *Client) EditUserInProject(params *EditUserInProjectParams, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
+
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
-
-	// only one success response has to be checked
 	success, ok := result.(*EditUserInProjectOK)
 	if ok {
 		return success, nil
 	}
-
-	// unexpected success response.
-	//
-	// a default response is provided: fill this and return an error
+	// unexpected success response
 	unexpectedSuccess := result.(*EditUserInProjectDefault)
-
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -202,7 +187,7 @@ func (a *Client) EditUserInProject(params *EditUserInProjectParams, authInfo run
 GetCurrentUser returns information about the current user
 */
 func (a *Client) GetCurrentUser(params *GetCurrentUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCurrentUserOK, error) {
-	// NOTE: parameters are not validated before sending
+	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetCurrentUserParams()
 	}
@@ -222,22 +207,17 @@ func (a *Client) GetCurrentUser(params *GetCurrentUserParams, authInfo runtime.C
 	for _, opt := range opts {
 		opt(op)
 	}
+
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
-
-	// only one success response has to be checked
 	success, ok := result.(*GetCurrentUserOK)
 	if ok {
 		return success, nil
 	}
-
-	// unexpected success response.
-	//
-	// a default response is provided: fill this and return an error
+	// unexpected success response
 	unexpectedSuccess := result.(*GetCurrentUserDefault)
-
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -245,7 +225,7 @@ func (a *Client) GetCurrentUser(params *GetCurrentUserParams, authInfo runtime.C
 GetUsersForProject Get list of users for the given project
 */
 func (a *Client) GetUsersForProject(params *GetUsersForProjectParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetUsersForProjectOK, error) {
-	// NOTE: parameters are not validated before sending
+	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewGetUsersForProjectParams()
 	}
@@ -265,22 +245,17 @@ func (a *Client) GetUsersForProject(params *GetUsersForProjectParams, authInfo r
 	for _, opt := range opts {
 		opt(op)
 	}
+
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
-
-	// only one success response has to be checked
 	success, ok := result.(*GetUsersForProjectOK)
 	if ok {
 		return success, nil
 	}
-
-	// unexpected success response.
-	//
-	// a default response is provided: fill this and return an error
+	// unexpected success response
 	unexpectedSuccess := result.(*GetUsersForProjectDefault)
-
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -290,7 +265,7 @@ LogoutCurrentUser adds current authorization bearer token to the blacklist
 Enforces user to login again with the new token.
 */
 func (a *Client) LogoutCurrentUser(params *LogoutCurrentUserParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*LogoutCurrentUserOK, error) {
-	// NOTE: parameters are not validated before sending
+	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewLogoutCurrentUserParams()
 	}
@@ -310,22 +285,17 @@ func (a *Client) LogoutCurrentUser(params *LogoutCurrentUserParams, authInfo run
 	for _, opt := range opts {
 		opt(op)
 	}
+
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
-
-	// only one success response has to be checked
 	success, ok := result.(*LogoutCurrentUserOK)
 	if ok {
 		return success, nil
 	}
-
-	// unexpected success response.
-	//
-	// a default response is provided: fill this and return an error
+	// unexpected success response
 	unexpectedSuccess := result.(*LogoutCurrentUserDefault)
-
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

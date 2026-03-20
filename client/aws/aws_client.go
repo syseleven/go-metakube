@@ -73,7 +73,7 @@ type ClientService interface {
 ListAWSSecurityGroups Lists available AWS Security Groups
 */
 func (a *Client) ListAWSSecurityGroups(params *ListAWSSecurityGroupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAWSSecurityGroupsOK, error) {
-	// NOTE: parameters are not validated before sending
+	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListAWSSecurityGroupsParams()
 	}
@@ -93,22 +93,17 @@ func (a *Client) ListAWSSecurityGroups(params *ListAWSSecurityGroupsParams, auth
 	for _, opt := range opts {
 		opt(op)
 	}
+
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
-
-	// only one success response has to be checked
 	success, ok := result.(*ListAWSSecurityGroupsOK)
 	if ok {
 		return success, nil
 	}
-
-	// unexpected success response.
-	//
-	// a default response is provided: fill this and return an error
+	// unexpected success response
 	unexpectedSuccess := result.(*ListAWSSecurityGroupsDefault)
-
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -116,7 +111,7 @@ func (a *Client) ListAWSSecurityGroups(params *ListAWSSecurityGroupsParams, auth
 ListAWSSizes lists available a w s sizes
 */
 func (a *Client) ListAWSSizes(params *ListAWSSizesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAWSSizesOK, error) {
-	// NOTE: parameters are not validated before sending
+	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListAWSSizesParams()
 	}
@@ -136,22 +131,17 @@ func (a *Client) ListAWSSizes(params *ListAWSSizesParams, authInfo runtime.Clien
 	for _, opt := range opts {
 		opt(op)
 	}
+
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
-
-	// only one success response has to be checked
 	success, ok := result.(*ListAWSSizesOK)
 	if ok {
 		return success, nil
 	}
-
-	// unexpected success response.
-	//
-	// a default response is provided: fill this and return an error
+	// unexpected success response
 	unexpectedSuccess := result.(*ListAWSSizesDefault)
-
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -159,7 +149,7 @@ func (a *Client) ListAWSSizes(params *ListAWSSizesParams, authInfo runtime.Clien
 ListAWSSizesNoCredentialsV2 Lists available AWS sizes
 */
 func (a *Client) ListAWSSizesNoCredentialsV2(params *ListAWSSizesNoCredentialsV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAWSSizesNoCredentialsV2OK, error) {
-	// NOTE: parameters are not validated before sending
+	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListAWSSizesNoCredentialsV2Params()
 	}
@@ -179,22 +169,17 @@ func (a *Client) ListAWSSizesNoCredentialsV2(params *ListAWSSizesNoCredentialsV2
 	for _, opt := range opts {
 		opt(op)
 	}
+
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
-
-	// only one success response has to be checked
 	success, ok := result.(*ListAWSSizesNoCredentialsV2OK)
 	if ok {
 		return success, nil
 	}
-
-	// unexpected success response.
-	//
-	// a default response is provided: fill this and return an error
+	// unexpected success response
 	unexpectedSuccess := result.(*ListAWSSizesNoCredentialsV2Default)
-
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -202,7 +187,7 @@ func (a *Client) ListAWSSizesNoCredentialsV2(params *ListAWSSizesNoCredentialsV2
 ListAWSSubnets Lists available AWS subnets
 */
 func (a *Client) ListAWSSubnets(params *ListAWSSubnetsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAWSSubnetsOK, error) {
-	// NOTE: parameters are not validated before sending
+	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListAWSSubnetsParams()
 	}
@@ -222,22 +207,17 @@ func (a *Client) ListAWSSubnets(params *ListAWSSubnetsParams, authInfo runtime.C
 	for _, opt := range opts {
 		opt(op)
 	}
+
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
-
-	// only one success response has to be checked
 	success, ok := result.(*ListAWSSubnetsOK)
 	if ok {
 		return success, nil
 	}
-
-	// unexpected success response.
-	//
-	// a default response is provided: fill this and return an error
+	// unexpected success response
 	unexpectedSuccess := result.(*ListAWSSubnetsDefault)
-
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -245,7 +225,7 @@ func (a *Client) ListAWSSubnets(params *ListAWSSubnetsParams, authInfo runtime.C
 ListAWSSubnetsNoCredentialsV2 Lists available AWS subnets
 */
 func (a *Client) ListAWSSubnetsNoCredentialsV2(params *ListAWSSubnetsNoCredentialsV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAWSSubnetsNoCredentialsV2OK, error) {
-	// NOTE: parameters are not validated before sending
+	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListAWSSubnetsNoCredentialsV2Params()
 	}
@@ -265,22 +245,17 @@ func (a *Client) ListAWSSubnetsNoCredentialsV2(params *ListAWSSubnetsNoCredentia
 	for _, opt := range opts {
 		opt(op)
 	}
+
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
-
-	// only one success response has to be checked
 	success, ok := result.(*ListAWSSubnetsNoCredentialsV2OK)
 	if ok {
 		return success, nil
 	}
-
-	// unexpected success response.
-	//
-	// a default response is provided: fill this and return an error
+	// unexpected success response
 	unexpectedSuccess := result.(*ListAWSSubnetsNoCredentialsV2Default)
-
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
@@ -288,7 +263,7 @@ func (a *Client) ListAWSSubnetsNoCredentialsV2(params *ListAWSSubnetsNoCredentia
 ListAWSVPCS Lists available AWS vpc's
 */
 func (a *Client) ListAWSVPCS(params *ListAWSVPCSParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListAWSVPCSOK, error) {
-	// NOTE: parameters are not validated before sending
+	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListAWSVPCSParams()
 	}
@@ -308,22 +283,17 @@ func (a *Client) ListAWSVPCS(params *ListAWSVPCSParams, authInfo runtime.ClientA
 	for _, opt := range opts {
 		opt(op)
 	}
+
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
-
-	// only one success response has to be checked
 	success, ok := result.(*ListAWSVPCSOK)
 	if ok {
 		return success, nil
 	}
-
-	// unexpected success response.
-	//
-	// a default response is provided: fill this and return an error
+	// unexpected success response
 	unexpectedSuccess := result.(*ListAWSVPCSDefault)
-
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

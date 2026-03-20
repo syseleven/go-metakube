@@ -63,7 +63,7 @@ type ClientService interface {
 ListVersionsByProvider Lists all versions which don't result in automatic updates for a given provider
 */
 func (a *Client) ListVersionsByProvider(params *ListVersionsByProviderParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListVersionsByProviderOK, error) {
-	// NOTE: parameters are not validated before sending
+	// TODO: Validate the params before sending
 	if params == nil {
 		params = NewListVersionsByProviderParams()
 	}
@@ -83,22 +83,17 @@ func (a *Client) ListVersionsByProvider(params *ListVersionsByProviderParams, au
 	for _, opt := range opts {
 		opt(op)
 	}
+
 	result, err := a.transport.Submit(op)
 	if err != nil {
 		return nil, err
 	}
-
-	// only one success response has to be checked
 	success, ok := result.(*ListVersionsByProviderOK)
 	if ok {
 		return success, nil
 	}
-
-	// unexpected success response.
-	//
-	// a default response is provided: fill this and return an error
+	// unexpected success response
 	unexpectedSuccess := result.(*ListVersionsByProviderDefault)
-
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 

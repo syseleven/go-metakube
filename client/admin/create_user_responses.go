@@ -7,7 +7,6 @@ package admin
 
 import (
 	"encoding/json"
-	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -23,7 +22,7 @@ type CreateUserReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateUserReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
+func (o *CreateUserReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 	case 201:
 		result := NewCreateUserCreated()
@@ -118,7 +117,7 @@ func (o *CreateUserCreated) readResponse(response runtime.ClientResponse, consum
 	o.Payload = new(models.User)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
@@ -304,7 +303,7 @@ func (o *CreateUserDefault) readResponse(response runtime.ClientResponse, consum
 	o.Payload = new(models.ErrorResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

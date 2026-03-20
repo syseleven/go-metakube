@@ -7,7 +7,6 @@ package openstack
 
 import (
 	"encoding/json"
-	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -23,7 +22,7 @@ type ListOpenstackQuotaLimitsNoCredentialsV2Reader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *ListOpenstackQuotaLimitsNoCredentialsV2Reader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
+func (o *ListOpenstackQuotaLimitsNoCredentialsV2Reader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 	case 200:
 		result := NewListOpenstackQuotaLimitsNoCredentialsV2OK()
@@ -106,7 +105,7 @@ func (o *ListOpenstackQuotaLimitsNoCredentialsV2OK) readResponse(response runtim
 	o.Payload = new(models.Quotas)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
@@ -180,7 +179,7 @@ func (o *ListOpenstackQuotaLimitsNoCredentialsV2Default) readResponse(response r
 	o.Payload = new(models.ErrorResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

@@ -7,7 +7,6 @@ package models
 
 import (
 	"context"
-	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -44,15 +43,11 @@ func (m *BcBody) validateBackupCredentials(formats strfmt.Registry) error {
 
 	if m.BackupCredentials != nil {
 		if err := m.BackupCredentials.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("backup_credentials")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("backup_credentials")
 			}
-
 			return err
 		}
 	}
@@ -83,15 +78,11 @@ func (m *BcBody) contextValidateBackupCredentials(ctx context.Context, formats s
 		}
 
 		if err := m.BackupCredentials.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("backup_credentials")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("backup_credentials")
 			}
-
 			return err
 		}
 	}

@@ -7,7 +7,6 @@ package models
 
 import (
 	"context"
-	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -60,15 +59,11 @@ func (m *CreateClusterSpec) validateCluster(formats strfmt.Registry) error {
 
 	if m.Cluster != nil {
 		if err := m.Cluster.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cluster")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("cluster")
 			}
-
 			return err
 		}
 	}
@@ -83,15 +78,11 @@ func (m *CreateClusterSpec) validateNodeDeployment(formats strfmt.Registry) erro
 
 	if m.NodeDeployment != nil {
 		if err := m.NodeDeployment.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("nodeDeployment")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("nodeDeployment")
 			}
-
 			return err
 		}
 	}
@@ -126,15 +117,11 @@ func (m *CreateClusterSpec) contextValidateCluster(ctx context.Context, formats 
 		}
 
 		if err := m.Cluster.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cluster")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("cluster")
 			}
-
 			return err
 		}
 	}
@@ -151,15 +138,11 @@ func (m *CreateClusterSpec) contextValidateNodeDeployment(ctx context.Context, f
 		}
 
 		if err := m.NodeDeployment.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("nodeDeployment")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("nodeDeployment")
 			}
-
 			return err
 		}
 	}

@@ -7,7 +7,6 @@ package models
 
 import (
 	"context"
-	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -84,15 +83,11 @@ func (m *ClusterNetworkingConfig) validateIPFamily(formats strfmt.Registry) erro
 	}
 
 	if err := m.IPFamily.Validate(formats); err != nil {
-		ve := new(errors.Validation)
-		if stderrors.As(err, &ve) {
+		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("ipFamily")
-		}
-		ce := new(errors.CompositeError)
-		if stderrors.As(err, &ce) {
+		} else if ce, ok := err.(*errors.CompositeError); ok {
 			return ce.ValidateName("ipFamily")
 		}
-
 		return err
 	}
 
@@ -106,15 +101,11 @@ func (m *ClusterNetworkingConfig) validateIpvs(formats strfmt.Registry) error {
 
 	if m.Ipvs != nil {
 		if err := m.Ipvs.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ipvs")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("ipvs")
 			}
-
 			return err
 		}
 	}
@@ -129,15 +120,11 @@ func (m *ClusterNetworkingConfig) validatePods(formats strfmt.Registry) error {
 
 	if m.Pods != nil {
 		if err := m.Pods.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pods")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("pods")
 			}
-
 			return err
 		}
 	}
@@ -152,15 +139,11 @@ func (m *ClusterNetworkingConfig) validateServices(formats strfmt.Registry) erro
 
 	if m.Services != nil {
 		if err := m.Services.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("services")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("services")
 			}
-
 			return err
 		}
 	}
@@ -201,15 +184,11 @@ func (m *ClusterNetworkingConfig) contextValidateIPFamily(ctx context.Context, f
 	}
 
 	if err := m.IPFamily.ContextValidate(ctx, formats); err != nil {
-		ve := new(errors.Validation)
-		if stderrors.As(err, &ve) {
+		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("ipFamily")
-		}
-		ce := new(errors.CompositeError)
-		if stderrors.As(err, &ce) {
+		} else if ce, ok := err.(*errors.CompositeError); ok {
 			return ce.ValidateName("ipFamily")
 		}
-
 		return err
 	}
 
@@ -225,15 +204,11 @@ func (m *ClusterNetworkingConfig) contextValidateIpvs(ctx context.Context, forma
 		}
 
 		if err := m.Ipvs.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("ipvs")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("ipvs")
 			}
-
 			return err
 		}
 	}
@@ -250,15 +225,11 @@ func (m *ClusterNetworkingConfig) contextValidatePods(ctx context.Context, forma
 		}
 
 		if err := m.Pods.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("pods")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("pods")
 			}
-
 			return err
 		}
 	}
@@ -275,15 +246,11 @@ func (m *ClusterNetworkingConfig) contextValidateServices(ctx context.Context, f
 		}
 
 		if err := m.Services.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("services")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("services")
 			}
-
 			return err
 		}
 	}

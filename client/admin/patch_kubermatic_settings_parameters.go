@@ -62,7 +62,7 @@ PatchKubermaticSettingsParams contains all the parameters to send to the API end
 type PatchKubermaticSettingsParams struct {
 
 	// Patch.
-	Patch any
+	Patch interface{}
 
 	timeout    time.Duration
 	Context    context.Context
@@ -118,13 +118,13 @@ func (o *PatchKubermaticSettingsParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithPatch adds the patch to the patch kubermatic settings params
-func (o *PatchKubermaticSettingsParams) WithPatch(patch any) *PatchKubermaticSettingsParams {
+func (o *PatchKubermaticSettingsParams) WithPatch(patch interface{}) *PatchKubermaticSettingsParams {
 	o.SetPatch(patch)
 	return o
 }
 
 // SetPatch adds the patch to the patch kubermatic settings params
-func (o *PatchKubermaticSettingsParams) SetPatch(patch any) {
+func (o *PatchKubermaticSettingsParams) SetPatch(patch interface{}) {
 	o.Patch = patch
 }
 

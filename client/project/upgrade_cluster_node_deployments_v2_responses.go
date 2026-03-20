@@ -7,7 +7,6 @@ package project
 
 import (
 	"encoding/json"
-	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -23,7 +22,7 @@ type UpgradeClusterNodeDeploymentsV2Reader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *UpgradeClusterNodeDeploymentsV2Reader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
+func (o *UpgradeClusterNodeDeploymentsV2Reader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 	case 200:
 		result := NewUpgradeClusterNodeDeploymentsV2OK()
@@ -290,7 +289,7 @@ func (o *UpgradeClusterNodeDeploymentsV2Default) readResponse(response runtime.C
 	o.Payload = new(models.ErrorResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
