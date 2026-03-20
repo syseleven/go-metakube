@@ -7,7 +7,6 @@ package models
 
 import (
 	"context"
-	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -114,15 +113,11 @@ func (m *DatacenterSpecOpenstack) validateImages(formats strfmt.Registry) error 
 
 	if m.Images != nil {
 		if err := m.Images.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("images")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("images")
 			}
-
 			return err
 		}
 	}
@@ -137,15 +132,11 @@ func (m *DatacenterSpecOpenstack) validateNodeSizeRequirements(formats strfmt.Re
 
 	if m.NodeSizeRequirements != nil {
 		if err := m.NodeSizeRequirements.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("nodeSizeRequirements")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("nodeSizeRequirements")
 			}
-
 			return err
 		}
 	}
@@ -178,15 +169,11 @@ func (m *DatacenterSpecOpenstack) contextValidateImages(ctx context.Context, for
 	}
 
 	if err := m.Images.ContextValidate(ctx, formats); err != nil {
-		ve := new(errors.Validation)
-		if stderrors.As(err, &ve) {
+		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("images")
-		}
-		ce := new(errors.CompositeError)
-		if stderrors.As(err, &ce) {
+		} else if ce, ok := err.(*errors.CompositeError); ok {
 			return ce.ValidateName("images")
 		}
-
 		return err
 	}
 
@@ -202,15 +189,11 @@ func (m *DatacenterSpecOpenstack) contextValidateNodeSizeRequirements(ctx contex
 		}
 
 		if err := m.NodeSizeRequirements.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("nodeSizeRequirements")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("nodeSizeRequirements")
 			}
-
 			return err
 		}
 	}

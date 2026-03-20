@@ -7,7 +7,6 @@ package etcdrestore
 
 import (
 	"encoding/json"
-	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -23,7 +22,7 @@ type CreateEtcdRestoreReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *CreateEtcdRestoreReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
+func (o *CreateEtcdRestoreReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 	case 201:
 		result := NewCreateEtcdRestoreCreated()
@@ -118,7 +117,7 @@ func (o *CreateEtcdRestoreCreated) readResponse(response runtime.ClientResponse,
 	o.Payload = new(models.EtcdBackupConfig)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
@@ -304,7 +303,7 @@ func (o *CreateEtcdRestoreDefault) readResponse(response runtime.ClientResponse,
 	o.Payload = new(models.ErrorResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

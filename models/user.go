@@ -7,7 +7,6 @@ package models
 
 import (
 	"context"
-	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -114,15 +113,11 @@ func (m *User) validateProjects(formats strfmt.Registry) error {
 
 		if m.Projects[i] != nil {
 			if err := m.Projects[i].Validate(formats); err != nil {
-				ve := new(errors.Validation)
-				if stderrors.As(err, &ve) {
+				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("projects" + "." + strconv.Itoa(i))
-				}
-				ce := new(errors.CompositeError)
-				if stderrors.As(err, &ce) {
+				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("projects" + "." + strconv.Itoa(i))
 				}
-
 				return err
 			}
 		}
@@ -139,15 +134,11 @@ func (m *User) validateUserSettings(formats strfmt.Registry) error {
 
 	if m.UserSettings != nil {
 		if err := m.UserSettings.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("userSettings")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("userSettings")
 			}
-
 			return err
 		}
 	}
@@ -184,15 +175,11 @@ func (m *User) contextValidateProjects(ctx context.Context, formats strfmt.Regis
 			}
 
 			if err := m.Projects[i].ContextValidate(ctx, formats); err != nil {
-				ve := new(errors.Validation)
-				if stderrors.As(err, &ve) {
+				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("projects" + "." + strconv.Itoa(i))
-				}
-				ce := new(errors.CompositeError)
-				if stderrors.As(err, &ce) {
+				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("projects" + "." + strconv.Itoa(i))
 				}
-
 				return err
 			}
 		}
@@ -211,15 +198,11 @@ func (m *User) contextValidateUserSettings(ctx context.Context, formats strfmt.R
 		}
 
 		if err := m.UserSettings.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("userSettings")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("userSettings")
 			}
-
 			return err
 		}
 	}

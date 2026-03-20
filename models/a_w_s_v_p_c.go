@@ -7,7 +7,6 @@ package models
 
 import (
 	"context"
-	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -89,15 +88,11 @@ func (m *AWSVPC) validateCidrBlockAssociationSet(formats strfmt.Registry) error 
 
 		if m.CidrBlockAssociationSet[i] != nil {
 			if err := m.CidrBlockAssociationSet[i].Validate(formats); err != nil {
-				ve := new(errors.Validation)
-				if stderrors.As(err, &ve) {
+				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("cidrBlockAssociationSet" + "." + strconv.Itoa(i))
-				}
-				ce := new(errors.CompositeError)
-				if stderrors.As(err, &ce) {
+				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("cidrBlockAssociationSet" + "." + strconv.Itoa(i))
 				}
-
 				return err
 			}
 		}
@@ -119,15 +114,11 @@ func (m *AWSVPC) validateIPV6CidrBlockAssociationSet(formats strfmt.Registry) er
 
 		if m.IPV6CidrBlockAssociationSet[i] != nil {
 			if err := m.IPV6CidrBlockAssociationSet[i].Validate(formats); err != nil {
-				ve := new(errors.Validation)
-				if stderrors.As(err, &ve) {
+				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("ipv6CidrBlockAssociationSet" + "." + strconv.Itoa(i))
-				}
-				ce := new(errors.CompositeError)
-				if stderrors.As(err, &ce) {
+				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("ipv6CidrBlockAssociationSet" + "." + strconv.Itoa(i))
 				}
-
 				return err
 			}
 		}
@@ -149,15 +140,11 @@ func (m *AWSVPC) validateTags(formats strfmt.Registry) error {
 
 		if m.Tags[i] != nil {
 			if err := m.Tags[i].Validate(formats); err != nil {
-				ve := new(errors.Validation)
-				if stderrors.As(err, &ve) {
+				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("tags" + "." + strconv.Itoa(i))
-				}
-				ce := new(errors.CompositeError)
-				if stderrors.As(err, &ce) {
+				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("tags" + "." + strconv.Itoa(i))
 				}
-
 				return err
 			}
 		}
@@ -200,15 +187,11 @@ func (m *AWSVPC) contextValidateCidrBlockAssociationSet(ctx context.Context, for
 			}
 
 			if err := m.CidrBlockAssociationSet[i].ContextValidate(ctx, formats); err != nil {
-				ve := new(errors.Validation)
-				if stderrors.As(err, &ve) {
+				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("cidrBlockAssociationSet" + "." + strconv.Itoa(i))
-				}
-				ce := new(errors.CompositeError)
-				if stderrors.As(err, &ce) {
+				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("cidrBlockAssociationSet" + "." + strconv.Itoa(i))
 				}
-
 				return err
 			}
 		}
@@ -229,15 +212,11 @@ func (m *AWSVPC) contextValidateIPV6CidrBlockAssociationSet(ctx context.Context,
 			}
 
 			if err := m.IPV6CidrBlockAssociationSet[i].ContextValidate(ctx, formats); err != nil {
-				ve := new(errors.Validation)
-				if stderrors.As(err, &ve) {
+				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("ipv6CidrBlockAssociationSet" + "." + strconv.Itoa(i))
-				}
-				ce := new(errors.CompositeError)
-				if stderrors.As(err, &ce) {
+				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("ipv6CidrBlockAssociationSet" + "." + strconv.Itoa(i))
 				}
-
 				return err
 			}
 		}
@@ -258,15 +237,11 @@ func (m *AWSVPC) contextValidateTags(ctx context.Context, formats strfmt.Registr
 			}
 
 			if err := m.Tags[i].ContextValidate(ctx, formats); err != nil {
-				ve := new(errors.Validation)
-				if stderrors.As(err, &ve) {
+				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("tags" + "." + strconv.Itoa(i))
-				}
-				ce := new(errors.CompositeError)
-				if stderrors.As(err, &ce) {
+				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("tags" + "." + strconv.Itoa(i))
 				}
-
 				return err
 			}
 		}

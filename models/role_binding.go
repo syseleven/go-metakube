@@ -7,7 +7,6 @@ package models
 
 import (
 	"context"
-	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -56,15 +55,11 @@ func (m *RoleBinding) validateSubjects(formats strfmt.Registry) error {
 
 		if m.Subjects[i] != nil {
 			if err := m.Subjects[i].Validate(formats); err != nil {
-				ve := new(errors.Validation)
-				if stderrors.As(err, &ve) {
+				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("subjects" + "." + strconv.Itoa(i))
-				}
-				ce := new(errors.CompositeError)
-				if stderrors.As(err, &ce) {
+				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("subjects" + "." + strconv.Itoa(i))
 				}
-
 				return err
 			}
 		}
@@ -99,15 +94,11 @@ func (m *RoleBinding) contextValidateSubjects(ctx context.Context, formats strfm
 			}
 
 			if err := m.Subjects[i].ContextValidate(ctx, formats); err != nil {
-				ve := new(errors.Validation)
-				if stderrors.As(err, &ve) {
+				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("subjects" + "." + strconv.Itoa(i))
-				}
-				ce := new(errors.CompositeError)
-				if stderrors.As(err, &ce) {
+				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("subjects" + "." + strconv.Itoa(i))
 				}
-
 				return err
 			}
 		}

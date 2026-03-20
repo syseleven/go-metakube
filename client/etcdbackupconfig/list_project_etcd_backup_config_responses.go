@@ -7,7 +7,6 @@ package etcdbackupconfig
 
 import (
 	"encoding/json"
-	stderrors "errors"
 	"fmt"
 	"io"
 
@@ -23,7 +22,7 @@ type ListProjectEtcdBackupConfigReader struct {
 }
 
 // ReadResponse reads a server response into the received o.
-func (o *ListProjectEtcdBackupConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
+func (o *ListProjectEtcdBackupConfigReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (interface{}, error) {
 	switch response.Code() {
 	case 200:
 		result := NewListProjectEtcdBackupConfigOK()
@@ -116,7 +115,7 @@ func (o *ListProjectEtcdBackupConfigOK) GetPayload() []*models.EtcdBackupConfig 
 func (o *ListProjectEtcdBackupConfigOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	// response payload
-	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
+	if err := consumer.Consume(response.Body(), &o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 
@@ -302,7 +301,7 @@ func (o *ListProjectEtcdBackupConfigDefault) readResponse(response runtime.Clien
 	o.Payload = new(models.ErrorResponse)
 
 	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
 		return err
 	}
 

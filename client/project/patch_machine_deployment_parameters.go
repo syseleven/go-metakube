@@ -62,7 +62,7 @@ PatchMachineDeploymentParams contains all the parameters to send to the API endp
 type PatchMachineDeploymentParams struct {
 
 	// Patch.
-	Patch any
+	Patch interface{}
 
 	// ClusterID.
 	ClusterID string
@@ -127,13 +127,13 @@ func (o *PatchMachineDeploymentParams) SetHTTPClient(client *http.Client) {
 }
 
 // WithPatch adds the patch to the patch machine deployment params
-func (o *PatchMachineDeploymentParams) WithPatch(patch any) *PatchMachineDeploymentParams {
+func (o *PatchMachineDeploymentParams) WithPatch(patch interface{}) *PatchMachineDeploymentParams {
 	o.SetPatch(patch)
 	return o
 }
 
 // SetPatch adds the patch to the patch machine deployment params
-func (o *PatchMachineDeploymentParams) SetPatch(patch any) {
+func (o *PatchMachineDeploymentParams) SetPatch(patch interface{}) {
 	o.Patch = patch
 }
 

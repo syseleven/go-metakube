@@ -7,7 +7,6 @@ package models
 
 import (
 	"context"
-	stderrors "errors"
 	"strconv"
 
 	"github.com/go-openapi/errors"
@@ -88,15 +87,11 @@ func (m *NodeSpec) validateTaints(formats strfmt.Registry) error {
 
 		if m.Taints[i] != nil {
 			if err := m.Taints[i].Validate(formats); err != nil {
-				ve := new(errors.Validation)
-				if stderrors.As(err, &ve) {
+				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("taints" + "." + strconv.Itoa(i))
-				}
-				ce := new(errors.CompositeError)
-				if stderrors.As(err, &ce) {
+				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("taints" + "." + strconv.Itoa(i))
 				}
-
 				return err
 			}
 		}
@@ -114,15 +109,11 @@ func (m *NodeSpec) validateCloud(formats strfmt.Registry) error {
 
 	if m.Cloud != nil {
 		if err := m.Cloud.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cloud")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("cloud")
 			}
-
 			return err
 		}
 	}
@@ -138,15 +129,11 @@ func (m *NodeSpec) validateOperatingSystem(formats strfmt.Registry) error {
 
 	if m.OperatingSystem != nil {
 		if err := m.OperatingSystem.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("operatingSystem")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("operatingSystem")
 			}
-
 			return err
 		}
 	}
@@ -162,15 +149,11 @@ func (m *NodeSpec) validateVersions(formats strfmt.Registry) error {
 
 	if m.Versions != nil {
 		if err := m.Versions.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("versions")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("versions")
 			}
-
 			return err
 		}
 	}
@@ -215,15 +198,11 @@ func (m *NodeSpec) contextValidateTaints(ctx context.Context, formats strfmt.Reg
 			}
 
 			if err := m.Taints[i].ContextValidate(ctx, formats); err != nil {
-				ve := new(errors.Validation)
-				if stderrors.As(err, &ve) {
+				if ve, ok := err.(*errors.Validation); ok {
 					return ve.ValidateName("taints" + "." + strconv.Itoa(i))
-				}
-				ce := new(errors.CompositeError)
-				if stderrors.As(err, &ce) {
+				} else if ce, ok := err.(*errors.CompositeError); ok {
 					return ce.ValidateName("taints" + "." + strconv.Itoa(i))
 				}
-
 				return err
 			}
 		}
@@ -238,15 +217,11 @@ func (m *NodeSpec) contextValidateCloud(ctx context.Context, formats strfmt.Regi
 	if m.Cloud != nil {
 
 		if err := m.Cloud.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cloud")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("cloud")
 			}
-
 			return err
 		}
 	}
@@ -259,15 +234,11 @@ func (m *NodeSpec) contextValidateOperatingSystem(ctx context.Context, formats s
 	if m.OperatingSystem != nil {
 
 		if err := m.OperatingSystem.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("operatingSystem")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("operatingSystem")
 			}
-
 			return err
 		}
 	}
@@ -280,15 +251,11 @@ func (m *NodeSpec) contextValidateVersions(ctx context.Context, formats strfmt.R
 	if m.Versions != nil {
 
 		if err := m.Versions.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("versions")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("versions")
 			}
-
 			return err
 		}
 	}

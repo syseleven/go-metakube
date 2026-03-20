@@ -7,7 +7,6 @@ package models
 
 import (
 	"context"
-	stderrors "errors"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
@@ -34,6 +33,10 @@ type ClusterSpec struct {
 	// the cluster creation any attached ssh keys won't be synced to the worker nodes. Once the agent is enabled/disabled
 	// it cannot be changed after the cluster is being created.
 	EnableUserSSHKeyAgent *bool `json:"enableUserSSHKeyAgent,omitempty"`
+
+	// Features is a set of enabled features for this cluster.
+	// Used mainly for internal debugging purposes.
+	Features []string `json:"features"`
 
 	// PodNodeSelectorAdmissionPluginConfig provides the configuration for the PodNodeSelector.
 	// It's used by the backend to create a configuration file for this plugin.
@@ -132,15 +135,11 @@ func (m *ClusterSpec) validateAuditLogging(formats strfmt.Registry) error {
 
 	if m.AuditLogging != nil {
 		if err := m.AuditLogging.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("auditLogging")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("auditLogging")
 			}
-
 			return err
 		}
 	}
@@ -155,15 +154,11 @@ func (m *ClusterSpec) validateCloud(formats strfmt.Registry) error {
 
 	if m.Cloud != nil {
 		if err := m.Cloud.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cloud")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("cloud")
 			}
-
 			return err
 		}
 	}
@@ -178,15 +173,11 @@ func (m *ClusterSpec) validateClusterNetwork(formats strfmt.Registry) error {
 
 	if m.ClusterNetwork != nil {
 		if err := m.ClusterNetwork.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("clusterNetwork")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("clusterNetwork")
 			}
-
 			return err
 		}
 	}
@@ -201,15 +192,11 @@ func (m *ClusterSpec) validateCniPlugin(formats strfmt.Registry) error {
 
 	if m.CniPlugin != nil {
 		if err := m.CniPlugin.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cniPlugin")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("cniPlugin")
 			}
-
 			return err
 		}
 	}
@@ -224,15 +211,11 @@ func (m *ClusterSpec) validateOidc(formats strfmt.Registry) error {
 
 	if m.Oidc != nil {
 		if err := m.Oidc.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("oidc")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("oidc")
 			}
-
 			return err
 		}
 	}
@@ -247,15 +230,11 @@ func (m *ClusterSpec) validateServiceAccount(formats strfmt.Registry) error {
 
 	if m.ServiceAccount != nil {
 		if err := m.ServiceAccount.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("serviceAccount")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("serviceAccount")
 			}
-
 			return err
 		}
 	}
@@ -270,15 +249,11 @@ func (m *ClusterSpec) validateSys11auth(formats strfmt.Registry) error {
 
 	if m.Sys11auth != nil {
 		if err := m.Sys11auth.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("sys11auth")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("sys11auth")
 			}
-
 			return err
 		}
 	}
@@ -293,15 +268,11 @@ func (m *ClusterSpec) validateUpdateWindow(formats strfmt.Registry) error {
 
 	if m.UpdateWindow != nil {
 		if err := m.UpdateWindow.Validate(formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("updateWindow")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("updateWindow")
 			}
-
 			return err
 		}
 	}
@@ -315,15 +286,11 @@ func (m *ClusterSpec) validateVersion(formats strfmt.Registry) error {
 	}
 
 	if err := m.Version.Validate(formats); err != nil {
-		ve := new(errors.Validation)
-		if stderrors.As(err, &ve) {
+		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("version")
-		}
-		ce := new(errors.CompositeError)
-		if stderrors.As(err, &ce) {
+		} else if ce, ok := err.(*errors.CompositeError); ok {
 			return ce.ValidateName("version")
 		}
-
 		return err
 	}
 
@@ -385,15 +352,11 @@ func (m *ClusterSpec) contextValidateAuditLogging(ctx context.Context, formats s
 		}
 
 		if err := m.AuditLogging.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("auditLogging")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("auditLogging")
 			}
-
 			return err
 		}
 	}
@@ -410,15 +373,11 @@ func (m *ClusterSpec) contextValidateCloud(ctx context.Context, formats strfmt.R
 		}
 
 		if err := m.Cloud.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cloud")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("cloud")
 			}
-
 			return err
 		}
 	}
@@ -435,15 +394,11 @@ func (m *ClusterSpec) contextValidateClusterNetwork(ctx context.Context, formats
 		}
 
 		if err := m.ClusterNetwork.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("clusterNetwork")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("clusterNetwork")
 			}
-
 			return err
 		}
 	}
@@ -460,15 +415,11 @@ func (m *ClusterSpec) contextValidateCniPlugin(ctx context.Context, formats strf
 		}
 
 		if err := m.CniPlugin.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("cniPlugin")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("cniPlugin")
 			}
-
 			return err
 		}
 	}
@@ -485,15 +436,11 @@ func (m *ClusterSpec) contextValidateOidc(ctx context.Context, formats strfmt.Re
 		}
 
 		if err := m.Oidc.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("oidc")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("oidc")
 			}
-
 			return err
 		}
 	}
@@ -510,15 +457,11 @@ func (m *ClusterSpec) contextValidateServiceAccount(ctx context.Context, formats
 		}
 
 		if err := m.ServiceAccount.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("serviceAccount")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("serviceAccount")
 			}
-
 			return err
 		}
 	}
@@ -535,15 +478,11 @@ func (m *ClusterSpec) contextValidateSys11auth(ctx context.Context, formats strf
 		}
 
 		if err := m.Sys11auth.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("sys11auth")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("sys11auth")
 			}
-
 			return err
 		}
 	}
@@ -560,15 +499,11 @@ func (m *ClusterSpec) contextValidateUpdateWindow(ctx context.Context, formats s
 		}
 
 		if err := m.UpdateWindow.ContextValidate(ctx, formats); err != nil {
-			ve := new(errors.Validation)
-			if stderrors.As(err, &ve) {
+			if ve, ok := err.(*errors.Validation); ok {
 				return ve.ValidateName("updateWindow")
-			}
-			ce := new(errors.CompositeError)
-			if stderrors.As(err, &ce) {
+			} else if ce, ok := err.(*errors.CompositeError); ok {
 				return ce.ValidateName("updateWindow")
 			}
-
 			return err
 		}
 	}
@@ -583,15 +518,11 @@ func (m *ClusterSpec) contextValidateVersion(ctx context.Context, formats strfmt
 	}
 
 	if err := m.Version.ContextValidate(ctx, formats); err != nil {
-		ve := new(errors.Validation)
-		if stderrors.As(err, &ve) {
+		if ve, ok := err.(*errors.Validation); ok {
 			return ve.ValidateName("version")
-		}
-		ce := new(errors.CompositeError)
-		if stderrors.As(err, &ce) {
+		} else if ce, ok := err.(*errors.CompositeError); ok {
 			return ce.ValidateName("version")
 		}
-
 		return err
 	}
 
