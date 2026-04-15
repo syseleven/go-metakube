@@ -21,7 +21,7 @@ type Sys11AuthSettings struct {
 	IAMAuthentication *bool `json:"iamAuthentication,omitempty"`
 
 	// +optional
-	Realm string `json:"realm,omitempty"`
+	Realm *string `json:"realm,omitempty"`
 }
 
 // Validate validates this sys11 auth settings

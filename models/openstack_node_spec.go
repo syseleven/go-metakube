@@ -43,6 +43,10 @@ type OpenstackNodeSpec struct {
 	// Defaults to the corresponding setting from the cluster spec
 	ServerGroupID string `json:"serverGroupID,omitempty"`
 
+	// Openstack server group name of the instance
+	// Defaults to the corresponding setting from the cluster spec
+	ServerGroupName string `json:"serverGroupName,omitempty"`
+
 	// Additional metadata to set
 	Tags map[string]string `json:"tags,omitempty"`
 

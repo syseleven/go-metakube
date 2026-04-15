@@ -69,9 +69,16 @@ type OpenstackCloudSpec struct {
 	SecurityGroups string `json:"securityGroups,omitempty"`
 
 	// ServerGroupID used as schedule hint shared between all machines in the cluster,
-	// When not specified, soft-anti-affinity server group will be automatically created
+	// When neither ServerGroupID nor ServerGroupName specified, soft-anti-affinity server group will be automatically created.
+	// This field is mututal exclusive to ServerGroupName.
 	// +optional
 	ServerGroupID string `json:"serverGroupID,omitempty"`
+
+	// ServerGroupName used as schedule hint shared between all machines in the cluster,
+	// When neither ServerGroupName nor ServerGroupID specified, soft-anti-affinity server group will be automatically created.
+	// This field is mututal exclusive to ServerGroupID.
+	// +optional
+	ServerGroupName string `json:"serverGroupName,omitempty"`
 
 	// +optional
 	SubnetCIDR string `json:"subnetCIDR,omitempty"`
