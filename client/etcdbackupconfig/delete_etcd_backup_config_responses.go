@@ -174,9 +174,10 @@ func NewDeleteEtcdBackupConfigForbidden() *DeleteEtcdBackupConfigForbidden {
 /*
 DeleteEtcdBackupConfigForbidden describes a response with status code 403, with default header values.
 
-EmptyResponse is a empty response
+errorResponse
 */
 type DeleteEtcdBackupConfigForbidden struct {
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this delete etcd backup config forbidden response has a 2xx status code
@@ -210,14 +211,27 @@ func (o *DeleteEtcdBackupConfigForbidden) Code() int {
 }
 
 func (o *DeleteEtcdBackupConfigForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/etcdbackupconfigs/{ebc_id}][%d] deleteEtcdBackupConfigForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/etcdbackupconfigs/{ebc_id}][%d] deleteEtcdBackupConfigForbidden %s", 403, payload)
 }
 
 func (o *DeleteEtcdBackupConfigForbidden) String() string {
-	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/etcdbackupconfigs/{ebc_id}][%d] deleteEtcdBackupConfigForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/etcdbackupconfigs/{ebc_id}][%d] deleteEtcdBackupConfigForbidden %s", 403, payload)
+}
+
+func (o *DeleteEtcdBackupConfigForbidden) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *DeleteEtcdBackupConfigForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

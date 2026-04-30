@@ -186,9 +186,10 @@ func NewListEtcdBackupConfigForbidden() *ListEtcdBackupConfigForbidden {
 /*
 ListEtcdBackupConfigForbidden describes a response with status code 403, with default header values.
 
-EmptyResponse is a empty response
+errorResponse
 */
 type ListEtcdBackupConfigForbidden struct {
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this list etcd backup config forbidden response has a 2xx status code
@@ -222,14 +223,27 @@ func (o *ListEtcdBackupConfigForbidden) Code() int {
 }
 
 func (o *ListEtcdBackupConfigForbidden) Error() string {
-	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/etcdbackupconfigs][%d] listEtcdBackupConfigForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/etcdbackupconfigs][%d] listEtcdBackupConfigForbidden %s", 403, payload)
 }
 
 func (o *ListEtcdBackupConfigForbidden) String() string {
-	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/etcdbackupconfigs][%d] listEtcdBackupConfigForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/etcdbackupconfigs][%d] listEtcdBackupConfigForbidden %s", 403, payload)
+}
+
+func (o *ListEtcdBackupConfigForbidden) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *ListEtcdBackupConfigForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

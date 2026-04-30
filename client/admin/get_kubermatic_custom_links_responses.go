@@ -186,9 +186,10 @@ func NewGetKubermaticCustomLinksForbidden() *GetKubermaticCustomLinksForbidden {
 /*
 GetKubermaticCustomLinksForbidden describes a response with status code 403, with default header values.
 
-EmptyResponse is a empty response
+errorResponse
 */
 type GetKubermaticCustomLinksForbidden struct {
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this get kubermatic custom links forbidden response has a 2xx status code
@@ -222,14 +223,27 @@ func (o *GetKubermaticCustomLinksForbidden) Code() int {
 }
 
 func (o *GetKubermaticCustomLinksForbidden) Error() string {
-	return fmt.Sprintf("[GET /api/v1/admin/settings/customlinks][%d] getKubermaticCustomLinksForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/admin/settings/customlinks][%d] getKubermaticCustomLinksForbidden %s", 403, payload)
 }
 
 func (o *GetKubermaticCustomLinksForbidden) String() string {
-	return fmt.Sprintf("[GET /api/v1/admin/settings/customlinks][%d] getKubermaticCustomLinksForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/admin/settings/customlinks][%d] getKubermaticCustomLinksForbidden %s", 403, payload)
+}
+
+func (o *GetKubermaticCustomLinksForbidden) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *GetKubermaticCustomLinksForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

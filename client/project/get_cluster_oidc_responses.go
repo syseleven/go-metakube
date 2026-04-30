@@ -188,9 +188,10 @@ func NewGetClusterOidcForbidden() *GetClusterOidcForbidden {
 /*
 GetClusterOidcForbidden describes a response with status code 403, with default header values.
 
-EmptyResponse is a empty response
+errorResponse
 */
 type GetClusterOidcForbidden struct {
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this get cluster oidc forbidden response has a 2xx status code
@@ -224,14 +225,27 @@ func (o *GetClusterOidcForbidden) Code() int {
 }
 
 func (o *GetClusterOidcForbidden) Error() string {
-	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/oidc][%d] getClusterOidcForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/oidc][%d] getClusterOidcForbidden %s", 403, payload)
 }
 
 func (o *GetClusterOidcForbidden) String() string {
-	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/oidc][%d] getClusterOidcForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/oidc][%d] getClusterOidcForbidden %s", 403, payload)
+}
+
+func (o *GetClusterOidcForbidden) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *GetClusterOidcForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

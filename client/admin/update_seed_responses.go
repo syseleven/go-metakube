@@ -191,9 +191,10 @@ func NewUpdateSeedForbidden() *UpdateSeedForbidden {
 /*
 UpdateSeedForbidden describes a response with status code 403, with default header values.
 
-EmptyResponse is a empty response
+errorResponse
 */
 type UpdateSeedForbidden struct {
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this update seed forbidden response has a 2xx status code
@@ -227,14 +228,27 @@ func (o *UpdateSeedForbidden) Code() int {
 }
 
 func (o *UpdateSeedForbidden) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/seeds/{seed_name}][%d] updateSeedForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /api/v1/admin/seeds/{seed_name}][%d] updateSeedForbidden %s", 403, payload)
 }
 
 func (o *UpdateSeedForbidden) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/seeds/{seed_name}][%d] updateSeedForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /api/v1/admin/seeds/{seed_name}][%d] updateSeedForbidden %s", 403, payload)
+}
+
+func (o *UpdateSeedForbidden) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *UpdateSeedForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

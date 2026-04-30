@@ -144,9 +144,10 @@ func NewUpdateProjectBadRequest() *UpdateProjectBadRequest {
 /*
 UpdateProjectBadRequest describes a response with status code 400, with default header values.
 
-EmptyResponse is a empty response
+errorResponse
 */
 type UpdateProjectBadRequest struct {
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this update project bad request response has a 2xx status code
@@ -180,14 +181,27 @@ func (o *UpdateProjectBadRequest) Code() int {
 }
 
 func (o *UpdateProjectBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /api/v1/projects/{project_id}][%d] updateProjectBadRequest", 400)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v1/projects/{project_id}][%d] updateProjectBadRequest %s", 400, payload)
 }
 
 func (o *UpdateProjectBadRequest) String() string {
-	return fmt.Sprintf("[PUT /api/v1/projects/{project_id}][%d] updateProjectBadRequest", 400)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v1/projects/{project_id}][%d] updateProjectBadRequest %s", 400, payload)
+}
+
+func (o *UpdateProjectBadRequest) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *UpdateProjectBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }
@@ -200,9 +214,10 @@ func NewUpdateProjectNotFound() *UpdateProjectNotFound {
 /*
 UpdateProjectNotFound describes a response with status code 404, with default header values.
 
-EmptyResponse is a empty response
+errorResponse
 */
 type UpdateProjectNotFound struct {
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this update project not found response has a 2xx status code
@@ -236,14 +251,27 @@ func (o *UpdateProjectNotFound) Code() int {
 }
 
 func (o *UpdateProjectNotFound) Error() string {
-	return fmt.Sprintf("[PUT /api/v1/projects/{project_id}][%d] updateProjectNotFound", 404)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v1/projects/{project_id}][%d] updateProjectNotFound %s", 404, payload)
 }
 
 func (o *UpdateProjectNotFound) String() string {
-	return fmt.Sprintf("[PUT /api/v1/projects/{project_id}][%d] updateProjectNotFound", 404)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v1/projects/{project_id}][%d] updateProjectNotFound %s", 404, payload)
+}
+
+func (o *UpdateProjectNotFound) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *UpdateProjectNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }
@@ -256,9 +284,10 @@ func NewUpdateProjectInternalServerError() *UpdateProjectInternalServerError {
 /*
 UpdateProjectInternalServerError describes a response with status code 500, with default header values.
 
-EmptyResponse is a empty response
+errorResponse
 */
 type UpdateProjectInternalServerError struct {
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this update project internal server error response has a 2xx status code
@@ -292,14 +321,27 @@ func (o *UpdateProjectInternalServerError) Code() int {
 }
 
 func (o *UpdateProjectInternalServerError) Error() string {
-	return fmt.Sprintf("[PUT /api/v1/projects/{project_id}][%d] updateProjectInternalServerError", 500)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v1/projects/{project_id}][%d] updateProjectInternalServerError %s", 500, payload)
 }
 
 func (o *UpdateProjectInternalServerError) String() string {
-	return fmt.Sprintf("[PUT /api/v1/projects/{project_id}][%d] updateProjectInternalServerError", 500)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v1/projects/{project_id}][%d] updateProjectInternalServerError %s", 500, payload)
+}
+
+func (o *UpdateProjectInternalServerError) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *UpdateProjectInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }
@@ -312,9 +354,10 @@ func NewUpdateProjectNotImplemented() *UpdateProjectNotImplemented {
 /*
 UpdateProjectNotImplemented describes a response with status code 501, with default header values.
 
-EmptyResponse is a empty response
+errorResponse
 */
 type UpdateProjectNotImplemented struct {
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this update project not implemented response has a 2xx status code
@@ -348,14 +391,27 @@ func (o *UpdateProjectNotImplemented) Code() int {
 }
 
 func (o *UpdateProjectNotImplemented) Error() string {
-	return fmt.Sprintf("[PUT /api/v1/projects/{project_id}][%d] updateProjectNotImplemented", 501)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v1/projects/{project_id}][%d] updateProjectNotImplemented %s", 501, payload)
 }
 
 func (o *UpdateProjectNotImplemented) String() string {
-	return fmt.Sprintf("[PUT /api/v1/projects/{project_id}][%d] updateProjectNotImplemented", 501)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /api/v1/projects/{project_id}][%d] updateProjectNotImplemented %s", 501, payload)
+}
+
+func (o *UpdateProjectNotImplemented) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *UpdateProjectNotImplemented) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

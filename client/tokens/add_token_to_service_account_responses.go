@@ -188,9 +188,10 @@ func NewAddTokenToServiceAccountForbidden() *AddTokenToServiceAccountForbidden {
 /*
 AddTokenToServiceAccountForbidden describes a response with status code 403, with default header values.
 
-EmptyResponse is a empty response
+errorResponse
 */
 type AddTokenToServiceAccountForbidden struct {
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this add token to service account forbidden response has a 2xx status code
@@ -224,14 +225,27 @@ func (o *AddTokenToServiceAccountForbidden) Code() int {
 }
 
 func (o *AddTokenToServiceAccountForbidden) Error() string {
-	return fmt.Sprintf("[POST /api/v1/projects/{project_id}/serviceaccounts/{serviceaccount_id}/tokens][%d] addTokenToServiceAccountForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/projects/{project_id}/serviceaccounts/{serviceaccount_id}/tokens][%d] addTokenToServiceAccountForbidden %s", 403, payload)
 }
 
 func (o *AddTokenToServiceAccountForbidden) String() string {
-	return fmt.Sprintf("[POST /api/v1/projects/{project_id}/serviceaccounts/{serviceaccount_id}/tokens][%d] addTokenToServiceAccountForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/projects/{project_id}/serviceaccounts/{serviceaccount_id}/tokens][%d] addTokenToServiceAccountForbidden %s", 403, payload)
+}
+
+func (o *AddTokenToServiceAccountForbidden) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *AddTokenToServiceAccountForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

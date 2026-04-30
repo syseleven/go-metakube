@@ -190,9 +190,10 @@ func NewCreateProjectConflict() *CreateProjectConflict {
 /*
 CreateProjectConflict describes a response with status code 409, with default header values.
 
-EmptyResponse is a empty response
+errorResponse
 */
 type CreateProjectConflict struct {
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this create project conflict response has a 2xx status code
@@ -226,14 +227,27 @@ func (o *CreateProjectConflict) Code() int {
 }
 
 func (o *CreateProjectConflict) Error() string {
-	return fmt.Sprintf("[POST /api/v1/projects][%d] createProjectConflict", 409)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/projects][%d] createProjectConflict %s", 409, payload)
 }
 
 func (o *CreateProjectConflict) String() string {
-	return fmt.Sprintf("[POST /api/v1/projects][%d] createProjectConflict", 409)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /api/v1/projects][%d] createProjectConflict %s", 409, payload)
+}
+
+func (o *CreateProjectConflict) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *CreateProjectConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

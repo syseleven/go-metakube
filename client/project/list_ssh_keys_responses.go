@@ -186,9 +186,10 @@ func NewListSSHKeysForbidden() *ListSSHKeysForbidden {
 /*
 ListSSHKeysForbidden describes a response with status code 403, with default header values.
 
-EmptyResponse is a empty response
+errorResponse
 */
 type ListSSHKeysForbidden struct {
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this list Ssh keys forbidden response has a 2xx status code
@@ -222,14 +223,27 @@ func (o *ListSSHKeysForbidden) Code() int {
 }
 
 func (o *ListSSHKeysForbidden) Error() string {
-	return fmt.Sprintf("[GET /api/v1/projects/{project_id}/sshkeys][%d] listSshKeysForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/projects/{project_id}/sshkeys][%d] listSshKeysForbidden %s", 403, payload)
 }
 
 func (o *ListSSHKeysForbidden) String() string {
-	return fmt.Sprintf("[GET /api/v1/projects/{project_id}/sshkeys][%d] listSshKeysForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/projects/{project_id}/sshkeys][%d] listSshKeysForbidden %s", 403, payload)
+}
+
+func (o *ListSSHKeysForbidden) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *ListSSHKeysForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

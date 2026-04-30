@@ -174,9 +174,10 @@ func NewDeleteSSHKeyForbidden() *DeleteSSHKeyForbidden {
 /*
 DeleteSSHKeyForbidden describes a response with status code 403, with default header values.
 
-EmptyResponse is a empty response
+errorResponse
 */
 type DeleteSSHKeyForbidden struct {
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this delete Ssh key forbidden response has a 2xx status code
@@ -210,14 +211,27 @@ func (o *DeleteSSHKeyForbidden) Code() int {
 }
 
 func (o *DeleteSSHKeyForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/projects/{project_id}/sshkeys/{key_id}][%d] deleteSshKeyForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /api/v1/projects/{project_id}/sshkeys/{key_id}][%d] deleteSshKeyForbidden %s", 403, payload)
 }
 
 func (o *DeleteSSHKeyForbidden) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/projects/{project_id}/sshkeys/{key_id}][%d] deleteSshKeyForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /api/v1/projects/{project_id}/sshkeys/{key_id}][%d] deleteSshKeyForbidden %s", 403, payload)
+}
+
+func (o *DeleteSSHKeyForbidden) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *DeleteSSHKeyForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }
