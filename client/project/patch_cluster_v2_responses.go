@@ -188,9 +188,10 @@ func NewPatchClusterV2Forbidden() *PatchClusterV2Forbidden {
 /*
 PatchClusterV2Forbidden describes a response with status code 403, with default header values.
 
-EmptyResponse is a empty response
+errorResponse
 */
 type PatchClusterV2Forbidden struct {
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this patch cluster v2 forbidden response has a 2xx status code
@@ -224,14 +225,27 @@ func (o *PatchClusterV2Forbidden) Code() int {
 }
 
 func (o *PatchClusterV2Forbidden) Error() string {
-	return fmt.Sprintf("[PATCH /api/v2/projects/{project_id}/clusters/{cluster_id}][%d] patchClusterV2Forbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /api/v2/projects/{project_id}/clusters/{cluster_id}][%d] patchClusterV2Forbidden %s", 403, payload)
 }
 
 func (o *PatchClusterV2Forbidden) String() string {
-	return fmt.Sprintf("[PATCH /api/v2/projects/{project_id}/clusters/{cluster_id}][%d] patchClusterV2Forbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /api/v2/projects/{project_id}/clusters/{cluster_id}][%d] patchClusterV2Forbidden %s", 403, payload)
+}
+
+func (o *PatchClusterV2Forbidden) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *PatchClusterV2Forbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

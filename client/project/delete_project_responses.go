@@ -174,9 +174,10 @@ func NewDeleteProjectForbidden() *DeleteProjectForbidden {
 /*
 DeleteProjectForbidden describes a response with status code 403, with default header values.
 
-EmptyResponse is a empty response
+errorResponse
 */
 type DeleteProjectForbidden struct {
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this delete project forbidden response has a 2xx status code
@@ -210,14 +211,27 @@ func (o *DeleteProjectForbidden) Code() int {
 }
 
 func (o *DeleteProjectForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/projects/{project_id}][%d] deleteProjectForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /api/v1/projects/{project_id}][%d] deleteProjectForbidden %s", 403, payload)
 }
 
 func (o *DeleteProjectForbidden) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/projects/{project_id}][%d] deleteProjectForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /api/v1/projects/{project_id}][%d] deleteProjectForbidden %s", 403, payload)
+}
+
+func (o *DeleteProjectForbidden) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *DeleteProjectForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

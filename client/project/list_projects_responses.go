@@ -186,9 +186,10 @@ func NewListProjectsConflict() *ListProjectsConflict {
 /*
 ListProjectsConflict describes a response with status code 409, with default header values.
 
-EmptyResponse is a empty response
+errorResponse
 */
 type ListProjectsConflict struct {
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this list projects conflict response has a 2xx status code
@@ -222,14 +223,27 @@ func (o *ListProjectsConflict) Code() int {
 }
 
 func (o *ListProjectsConflict) Error() string {
-	return fmt.Sprintf("[GET /api/v1/projects][%d] listProjectsConflict", 409)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/projects][%d] listProjectsConflict %s", 409, payload)
 }
 
 func (o *ListProjectsConflict) String() string {
-	return fmt.Sprintf("[GET /api/v1/projects][%d] listProjectsConflict", 409)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v1/projects][%d] listProjectsConflict %s", 409, payload)
+}
+
+func (o *ListProjectsConflict) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *ListProjectsConflict) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

@@ -188,9 +188,10 @@ func NewGetMachineDeploymentForbidden() *GetMachineDeploymentForbidden {
 /*
 GetMachineDeploymentForbidden describes a response with status code 403, with default header values.
 
-EmptyResponse is a empty response
+errorResponse
 */
 type GetMachineDeploymentForbidden struct {
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this get machine deployment forbidden response has a 2xx status code
@@ -224,14 +225,27 @@ func (o *GetMachineDeploymentForbidden) Code() int {
 }
 
 func (o *GetMachineDeploymentForbidden) Error() string {
-	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments/{machinedeployment_id}][%d] getMachineDeploymentForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments/{machinedeployment_id}][%d] getMachineDeploymentForbidden %s", 403, payload)
 }
 
 func (o *GetMachineDeploymentForbidden) String() string {
-	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments/{machinedeployment_id}][%d] getMachineDeploymentForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments/{machinedeployment_id}][%d] getMachineDeploymentForbidden %s", 403, payload)
+}
+
+func (o *GetMachineDeploymentForbidden) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *GetMachineDeploymentForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

@@ -188,9 +188,10 @@ func NewPatchKubermaticSettingsForbidden() *PatchKubermaticSettingsForbidden {
 /*
 PatchKubermaticSettingsForbidden describes a response with status code 403, with default header values.
 
-EmptyResponse is a empty response
+errorResponse
 */
 type PatchKubermaticSettingsForbidden struct {
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this patch kubermatic settings forbidden response has a 2xx status code
@@ -224,14 +225,27 @@ func (o *PatchKubermaticSettingsForbidden) Code() int {
 }
 
 func (o *PatchKubermaticSettingsForbidden) Error() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/settings][%d] patchKubermaticSettingsForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /api/v1/admin/settings][%d] patchKubermaticSettingsForbidden %s", 403, payload)
 }
 
 func (o *PatchKubermaticSettingsForbidden) String() string {
-	return fmt.Sprintf("[PATCH /api/v1/admin/settings][%d] patchKubermaticSettingsForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /api/v1/admin/settings][%d] patchKubermaticSettingsForbidden %s", 403, payload)
+}
+
+func (o *PatchKubermaticSettingsForbidden) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *PatchKubermaticSettingsForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

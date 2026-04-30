@@ -186,9 +186,10 @@ func NewListMachineDeploymentsForbidden() *ListMachineDeploymentsForbidden {
 /*
 ListMachineDeploymentsForbidden describes a response with status code 403, with default header values.
 
-EmptyResponse is a empty response
+errorResponse
 */
 type ListMachineDeploymentsForbidden struct {
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this list machine deployments forbidden response has a 2xx status code
@@ -222,14 +223,27 @@ func (o *ListMachineDeploymentsForbidden) Code() int {
 }
 
 func (o *ListMachineDeploymentsForbidden) Error() string {
-	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments][%d] listMachineDeploymentsForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments][%d] listMachineDeploymentsForbidden %s", 403, payload)
 }
 
 func (o *ListMachineDeploymentsForbidden) String() string {
-	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments][%d] listMachineDeploymentsForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters/{cluster_id}/machinedeployments][%d] listMachineDeploymentsForbidden %s", 403, payload)
+}
+
+func (o *ListMachineDeploymentsForbidden) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *ListMachineDeploymentsForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

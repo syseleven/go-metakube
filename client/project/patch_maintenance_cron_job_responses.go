@@ -188,9 +188,10 @@ func NewPatchMaintenanceCronJobForbidden() *PatchMaintenanceCronJobForbidden {
 /*
 PatchMaintenanceCronJobForbidden describes a response with status code 403, with default header values.
 
-EmptyResponse is a empty response
+errorResponse
 */
 type PatchMaintenanceCronJobForbidden struct {
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this patch maintenance cron job forbidden response has a 2xx status code
@@ -224,14 +225,27 @@ func (o *PatchMaintenanceCronJobForbidden) Code() int {
 }
 
 func (o *PatchMaintenanceCronJobForbidden) Error() string {
-	return fmt.Sprintf("[PATCH /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] patchMaintenanceCronJobForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] patchMaintenanceCronJobForbidden %s", 403, payload)
 }
 
 func (o *PatchMaintenanceCronJobForbidden) String() string {
-	return fmt.Sprintf("[PATCH /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] patchMaintenanceCronJobForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PATCH /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] patchMaintenanceCronJobForbidden %s", 403, payload)
+}
+
+func (o *PatchMaintenanceCronJobForbidden) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *PatchMaintenanceCronJobForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

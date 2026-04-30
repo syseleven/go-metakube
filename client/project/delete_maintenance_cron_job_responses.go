@@ -174,9 +174,10 @@ func NewDeleteMaintenanceCronJobForbidden() *DeleteMaintenanceCronJobForbidden {
 /*
 DeleteMaintenanceCronJobForbidden describes a response with status code 403, with default header values.
 
-EmptyResponse is a empty response
+errorResponse
 */
 type DeleteMaintenanceCronJobForbidden struct {
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this delete maintenance cron job forbidden response has a 2xx status code
@@ -210,14 +211,27 @@ func (o *DeleteMaintenanceCronJobForbidden) Code() int {
 }
 
 func (o *DeleteMaintenanceCronJobForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] deleteMaintenanceCronJobForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] deleteMaintenanceCronJobForbidden %s", 403, payload)
 }
 
 func (o *DeleteMaintenanceCronJobForbidden) String() string {
-	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] deleteMaintenanceCronJobForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /api/v2/projects/{project_id}/clusters/{cluster_id}/maintenancecronjobs/{maintenancecronjob_id}][%d] deleteMaintenanceCronJobForbidden %s", 403, payload)
+}
+
+func (o *DeleteMaintenanceCronJobForbidden) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *DeleteMaintenanceCronJobForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

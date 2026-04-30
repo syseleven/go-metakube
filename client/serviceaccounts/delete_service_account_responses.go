@@ -174,9 +174,10 @@ func NewDeleteServiceAccountForbidden() *DeleteServiceAccountForbidden {
 /*
 DeleteServiceAccountForbidden describes a response with status code 403, with default header values.
 
-EmptyResponse is a empty response
+errorResponse
 */
 type DeleteServiceAccountForbidden struct {
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this delete service account forbidden response has a 2xx status code
@@ -210,14 +211,27 @@ func (o *DeleteServiceAccountForbidden) Code() int {
 }
 
 func (o *DeleteServiceAccountForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/projects/{project_id}/serviceaccounts/{serviceaccount_id}][%d] deleteServiceAccountForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /api/v1/projects/{project_id}/serviceaccounts/{serviceaccount_id}][%d] deleteServiceAccountForbidden %s", 403, payload)
 }
 
 func (o *DeleteServiceAccountForbidden) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/projects/{project_id}/serviceaccounts/{serviceaccount_id}][%d] deleteServiceAccountForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /api/v1/projects/{project_id}/serviceaccounts/{serviceaccount_id}][%d] deleteServiceAccountForbidden %s", 403, payload)
+}
+
+func (o *DeleteServiceAccountForbidden) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *DeleteServiceAccountForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

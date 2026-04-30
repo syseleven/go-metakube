@@ -174,9 +174,10 @@ func NewDeleteSeedForbidden() *DeleteSeedForbidden {
 /*
 DeleteSeedForbidden describes a response with status code 403, with default header values.
 
-EmptyResponse is a empty response
+errorResponse
 */
 type DeleteSeedForbidden struct {
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this delete seed forbidden response has a 2xx status code
@@ -210,14 +211,27 @@ func (o *DeleteSeedForbidden) Code() int {
 }
 
 func (o *DeleteSeedForbidden) Error() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/seeds/{seed_name}][%d] deleteSeedForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /api/v1/admin/seeds/{seed_name}][%d] deleteSeedForbidden %s", 403, payload)
 }
 
 func (o *DeleteSeedForbidden) String() string {
-	return fmt.Sprintf("[DELETE /api/v1/admin/seeds/{seed_name}][%d] deleteSeedForbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[DELETE /api/v1/admin/seeds/{seed_name}][%d] deleteSeedForbidden %s", 403, payload)
+}
+
+func (o *DeleteSeedForbidden) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *DeleteSeedForbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }

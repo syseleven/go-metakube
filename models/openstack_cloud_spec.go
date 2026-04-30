@@ -41,6 +41,12 @@ type OpenstackCloudSpec struct {
 	// Note that the network is external if the "External" field is set to true
 	FloatingIPPool string `json:"floatingIPPool,omitempty"`
 
+	// FloatingNetworkID holds the floating network ID for load balancers.
+	// Only an internal field, as we don't want to make it configurable.
+	// It will be the same as the FloatingIPPool choice.
+	// +optional
+	FloatingNetworkID string `json:"floatingNetworkID,omitempty"`
+
 	// Network holds the name of the internal network
 	// When specified, all worker nodes will be attached to this network. If not specified, a network, subnet and router will be created
 	//

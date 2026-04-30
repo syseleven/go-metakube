@@ -186,9 +186,10 @@ func NewListClustersV2Forbidden() *ListClustersV2Forbidden {
 /*
 ListClustersV2Forbidden describes a response with status code 403, with default header values.
 
-EmptyResponse is a empty response
+errorResponse
 */
 type ListClustersV2Forbidden struct {
+	Payload *models.ErrorResponse
 }
 
 // IsSuccess returns true when this list clusters v2 forbidden response has a 2xx status code
@@ -222,14 +223,27 @@ func (o *ListClustersV2Forbidden) Code() int {
 }
 
 func (o *ListClustersV2Forbidden) Error() string {
-	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters][%d] listClustersV2Forbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters][%d] listClustersV2Forbidden %s", 403, payload)
 }
 
 func (o *ListClustersV2Forbidden) String() string {
-	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters][%d] listClustersV2Forbidden", 403)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /api/v2/projects/{project_id}/clusters][%d] listClustersV2Forbidden %s", 403, payload)
+}
+
+func (o *ListClustersV2Forbidden) GetPayload() *models.ErrorResponse {
+	return o.Payload
 }
 
 func (o *ListClustersV2Forbidden) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ErrorResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
+		return err
+	}
 
 	return nil
 }
