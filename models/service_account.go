@@ -32,7 +32,7 @@ type ServiceAccount struct {
 	// It is incremented synchronously by the API server on every change to the
 	// resource spec. Comparing it to the status observedGeneration (for NodeDeployments)
 	// allows clients to tell whether the reported status is based on the current spec.
-	// Read-Only.
+	// Read-Only. abcxyz
 	Generation int64 `json:"generation,omitempty"`
 
 	// Group that a service account belongs to
