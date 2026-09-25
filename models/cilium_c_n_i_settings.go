@@ -17,6 +17,9 @@ import (
 // swagger:model CiliumCNISettings
 type CiliumCNISettings struct {
 
+	// BpfLbSockHostnsOnly, if set to true, sets the bpf-lb-sock-hostns-only option in the Cilium configuration. Needed e.g. for Istio.
+	BpfLbSockHostnsOnly bool `json:"bpfLbSockHostnsOnly,omitempty"`
+
 	// enable hubble
 	EnableHubble bool `json:"enableHubble,omitempty"`
 
