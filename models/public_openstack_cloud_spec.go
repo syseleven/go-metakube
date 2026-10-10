@@ -26,6 +26,9 @@ type PublicOpenstackCloudSpec struct {
 	// network
 	Network string `json:"network,omitempty"`
 
+	// pod subnet v6 ID
+	PodSubnetV6ID string `json:"podSubnetV6ID,omitempty"`
+
 	// project
 	Project string `json:"project,omitempty"`
 
@@ -43,6 +46,12 @@ type PublicOpenstackCloudSpec struct {
 
 	// subnet ID
 	SubnetID string `json:"subnetID,omitempty"`
+
+	// subnet v6 c ID r
+	SubnetV6CIDR string `json:"subnetV6CIDR,omitempty"`
+
+	// subnet v6 ID
+	SubnetV6ID string `json:"subnetV6ID,omitempty"`
 }
 
 // Validate validates this public openstack cloud spec
