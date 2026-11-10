@@ -46,6 +46,11 @@ type OpenstackCloudSpec struct {
 	// +optional
 	FloatingNetworkID string `json:"floatingNetworkID,omitempty"`
 
+	// LBProvider specifies the Octavia provider for LoadBalancer services.
+	// Can be "amphora" or "ovn".
+	// For backwards compatibility, an empty string selects "amphora" as well.
+	LBProvider string `json:"lbProvider,omitempty"`
+
 	// Network holds the name of the internal network
 	// When specified, all worker nodes will be attached to this network. If not specified, a network, subnet and router will be created
 	//
