@@ -61,6 +61,12 @@ type ClientService interface {
 	// ListOpenstackAvailabilityZonesContext Lists availability zones from openstack.
 	ListOpenstackAvailabilityZonesContext(ctx context.Context, params *ListOpenstackAvailabilityZonesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackAvailabilityZonesOK, error)
 
+	// ListOpenstackAvailabilityZonesForDatacenterV2 lists availability zones from openstack for the given n c s datacenter.
+	ListOpenstackAvailabilityZonesForDatacenterV2(params *ListOpenstackAvailabilityZonesForDatacenterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackAvailabilityZonesForDatacenterV2OK, error)
+
+	// ListOpenstackAvailabilityZonesForDatacenterV2Context lists availability zones from openstack for the given n c s datacenter.
+	ListOpenstackAvailabilityZonesForDatacenterV2Context(ctx context.Context, params *ListOpenstackAvailabilityZonesForDatacenterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackAvailabilityZonesForDatacenterV2OK, error)
+
 	// ListOpenstackAvailabilityZonesNoCredentialsV2 Lists availability zones from openstack.
 	ListOpenstackAvailabilityZonesNoCredentialsV2(params *ListOpenstackAvailabilityZonesNoCredentialsV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackAvailabilityZonesNoCredentialsV2OK, error)
 
@@ -73,6 +79,12 @@ type ClientService interface {
 	// ListOpenstackImagesContext Lists images from openstack.
 	ListOpenstackImagesContext(ctx context.Context, params *ListOpenstackImagesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackImagesOK, error)
 
+	// ListOpenstackImagesForDatacenterV2 lists images from openstack for the given n c s datacenter.
+	ListOpenstackImagesForDatacenterV2(params *ListOpenstackImagesForDatacenterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackImagesForDatacenterV2OK, error)
+
+	// ListOpenstackImagesForDatacenterV2Context lists images from openstack for the given n c s datacenter.
+	ListOpenstackImagesForDatacenterV2Context(ctx context.Context, params *ListOpenstackImagesForDatacenterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackImagesForDatacenterV2OK, error)
+
 	// ListOpenstackImagesNoCredentialsV2 Lists images from openstack.
 	ListOpenstackImagesNoCredentialsV2(params *ListOpenstackImagesNoCredentialsV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackImagesNoCredentialsV2OK, error)
 
@@ -84,6 +96,12 @@ type ClientService interface {
 
 	// ListOpenstackNetworksContext Lists networks from openstack.
 	ListOpenstackNetworksContext(ctx context.Context, params *ListOpenstackNetworksParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackNetworksOK, error)
+
+	// ListOpenstackNetworksForDatacenterV2 lists networks from openstack for the given n c s datacenter.
+	ListOpenstackNetworksForDatacenterV2(params *ListOpenstackNetworksForDatacenterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackNetworksForDatacenterV2OK, error)
+
+	// ListOpenstackNetworksForDatacenterV2Context lists networks from openstack for the given n c s datacenter.
+	ListOpenstackNetworksForDatacenterV2Context(ctx context.Context, params *ListOpenstackNetworksForDatacenterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackNetworksForDatacenterV2OK, error)
 
 	// ListOpenstackNetworksNoCredentialsV2 Lists networks from openstack.
 	ListOpenstackNetworksNoCredentialsV2(params *ListOpenstackNetworksNoCredentialsV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackNetworksNoCredentialsV2OK, error)
@@ -109,6 +127,12 @@ type ClientService interface {
 	// ListOpenstackSecurityGroupsContext Lists security groups from openstack.
 	ListOpenstackSecurityGroupsContext(ctx context.Context, params *ListOpenstackSecurityGroupsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackSecurityGroupsOK, error)
 
+	// ListOpenstackSecurityGroupsForDatacenterV2 lists security groups from openstack for the given n c s datacenter.
+	ListOpenstackSecurityGroupsForDatacenterV2(params *ListOpenstackSecurityGroupsForDatacenterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackSecurityGroupsForDatacenterV2OK, error)
+
+	// ListOpenstackSecurityGroupsForDatacenterV2Context lists security groups from openstack for the given n c s datacenter.
+	ListOpenstackSecurityGroupsForDatacenterV2Context(ctx context.Context, params *ListOpenstackSecurityGroupsForDatacenterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackSecurityGroupsForDatacenterV2OK, error)
+
 	// ListOpenstackSecurityGroupsNoCredentialsV2 Lists security groups from openstack.
 	ListOpenstackSecurityGroupsNoCredentialsV2(params *ListOpenstackSecurityGroupsNoCredentialsV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackSecurityGroupsNoCredentialsV2OK, error)
 
@@ -121,6 +145,12 @@ type ClientService interface {
 	// ListOpenstackSizesContext Lists sizes from openstack.
 	ListOpenstackSizesContext(ctx context.Context, params *ListOpenstackSizesParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackSizesOK, error)
 
+	// ListOpenstackSizesForDatacenterV2 lists sizes from openstack for the given n c s datacenter.
+	ListOpenstackSizesForDatacenterV2(params *ListOpenstackSizesForDatacenterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackSizesForDatacenterV2OK, error)
+
+	// ListOpenstackSizesForDatacenterV2Context lists sizes from openstack for the given n c s datacenter.
+	ListOpenstackSizesForDatacenterV2Context(ctx context.Context, params *ListOpenstackSizesForDatacenterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackSizesForDatacenterV2OK, error)
+
 	// ListOpenstackSizesNoCredentialsV2 Lists sizes from openstack.
 	ListOpenstackSizesNoCredentialsV2(params *ListOpenstackSizesNoCredentialsV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackSizesNoCredentialsV2OK, error)
 
@@ -132,6 +162,12 @@ type ClientService interface {
 
 	// ListOpenstackSubnetsContext Lists subnets from openstack.
 	ListOpenstackSubnetsContext(ctx context.Context, params *ListOpenstackSubnetsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackSubnetsOK, error)
+
+	// ListOpenstackSubnetsForDatacenterV2 lists subnets from openstack for the given network in the given n c s datacenter.
+	ListOpenstackSubnetsForDatacenterV2(params *ListOpenstackSubnetsForDatacenterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackSubnetsForDatacenterV2OK, error)
+
+	// ListOpenstackSubnetsForDatacenterV2Context lists subnets from openstack for the given network in the given n c s datacenter.
+	ListOpenstackSubnetsForDatacenterV2Context(ctx context.Context, params *ListOpenstackSubnetsForDatacenterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackSubnetsForDatacenterV2OK, error)
 
 	// ListOpenstackSubnetsNoCredentialsV2 Lists subnets from openstack.
 	ListOpenstackSubnetsNoCredentialsV2(params *ListOpenstackSubnetsNoCredentialsV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackSubnetsNoCredentialsV2OK, error)
@@ -212,6 +248,72 @@ func (a *Client) ListOpenstackAvailabilityZonesContext(ctx context.Context, para
 	//
 	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*ListOpenstackAvailabilityZonesDefault)
+
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+// ListOpenstackAvailabilityZonesForDatacenterV2 lists availability zones from openstack for the given n c s datacenter.
+//
+// The user must be an NCS user and the datacenter must be an NCS datacenter..
+//
+// This method does not support injected context.
+// However, timeout and opentracing contexts are honored whenever enabled.
+//
+// If you need to pass a specific context, use [Client.ListOpenstackAvailabilityZonesForDatacenterV2Context] instead.
+func (a *Client) ListOpenstackAvailabilityZonesForDatacenterV2(params *ListOpenstackAvailabilityZonesForDatacenterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackAvailabilityZonesForDatacenterV2OK, error) {
+	var ctx context.Context
+	if params.inner.ctx != nil {
+		ctx = params.inner.ctx
+	} else {
+		ctx = context.Background()
+	}
+
+	return a.ListOpenstackAvailabilityZonesForDatacenterV2Context(ctx, params, authInfo, opts...)
+}
+
+// ListOpenstackAvailabilityZonesForDatacenterV2Context lists availability zones from openstack for the given n c s datacenter.
+//
+// The user must be an NCS user and the datacenter must be an NCS datacenter..
+//
+// Do not use the deprecated [ListOpenstackAvailabilityZonesForDatacenterV2Params.Context] with this method: it would be ignored.
+func (a *Client) ListOpenstackAvailabilityZonesForDatacenterV2Context(ctx context.Context, params *ListOpenstackAvailabilityZonesForDatacenterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackAvailabilityZonesForDatacenterV2OK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewListOpenstackAvailabilityZonesForDatacenterV2Params()
+	}
+
+	op := &runtime.ClientOperation{
+		ID:                 "listOpenstackAvailabilityZonesForDatacenterV2",
+		Method:             "GET",
+		PathPattern:        "/api/v2/projects/{project_id}/dc/{datacenter}/availabilityzones",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListOpenstackAvailabilityZonesForDatacenterV2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Client:             params.HTTPClient,
+	}
+
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.SubmitContext(ctx, op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*ListOpenstackAvailabilityZonesForDatacenterV2OK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
+	unexpectedSuccess := result.(*ListOpenstackAvailabilityZonesForDatacenterV2Default)
 
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
@@ -340,6 +442,76 @@ func (a *Client) ListOpenstackImagesContext(ctx context.Context, params *ListOpe
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
+// ListOpenstackImagesForDatacenterV2 lists images from openstack for the given n c s datacenter.
+//
+// The user must be an NCS user and the datacenter must be an NCS datacenter.
+// If the user's token is rejected by OpenStack, the configured DC resource access token is used
+// and only non-private images are listed..
+//
+// This method does not support injected context.
+// However, timeout and opentracing contexts are honored whenever enabled.
+//
+// If you need to pass a specific context, use [Client.ListOpenstackImagesForDatacenterV2Context] instead.
+func (a *Client) ListOpenstackImagesForDatacenterV2(params *ListOpenstackImagesForDatacenterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackImagesForDatacenterV2OK, error) {
+	var ctx context.Context
+	if params.inner.ctx != nil {
+		ctx = params.inner.ctx
+	} else {
+		ctx = context.Background()
+	}
+
+	return a.ListOpenstackImagesForDatacenterV2Context(ctx, params, authInfo, opts...)
+}
+
+// ListOpenstackImagesForDatacenterV2Context lists images from openstack for the given n c s datacenter.
+//
+// The user must be an NCS user and the datacenter must be an NCS datacenter.
+// If the user's token is rejected by OpenStack, the configured DC resource access token is used
+// and only non-private images are listed..
+//
+// Do not use the deprecated [ListOpenstackImagesForDatacenterV2Params.Context] with this method: it would be ignored.
+func (a *Client) ListOpenstackImagesForDatacenterV2Context(ctx context.Context, params *ListOpenstackImagesForDatacenterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackImagesForDatacenterV2OK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewListOpenstackImagesForDatacenterV2Params()
+	}
+
+	op := &runtime.ClientOperation{
+		ID:                 "listOpenstackImagesForDatacenterV2",
+		Method:             "GET",
+		PathPattern:        "/api/v2/projects/{project_id}/dc/{datacenter}/images",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListOpenstackImagesForDatacenterV2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Client:             params.HTTPClient,
+	}
+
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.SubmitContext(ctx, op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*ListOpenstackImagesForDatacenterV2OK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
+	unexpectedSuccess := result.(*ListOpenstackImagesForDatacenterV2Default)
+
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
 // ListOpenstackImagesNoCredentialsV2 Lists images from openstack.
 //
 // This method does not support injected context.
@@ -460,6 +632,72 @@ func (a *Client) ListOpenstackNetworksContext(ctx context.Context, params *ListO
 	//
 	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*ListOpenstackNetworksDefault)
+
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+// ListOpenstackNetworksForDatacenterV2 lists networks from openstack for the given n c s datacenter.
+//
+// The user must be an NCS user and the datacenter must be an NCS datacenter..
+//
+// This method does not support injected context.
+// However, timeout and opentracing contexts are honored whenever enabled.
+//
+// If you need to pass a specific context, use [Client.ListOpenstackNetworksForDatacenterV2Context] instead.
+func (a *Client) ListOpenstackNetworksForDatacenterV2(params *ListOpenstackNetworksForDatacenterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackNetworksForDatacenterV2OK, error) {
+	var ctx context.Context
+	if params.inner.ctx != nil {
+		ctx = params.inner.ctx
+	} else {
+		ctx = context.Background()
+	}
+
+	return a.ListOpenstackNetworksForDatacenterV2Context(ctx, params, authInfo, opts...)
+}
+
+// ListOpenstackNetworksForDatacenterV2Context lists networks from openstack for the given n c s datacenter.
+//
+// The user must be an NCS user and the datacenter must be an NCS datacenter..
+//
+// Do not use the deprecated [ListOpenstackNetworksForDatacenterV2Params.Context] with this method: it would be ignored.
+func (a *Client) ListOpenstackNetworksForDatacenterV2Context(ctx context.Context, params *ListOpenstackNetworksForDatacenterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackNetworksForDatacenterV2OK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewListOpenstackNetworksForDatacenterV2Params()
+	}
+
+	op := &runtime.ClientOperation{
+		ID:                 "listOpenstackNetworksForDatacenterV2",
+		Method:             "GET",
+		PathPattern:        "/api/v2/projects/{project_id}/dc/{datacenter}/networks",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListOpenstackNetworksForDatacenterV2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Client:             params.HTTPClient,
+	}
+
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.SubmitContext(ctx, op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*ListOpenstackNetworksForDatacenterV2OK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
+	unexpectedSuccess := result.(*ListOpenstackNetworksForDatacenterV2Default)
 
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
@@ -712,6 +950,74 @@ func (a *Client) ListOpenstackSecurityGroupsContext(ctx context.Context, params 
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
+// ListOpenstackSecurityGroupsForDatacenterV2 lists security groups from openstack for the given n c s datacenter.
+//
+// The user must be an NCS user and the datacenter must be an NCS datacenter.
+// If the user's token is rejected by OpenStack, an empty list is returned..
+//
+// This method does not support injected context.
+// However, timeout and opentracing contexts are honored whenever enabled.
+//
+// If you need to pass a specific context, use [Client.ListOpenstackSecurityGroupsForDatacenterV2Context] instead.
+func (a *Client) ListOpenstackSecurityGroupsForDatacenterV2(params *ListOpenstackSecurityGroupsForDatacenterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackSecurityGroupsForDatacenterV2OK, error) {
+	var ctx context.Context
+	if params.inner.ctx != nil {
+		ctx = params.inner.ctx
+	} else {
+		ctx = context.Background()
+	}
+
+	return a.ListOpenstackSecurityGroupsForDatacenterV2Context(ctx, params, authInfo, opts...)
+}
+
+// ListOpenstackSecurityGroupsForDatacenterV2Context lists security groups from openstack for the given n c s datacenter.
+//
+// The user must be an NCS user and the datacenter must be an NCS datacenter.
+// If the user's token is rejected by OpenStack, an empty list is returned..
+//
+// Do not use the deprecated [ListOpenstackSecurityGroupsForDatacenterV2Params.Context] with this method: it would be ignored.
+func (a *Client) ListOpenstackSecurityGroupsForDatacenterV2Context(ctx context.Context, params *ListOpenstackSecurityGroupsForDatacenterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackSecurityGroupsForDatacenterV2OK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewListOpenstackSecurityGroupsForDatacenterV2Params()
+	}
+
+	op := &runtime.ClientOperation{
+		ID:                 "listOpenstackSecurityGroupsForDatacenterV2",
+		Method:             "GET",
+		PathPattern:        "/api/v2/projects/{project_id}/dc/{datacenter}/securitygroups",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListOpenstackSecurityGroupsForDatacenterV2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Client:             params.HTTPClient,
+	}
+
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.SubmitContext(ctx, op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*ListOpenstackSecurityGroupsForDatacenterV2OK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
+	unexpectedSuccess := result.(*ListOpenstackSecurityGroupsForDatacenterV2Default)
+
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
 // ListOpenstackSecurityGroupsNoCredentialsV2 Lists security groups from openstack.
 //
 // This method does not support injected context.
@@ -836,6 +1142,72 @@ func (a *Client) ListOpenstackSizesContext(ctx context.Context, params *ListOpen
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
 
+// ListOpenstackSizesForDatacenterV2 lists sizes from openstack for the given n c s datacenter.
+//
+// The user must be an NCS user and the datacenter must be an NCS datacenter..
+//
+// This method does not support injected context.
+// However, timeout and opentracing contexts are honored whenever enabled.
+//
+// If you need to pass a specific context, use [Client.ListOpenstackSizesForDatacenterV2Context] instead.
+func (a *Client) ListOpenstackSizesForDatacenterV2(params *ListOpenstackSizesForDatacenterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackSizesForDatacenterV2OK, error) {
+	var ctx context.Context
+	if params.inner.ctx != nil {
+		ctx = params.inner.ctx
+	} else {
+		ctx = context.Background()
+	}
+
+	return a.ListOpenstackSizesForDatacenterV2Context(ctx, params, authInfo, opts...)
+}
+
+// ListOpenstackSizesForDatacenterV2Context lists sizes from openstack for the given n c s datacenter.
+//
+// The user must be an NCS user and the datacenter must be an NCS datacenter..
+//
+// Do not use the deprecated [ListOpenstackSizesForDatacenterV2Params.Context] with this method: it would be ignored.
+func (a *Client) ListOpenstackSizesForDatacenterV2Context(ctx context.Context, params *ListOpenstackSizesForDatacenterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackSizesForDatacenterV2OK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewListOpenstackSizesForDatacenterV2Params()
+	}
+
+	op := &runtime.ClientOperation{
+		ID:                 "listOpenstackSizesForDatacenterV2",
+		Method:             "GET",
+		PathPattern:        "/api/v2/projects/{project_id}/dc/{datacenter}/sizes",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListOpenstackSizesForDatacenterV2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Client:             params.HTTPClient,
+	}
+
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.SubmitContext(ctx, op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*ListOpenstackSizesForDatacenterV2OK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
+	unexpectedSuccess := result.(*ListOpenstackSizesForDatacenterV2Default)
+
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
 // ListOpenstackSizesNoCredentialsV2 Lists sizes from openstack.
 //
 // This method does not support injected context.
@@ -956,6 +1328,72 @@ func (a *Client) ListOpenstackSubnetsContext(ctx context.Context, params *ListOp
 	//
 	// a default response is provided: fill this and return an error
 	unexpectedSuccess := result.(*ListOpenstackSubnetsDefault)
+
+	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
+}
+
+// ListOpenstackSubnetsForDatacenterV2 lists subnets from openstack for the given network in the given n c s datacenter.
+//
+// The user must be an NCS user and the datacenter must be an NCS datacenter..
+//
+// This method does not support injected context.
+// However, timeout and opentracing contexts are honored whenever enabled.
+//
+// If you need to pass a specific context, use [Client.ListOpenstackSubnetsForDatacenterV2Context] instead.
+func (a *Client) ListOpenstackSubnetsForDatacenterV2(params *ListOpenstackSubnetsForDatacenterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackSubnetsForDatacenterV2OK, error) {
+	var ctx context.Context
+	if params.inner.ctx != nil {
+		ctx = params.inner.ctx
+	} else {
+		ctx = context.Background()
+	}
+
+	return a.ListOpenstackSubnetsForDatacenterV2Context(ctx, params, authInfo, opts...)
+}
+
+// ListOpenstackSubnetsForDatacenterV2Context lists subnets from openstack for the given network in the given n c s datacenter.
+//
+// The user must be an NCS user and the datacenter must be an NCS datacenter..
+//
+// Do not use the deprecated [ListOpenstackSubnetsForDatacenterV2Params.Context] with this method: it would be ignored.
+func (a *Client) ListOpenstackSubnetsForDatacenterV2Context(ctx context.Context, params *ListOpenstackSubnetsForDatacenterV2Params, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*ListOpenstackSubnetsForDatacenterV2OK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewListOpenstackSubnetsForDatacenterV2Params()
+	}
+
+	op := &runtime.ClientOperation{
+		ID:                 "listOpenstackSubnetsForDatacenterV2",
+		Method:             "GET",
+		PathPattern:        "/api/v2/projects/{project_id}/dc/{datacenter}/subnets",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &ListOpenstackSubnetsForDatacenterV2Reader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Client:             params.HTTPClient,
+	}
+
+	for _, opt := range opts {
+		opt(op)
+	}
+
+	result, err := a.transport.SubmitContext(ctx, op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*ListOpenstackSubnetsForDatacenterV2OK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+	//
+	// a default response is provided: fill this and return an error
+	unexpectedSuccess := result.(*ListOpenstackSubnetsForDatacenterV2Default)
 
 	return nil, runtime.NewAPIError("unexpected success response: content available as default response in error", unexpectedSuccess, unexpectedSuccess.Code())
 }
