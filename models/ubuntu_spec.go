@@ -16,6 +16,9 @@ type UbuntuSpec struct {
 
 	// do a dist-upgrade on boot and reboot it required afterwards
 	DistUpgradeOnBoot bool `json:"distUpgradeOnBoot,omitempty"`
+
+	// enable automatic login for the default user
+	EnableAutoLogin bool `json:"enableAutoLogin,omitempty"`
 }
 
 // Validate validates this ubuntu spec
